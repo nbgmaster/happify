@@ -1,0 +1,46 @@
+# 403 Error-Message
+ErrorDocument 403 "403 Forbidden
+
+# 403 good bye
+BrowserMatch ^CoolBot evil
+BrowserMatch internetseer evil
+BrowserMatch "^Mozilla\/4\.06 \(Win95; I\)$" evil
+BrowserMatchNoCase msnbot evil
+
+<Limit GET POST HEAD>
+   Order Allow,Deny
+   Allow from all
+   Deny from env=evil
+</Limit> 
+
+AddType application/x-httpd-php php php4 php3 html htm
+
+Options +FollowSymlinks
+RewriteEngine on
+
+#HTML
+RewriteRule ^html/([a-z0-9_.]+)(\/)?$ $0 [QSA,NC]
+
+# Home
+RewriteRule ^index(\.html|/)?$ index.php [QSA,NC]
+
+
+# Site
+RewriteRule ^([a-z0-9_]+)(\/)?$ index.php?module=$1 [QSA,NC]
+RewriteRule ^([a-z0-9_]+)(\.html|/)?$ index.php?module=$1 [QSA,NC]
+
+# ADMIN
+RewriteRule ^admin(\/)?$ index.php?module=admin [QSA,NC]
+RewriteRule ^admin/blog/new/(\/)?$ index.php?module=admin&do=newblog [QSA,NC]
+RewriteRule ^admin/blog/edit/([a-z0-9_]+)(\/)?$ index.php?module=admin&do=editblog&nid=$1 [QSA,NC]
+RewriteRule ^admin/changecms/([a-z0-9_]+)(\/)?$ index.php?module=admin&do=changecms&cat=$1 [QSA,NC]
+RewriteRule ^admin/([a-z0-9_]+)(\/)?$ index.php?module=admin&do=$1 [QSA,NC]
+
+# CMS
+RewriteRule ^([a-z0-9_]+)/([a-z0-9_]+)(\/)?$ index.php?module=$1&cat=$2 [QSA,NC]
+RewriteRule ^([a-z0-9_]+)/([a-z0-9_]+)(\.html|/)?$ index.php?module=$1&cat=$2 [QSA,NC]
+
+#Error Pages
+ErrorDocument 404 /html/happify/html/404.html
+
+

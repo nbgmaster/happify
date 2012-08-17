@@ -1,0 +1,100 @@
+#container4 {
+	clear:left;
+	float:left;
+	width:100%;
+		position:relative;
+	overflow:hidden;
+ 	border-bottom:1px solid #ccc;
+    
+	background:#e6efea; /* column 4 background colour */
+}
+#container3 {
+	clear:left;
+	float:left;
+	width:100%;
+	position:relative;
+	
+	right:10%;
+      
+	background:#e6efea; /* column 3 background colour */
+}
+#container2 {
+	clear:left;
+	float:left;
+	width:100%;
+	position:relative;  
+	right:30%;
+
+	background:#e6efea; /* column 2 background colour */
+}
+#container1 {    
+	float:left;
+	width:100%;
+	position:relative;  
+	right:30%;
+ 
+	background:#e6efea; /* column 1 background colour */
+}
+#col1 {
+	float:left;
+	width:27%;
+	position:relative;
+	left:70%;
+	overflow:hidden;
+padding:10px; 
+font-weight: bold;
+      line-height:18px;
+			font-size: 12px;
+}
+
+#col2 {
+	float:left;
+	width:27%;
+	position:relative;
+	left:70%;
+	overflow:hidden;
+padding:10px;  
+      line-height:18px;   
+		font-size: 12px;
+}
+#col3 {
+	float:left;
+	width:27%;
+	position:relative;
+	left:70%;
+	overflow:hidden;
+padding:10px;
+            line-height:18px;
+				font-size: 12px;
+}
+#col4 {
+	float:left;
+	width:65px;
+	position:relative;
+	left:70%;     
+	padding:10px;
+	overflow:hidden;
+       line-height:18px;
+				font-size: 12px;
+}
+
+#container1.headline, #container2.headline, #container3.headline, #container4.headline {
+  background: transparent !important;
+}  
+
+#col1.headline, #col2.headline, #col3.headline, #col4.headline  {
+  font-weight:bold;
+  background-color:#d3e2d4; 
+}
+
+ #col1.headline {
+border-top-left-radius: 14px;
+-moz-border-radius-topleft: 14px;
+-webkit-border-top-left-radius: 14px;
+}
+
+ #col4.headline {            
+border-top-right-radius: 14px;
+-moz-border-radius-topright: 14px;
+-webkit-border-top-right-radius: 14px;
+}
