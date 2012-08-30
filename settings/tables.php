@@ -4,6 +4,8 @@
   
      $tbl_diary = "diary";
      $tbl_distorted_thoughts = "distorted_thoughts";
+	 $tbl_checklist_categories = "checklist_categories";
+	 $tbl_checklist_items = "checklist_items";
 
      $tbl_blog = "blog";
 

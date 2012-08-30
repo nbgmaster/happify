@@ -3,6 +3,12 @@
   /* Initialize :: Template Data */
   
         $tpl = new Smarty;
+        $tpl->debugging = false;
+        //$tpl->caching = false;
+        //$tpl->cache_lifetime = 120;
+        $tpl->setTemplateDir('./tpl');
+		$tpl->setCompileDir('./lib/smarty/templates_c');
+		$tpl->setCacheDir('./lib/smarty/cache');
 
      /* Miscellaneous */
 
