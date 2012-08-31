@@ -63,16 +63,13 @@
 
      /* Tablenames :: Defined in settings/tables.php */
 
-        $tpl->assign("tbl_blog", $tbl_blog);
-        $tpl->assign("tbl_settings", $tbl_settings);
-        $tpl->assign("tbl_users", $tbl_users);
-        $tpl->assign("tbl_cms", $tbl_cms);
-        $tpl->assign("tbl_profile", $tbl_profile);
-        $tpl->assign("tbl_ref", $tbl_ref);
-        $tpl->assign("tbl_design", $tbl_design);
-        $tpl->assign("tbl_blocks", $tbl_blocks);
-        $tpl->assign("tbl_links_c", $tbl_links_c);
-        $tpl->assign("tbl_links", $tbl_links);
+	 	$tpl->assign("tbl_diary", $tbl_diary);
+		$tpl->assign("tbl_distorted_thoughts", $tbl_distorted_thoughts);
+   	    $tpl->assign("tbl_checklist_categories", $tbl_checklist_categories);
+		$tpl->assign("tbl_checklist_items", $tbl_checklist_items);
+		$tpl->assign("tbl_da_scale_categories", $tbl_da_scale_categories);
+		$tpl->assign("tbl_da_scale_items", $tbl_da_scale_items);
+		$tpl->assign("tbl_da_scale_results", $tbl_da_scale_results);
 
      /******************************************/
 
@@ -188,7 +185,6 @@
 
      /* Initialize and Load :: Choosen Language */
      
-        $lang_browser = 'EN';
      
         if ( !isset($_COOKIE["lang"]) )  { 
         
@@ -229,6 +225,8 @@
              if (isset($set[0]["main_title"])) $tpl->assign("main_title", $set[0]["main_title_EN"]);
                              
         }
+
+		$lang_active = "EN";
         
         //$tpl->assign("lang", $lang_active); 
 

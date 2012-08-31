@@ -109,9 +109,10 @@
 				</li>
 
 			</ul>
-			 
+				  			
 		</div>
 		</div>
+		
 	</div>
 
     <div id="main" role="main">
@@ -121,3 +122,5 @@
       <div class="entry-content">
 	
 	  	<div class="ani-spacer"></div>
+
+{include file="breadcrumb.tpl"} 

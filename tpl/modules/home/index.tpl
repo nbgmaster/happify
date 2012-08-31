@@ -11,14 +11,14 @@
 <img src="{$dir_img}photo.png"> <strong>Upload happifying photo</strong>
 <p></p>  
 
-<form method="get" id="update">
+<form method="get" id="insert">
 <fieldset>
     <textarea style="width:99%;border:1px solid #b4bbcd;outline: none;resize: none;padding:8px;margin-top:4px" name="note">Tell yourself something nice about the day</textarea>
     <p>&nbsp;</p>
 </fieldset>
 </form>
 
-<a href="#" onclick="xajax_postdata('diary', xajax.getFormValues('update'));return false;" class="btn"><span>Post<span></a>
+<a href="#" onclick="xajax_postdata('{$tbl_diary}', xajax.getFormValues('insert'));return false;" class="btn"><span>Post<span></a>
 
 <p>&nbsp;</p>
 

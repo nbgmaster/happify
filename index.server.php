@@ -15,18 +15,66 @@
      include('settings/template.php');   
      require_once('lib/select.php');
      require_once('lib/modify.php');
+	 
+	 if ($table == $tbl_diary) {
      
-       $mysqldate = date( 'Y-m-d H:i:s', time() );
+	       $mysqldate = date( 'Y-m-d H:i:s', time() );
+	
+	       $diary = new ModifyEntry();
+	       $diary->table  = $table;
+	       $diary->cols   = 'userID, entry, date';
+	       $diary->values = " '1', '".$data['note']."', '".$mysqldate."' ";
+	
+	       $diary->insert();  
+	       unset($diary);
+	   
+	 }
 
-       $diary = new ModifyEntry();
-       $diary->table  = $tbl_diary;
-       $diary->cols   = 'userID, entry, date';
-       $diary->values = " '1', '".$data['note']."', '".$mysqldate."' ";
+	 if ($table == $tbl_da_scale_results) {
+	 	
+		$i = 0;
+		$dataValid = 1;
+		 
+	       $mysqldate = date( 'Y-m-d', time() );
+		 
+		   for($i=1; $i<=$data['items_total']; $i++) {
+		   	
+		   	   if (!isset($data[$i]))	{
+		   	       $objResponse->alert('Please answer all items');
+				   $dataValid = 0;
+			       break;
+		       }
+		   }
+		   
+		   if ($dataValid == 1) {   
 
-       $diary->insert();
-        
-       unset($diary);
-       
+		           $da_scale = new ModifyEntry();
+			       $da_scale->table  = $table;
+				   			  			 
+				   for($i=1; $i<=$data['items_total']; $i++) {
+				   	
+					   if (isset($data[$i]))	{
+					  
+					       $da_scale->cols   = 'userID, itemID, value, date';
+					       $da_scale->values = " '1', '".$i."', '".$data[$i]."', '".$mysqldate."' ";
+					
+					       $da_scale->insert();  
+			
+					   }
+					   
+					   if($da_scale->errno() > 0) break; 
+					   
+				   }
+				   
+				       				 
+		   }
+		   						
+		   if ($dataValid == 1 && $da_scale->errno() == 0) $objResponse-> redirect(ROOT_DIR.'da_scale/');
+		   
+		   unset($da_scale);					 
+		   
+	 }
+	 	       
       /* header ("Location:".ROOT_DIR."flash/newflash.html");
                  
      $select = new SelectEntrys();

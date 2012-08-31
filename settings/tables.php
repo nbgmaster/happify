@@ -6,6 +6,10 @@
      $tbl_distorted_thoughts = "distorted_thoughts";
 	 $tbl_checklist_categories = "checklist_categories";
 	 $tbl_checklist_items = "checklist_items";
+	 $tbl_da_scale_categories = "da_scale_categories";
+	 $tbl_da_scale_items = "da_scale_items";
+	 $tbl_da_scale_results = "da_scale_results";
+	 	 
 
      $tbl_blog = "blog";
 

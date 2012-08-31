@@ -46,6 +46,10 @@
 
           /*************************/
 
+          
+          function errno() {         			
+				return mysql_errno();
+          }
 
           /* Delete entry */
 
