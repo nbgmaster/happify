@@ -1,1 +1,1 @@
-<a href="new/">Create new entry</a>
+<a href="new.html">Create new entry</a>

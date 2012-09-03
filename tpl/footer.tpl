@@ -18,7 +18,8 @@
 <li id="menu-item-844" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-844"><a class="qjax" href="login/">Login</a></li>
 <li id="menu-item-875" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-875"><a class="qjax" href="register/">Create Account</a></li>
 <li id="menu-item-1051" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-1051"><a class="qjax" href="http://www.happify.me/">© Happify 2012</a></li>
-</ul></div> 
+</ul></div>
+{$rendering_time} 
 </div>
 
 

@@ -16,6 +16,8 @@
           /* Are there any strikes under the following conditions? */
 
           function exist() {
+          	
+			  global $db;
 
               if ( $this->conditionE )  {
 
@@ -23,9 +25,9 @@
 
               }
 
-              $query = mysql_query("SELECT COUNT(1) AS result from $this->tableE $this->conditionE LIMIT 1");
+              $query = mysqli_query($db, "SELECT COUNT(1) AS result from $this->tableE $this->conditionE LIMIT 1");
 
-              $rows  = mysql_fetch_row( $query );
+              $rows  = mysqli_fetch_row( $query );
 
               $result = $rows[ 0 ];  
 
@@ -35,31 +37,32 @@
 
           /******************************************/
 
-
+          
           /* Create a cookie :: LOGIN */
 
-             function cookieset() { 
+             function cookieset($c_name) { 
 
-                 $more = md5 (uniqid (rand()));
+                 $more1 = substr(md5(rand()), 0, 3);
+                 $more2 = substr(md5(rand()), 0, 3);
+                 
+                 if ( $this->email && $this->pw )  {
 
-                 if ( $this->user && $this->pw )  {
+                      $usertoken = $this->getUserToken();
 
-                      $this->username = $this->user;
-
-                      $userid = $this->getUserID();
-
-                      $cookie = "$more|$userid|$this->pw";
-
+                      $cookie = "$more1$usertoken$more2$this->pw";
+	                  if ($this->cookie_duration == 0) setcookie($c_name, $cookie, 0, "/");           
+					  else setcookie($c_name, $cookie, time()+365*3600*24, "/");
+				 
                  }
    
-                 else  {
+                 else  { 
 
                       $cookie = '';
-
+           
+				      setcookie($c_name, $cookie, time()-3600, "/");
+  
                  }
 
-                 setcookie(userdata, $cookie, time()+365*3600*24, "/");
-  
              }
 
           /******************************************/
@@ -80,12 +83,12 @@
 
              function cookieLANG() { 
 
-                 setcookie(lang,$this->lang,time()+365*24*3600);
+                 setcookie("lang",$this->lang,time()+365*24*3600);
 
              }
 
           /******************************************/
-
+          
      }
 
   /******************************************/

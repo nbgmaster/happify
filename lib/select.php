@@ -60,16 +60,37 @@
 
           /******************************************/
 
+          
+          /* Convert UserName into UserID */
 
+             function getUserToken()  {
+
+                 $this->cols      = 'UserToken';
+                 $this->table     = $this->tbl_users;
+                 $this->condition = " UserEmail = '".$this->email."' ";
+                 $this->order     = '';
+                 $this->limit     = '1';
+                 $this->module    = '';
+                 $this->template  = '';
+
+                 return $this->row();
+
+          }
+
+          /******************************************/
+
+          
           /* Get total rows */
 
-             function getrows() { 
-
+             function getrows() {
+             	
+			   	 global $db; 
+  
                  if ( !$this->table ) $this->table = 'users';
 
-                 $query = mysql_query("SELECT COUNT(1) AS result from $this->table $this->condition LIMIT 1");
+                 $query = mysqli_query($db, "SELECT COUNT(1) AS result from $this->table $this->condition LIMIT 1");
   //echo "SELECT COUNT(1) AS result from $this->table $this->condition LIMIT 1";
-                 $rows  = mysql_fetch_row( $query );
+                 $rows  = mysqli_fetch_row( $query );
                                             
                  $result = $rows[ 0 ];
 
@@ -106,7 +127,9 @@
 
           /* Loop out data */
 
-          function row() {      
+          function row() {
+          		  
+          	  global $db;      
 
               //if ( !eregi  ( "ORDER", $this->order ) && $this->order )  {
               if ( !preg_match("/ORDER/i", $this->order) && $this->order) {
@@ -142,9 +165,9 @@
                        
                    $count = 0;
             //echo "SELECT $this->cols FROM $this->table $this->condition $this->group $this->order $this->limit";      
-                   $select = mysql_query("SELECT $this->cols FROM $this->table $this->condition $this->group $this->order $this->limit");
+                   $select = mysqli_query($db, "SELECT $this->cols FROM $this->table $this->condition $this->group $this->order $this->limit");
 
-                   while ( $result = mysql_fetch_assoc($select) )  {
+                   while ( $result = mysqli_fetch_assoc($select) )  {
 
                            if ( $this->module && $this->template )  {
                                                   
@@ -213,7 +236,7 @@
 
                     }
 
-                    mysql_free_result($select);
+                    mysqli_free_result($select);
 
               }
 

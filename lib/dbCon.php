@@ -8,12 +8,14 @@
           public $dbuser;
           public $dbpass;
           public $dbname;
+		  public $db;
   
           function connectDB() {
+          	
+          	  global $db;
+              $db = mysqli_connect($this->dbserver, $this->dbuser, $this->dbpass, $this->dbname);      
 
-              $db = mysql_connect($this->dbserver, $this->dbuser, $this->dbpass, $this->dbname);      
-
-              mysql_select_db($this->dbname, $db) OR die(mysql_error());
+              mysqli_select_db($db, $this->dbname) OR die(mysqli_error());
 
           }
 

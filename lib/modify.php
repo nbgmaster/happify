@@ -16,12 +16,14 @@
 
           /* Insert new entry */
 
-             function insert()  { 
+             function insert()  {
+             	 
+				 global $db; 
 
                  $query   = "INSERT into $this->table ($this->cols)";
                  $query  .= "VALUES ($this->values)";
 
-                 $result  = @mysql_query($query) OR die(mysql_error());
+                 $result  = @mysqli_query($db, $query) OR die(mysql_error());
 
              }
 
@@ -30,7 +32,9 @@
 
           /* Update data */
 
-             function update() { 
+             function update() {
+             	
+				 global $db; 
 
                  if ( !preg_match("/WHERE/i", $this->condition) && $this->condition )  {
 
@@ -40,7 +44,7 @@
          
                  $sql = "UPDATE $this->table Set $this->changes $this->condition"; 
 
-                 $update = mysql_query($sql);
+                 $update = mysqli_query($db, $sql);
 
              }
 
@@ -48,12 +52,14 @@
 
           
           function errno() {         			
-				return mysql_errno();
+				return mysqli_errno();
           }
 
           /* Delete entry */
 
-             function delete() { 
+             function delete() {
+             	
+				 global $db; 
 
                  if ( !preg_match("/WHERE/i", $this->condition) && $this->condition )  {
 
@@ -63,7 +69,7 @@
 
                  $delete = "DELETE FROM $this->table $this->condition";     
 
-                 mysql_query($delete); 
+                 mysqli_query($db, delete); 
 
              }
 

@@ -1,16 +1,28 @@
 <?php
+    
+     //$expires = 60*60*24*365;
+     //header("Cache-Control: maxage=".$expires);
+     //header('Expires: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
+     header("Cache-Control: private, no-cache, no-store, must-revalidate"); 
+     header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+     //header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+     //header("Cache-Control: no-cache, must-revalidate");
+     //header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+     
+     session_start();
+     ob_start();
+     
+	 $debug_mode = "ON_PRINT"; //OFF, ON_DEV, ON_PRINT
+	
+	 if ($debug_mode == "ON_PRINT") error_reporting(E_ALL);
+	 else error_reporting(E_ERROR | E_WARNING | E_PARSE);
+	 
 
- $debug_mode = "ON_PRINT"; //OFF, ON_DEV, ON_PRINT
-
- if ($debug_mode == "ON_PRINT") error_reporting(E_ALL);
- else error_reporting(E_ERROR | E_WARNING | E_PARSE);
- 
-
-  /* Load :: XAJAX AND Smarty */
+     $start = microtime(true); 
+  
+  /* Load :: Smarty */
 
      require_once("./lib/smarty/Smarty.class.php");
-
-     require_once("./lib/xajax/xajax_core/xajax.inc.php");     
 
   /******************************************/
 
@@ -21,25 +33,6 @@
 
   /******************************************/
 
-
-  /* Security:: Set register globals off 
-
-     if ( @ini_get('register_globals') )
-
-          foreach ( $_REQUEST as $key => $value )
-
-                    unset($GLOBALS[$key]);
-
-     if (!empty($_GET))     extract($_GET);
-
-     if (!empty($_POST))    extract($_POST);
-
-     if (!empty($_COOKIE))  extract($_COOKIE);
-
-     if (!empty($_SESSION)) extract($_SESSION);
-
-  ******************************************/
-  
   
   /* Define :: Globals & Constants */  
   
@@ -51,14 +44,28 @@
      global $tpl;
      global $img_enlarge_title;
      global $module;
-  
+
+     define("ROOT_DIR", "http://127.0.0.1/happify/");
+
   /******************************************/
 
+  
+  /* Load :: Libraries */
+    
+     require_once('./lib/exist.php');
+     require_once('./lib/select.php');
+     require_once('./lib/replace.php');    
+     require_once('./lib/modify.php');
+     require_once('./lib/functions.php');
+                          
+  /******************************************/
+      
 
   /* Load :: Current time & date */
 
      $timestamp = time();
-          
+     $mysqldate = date( 'Y-m-d H:i:s', time() );
+                   
      $c_time = date("H:i",$timestamp);
 
      $c_date = date("d.m.Y",$timestamp);
@@ -84,10 +91,92 @@
      include('browser.php');
 
   /******************************************/
-
-
-     require_once('./lib/select.php');
+    
+  /* Login Status */
   
+  	 $user_data = "";     
+  
+    if ( isset($_GET['module']))  { if ($_GET['module'] == 'logout' )    include('modules/logon/logout.php'); }
+
+     $logon_true = '0';
+     $l = Array();
+
+     if ( isset($_COOKIE["ly"]) )  {  
+          /* Call Method :: Explode the Cookie */
+                   
+             $l["token"] = substr($_COOKIE["ly"], 3, -35);           
+             $l["pw"]    = substr($_COOKIE["ly"], -32);   
+
+          /******************************************/
+
+
+         /* Compare Cookie data with database 
+
+            $logon = new CheckExist();
+
+            $logon->tableE     = $tbl_users;
+            $logon->conditionE = " UserToken = '".$l["token"]."' && UserPass = '".$l["pw"]."' ";
+
+            $logon_true = $logon->exist();
+
+         ******************************************/
+         
+         $logon_true = 1;
+
+     }   else $l["token"] = 0;
+	 
+
+  /******************************************/
+
+ 
+  /* Load :: Template settings */
+
+     include('settings/template.php');
+
+  /******************************************/
+  
+  
+  /* Load :: XAJAX AND Smarty */
+         
+     require_once('./lib/ajax_functions.php');
+     
+  /******************************************/
+  
+              
+  /* Load :: Caching System */
+  
+     $mod_memcache = 1;    
+     if ($mod_memcache == 1) require_once("settings/memcache.php");
+                          
+  /******************************************/
+   
+  /* Get UserData */
+  
+     if ( $logon_true == '1' )  include('modules/logon/get_userdata.php');
+
+   /******************************************/
+              
+
+  
+  /* Security:: Set register globals off 
+
+     if ( @ini_get('register_globals') )
+
+          foreach ( $_REQUEST as $key => $value )
+
+                    unset($GLOBALS[$key]);
+
+     if (!empty($_GET))     extract($_GET);
+
+     if (!empty($_POST))    extract($_POST);
+
+     if (!empty($_COOKIE))  extract($_COOKIE);
+
+     if (!empty($_SESSION)) extract($_SESSION);
+
+  ******************************************/
+
+
   /* Get block on/off status 
 
      $blocks = new SelectEntrys();
@@ -131,15 +220,7 @@
      $main_description_EN = replaceBBcode($main_description_EN, $set[0]["width_images"], 1);
      
   ******************************************/
-
-     define("ROOT_DIR", "http://localhost/happify/");
-       
-  /* Load :: Template settings */
-
-     require_once('lib/functions.php');
-
-  /******************************************/
-
+   
 
   /* Load :: Twitter posting time 
   
@@ -173,12 +254,6 @@
 
   ******************************************/
     
-
-  /* Load :: Template settings */
-
-     include('settings/template.php');
-
-  /******************************************/
 
         
   /* Initialize :: Current Page Number 

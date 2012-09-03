@@ -13,7 +13,7 @@
      /* Miscellaneous */
 
         $tpl->assign('root_dir', ROOT_DIR);  
-             
+        $tpl->assign("logon", $logon_true);             
         $tpl->assign("debug_mode", "debug_mode");
              
         if (isset($_GET["IE"])) $tpl->assign('IE', $_GET["IE"]); 
@@ -43,24 +43,6 @@
      /******************************************/
      
 
-
-      /* IE style fixing 
-
-        if (isset($IE))  {
-
-            $tpl->assign('IE_br', "<br>");
-
-        }
-
-        else if ( $block[0]["status"] == 0 ) {
-
-              $tpl->assign('FF_br', "<br>");
-
-        }
-
-     ******************************************/
-
-
      /* Tablenames :: Defined in settings/tables.php */
 
 	 	$tpl->assign("tbl_diary", $tbl_diary);
@@ -70,13 +52,13 @@
 		$tpl->assign("tbl_da_scale_categories", $tbl_da_scale_categories);
 		$tpl->assign("tbl_da_scale_items", $tbl_da_scale_items);
 		$tpl->assign("tbl_da_scale_results", $tbl_da_scale_results);
-
+		$tpl->assign("tbl_users", $tbl_users);
+		
      /******************************************/
 
 
      /* Folders */
      
-
         $tpl->assign('dir_img', ROOT_DIR."media/images/");
         $tpl->assign('dir_img_bbcode', ROOT_DIR."media/images/bbcode/");
         $tpl->assign('dir_img_file', ROOT_DIR."media/images/fileicons/");
