@@ -166,8 +166,7 @@
 
 
      /* Initialize and Load :: Choosen Language */
-     
-     
+
         if ( !isset($_COOKIE["lang"]) )  { 
         
              switch ( substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2) ) {
@@ -178,12 +177,19 @@
              
         }
 
-        else if ( $_COOKIE["lang"] == '2' || $lang_browser == 'DE' )  {
+		else if ( isset ($_COOKIE["lang"]) ) {
+			
+			if ( $_COOKIE["lang"] == '2' ) $lang_browser = 'DE';
+			if ( $_COOKIE["lang"] == '3' ) $lang_browser = 'EN';
+				
+		}	
 
+        if ( $lang_browser == 'DE' )  {
+  
              include('settings/lang_german.php');
 
              $tpl->assign('lang_java', "lang_german");
-             $tpl->assign('lang', "german");
+             $tpl->assign('lang', "DE");
    
              $lang_active = "DE";
                         
@@ -192,12 +198,12 @@
                           
         }
 
-        else if ( $_COOKIE["lang"] == '3' || $lang_browser == 'EN' )  {   
+        else if ( $lang_browser == 'EN' )  {   
 
              include('settings/lang_english.php');
 
              $tpl->assign('lang_java', "lang_english");
-             $tpl->assign('lang', "english");
+             $tpl->assign('lang', "EN");
 
              $lang_active = "EN";
 
@@ -208,8 +214,6 @@
                              
         }
 
-		$lang_active = "EN";
-        
         //$tpl->assign("lang", $lang_active); 
 
     /******************************************/

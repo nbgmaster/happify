@@ -33,33 +33,29 @@
       
       /* Load :: Page Content */
       
-      include("modules/home/index.php");                              
-      
+                            
+	   if ( !isset ($_GET['section']) ) $_GET['section'] = 'index';
+				               
+	   if ( isset ($_GET["module"]) && isset ($_GET["section"]) ) {
+	  	
+	       if ($logon_true != 1 && $_GET["module"] != "logon" && $_GET["section"] != "activation") header("Location:".ROOT_DIR);
+		  				
+		   if (file_exists('modules/'.$_GET['module']."/".$_GET['section'].".php") && file_exists('tpl/modules/'.$_GET['module']."/".$_GET['section'].".tpl"))  {
 
-		         $load_main = 0; 
-		         if ($logon_true != 1 && isset($_GET['section'])) {   if ($_GET['section'] == 'activation') $load_main = 1; }
-                       
-		         i {
-		         	
-				//	if ($logon_true != 1 && $load_main == 0) header("Location:".ROOT_DIR);
-		         	
-					   if ( !isset ($_GET['section']) ) $_GET['section'] = 'index';
-			         
-					   if (file_exists('modules/'.$_GET['module']."/".$_GET['section'].".php") && file_exists('tpl/modules/'.$_GET['module']."/".$_GET['section'].".tpl"))  {
+	           $tpl->display("breadcrumb.tpl");
 				
-				           include("modules/".$_GET['module']."/".$_GET['section'].".php"); 
-						  
-		                   $tpl->display("breadcrumb.tpl");
-							   
-			               $tpl->display("modules/".$_GET['module']."/".$_GET['section'].".tpl"); 
-			              
-					   }
-					   
-			          else $tpl->display("errorpage.tpl");
+	           include("modules/".$_GET['module']."/".$_GET['section'].".php"); 
+			   	   
+	           $tpl->display("modules/".$_GET['module']."/".$_GET['section'].".tpl"); 
+	 
+		   }
+		   
+	      else $tpl->display("errorpage.tpl");
 			         
-				 }
-				 
-    
+	  }
+	 
+	  else  include("modules/home/index.php"); 
+			
       /******************************************/
          
       /* Load :: Footer Content */

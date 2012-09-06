@@ -27,7 +27,9 @@
           /* Get UserData, only ONE row */
 
              function getUserData()  { 
-
+             	
+			   	 global $db; 
+  
                  $this->table     = $this->tbl_users;
                  $this->condition = " UserID = '$this->userid' ";
                  $this->order     = '';
@@ -35,7 +37,7 @@
                  $this->module    = '';
                  $this->template  = '';
 
-                 return $this->row();
+                 if ( $this->errno($db) == 0 ) return $this->row();
 
              }
 
@@ -45,7 +47,9 @@
           /* Convert UserName into UserID */
 
              function getUserID()  {
-
+             	
+			   	 global $db; 
+  
                  $this->cols      = 'UserID';
                  $this->table     = $this->tbl_users;
                  $this->condition = " UserName = '$this->username' ";
@@ -54,7 +58,7 @@
                  $this->module    = '';
                  $this->template  = '';
 
-                 return $this->row();
+                 if ( $this->errno($db) == 0 ) return $this->row();
 
           }
 
@@ -64,7 +68,9 @@
           /* Convert UserName into UserID */
 
              function getUserToken()  {
-
+             	
+			   	 global $db; 
+  
                  $this->cols      = 'UserToken';
                  $this->table     = $this->tbl_users;
                  $this->condition = " UserEmail = '".$this->email."' ";
@@ -73,12 +79,15 @@
                  $this->module    = '';
                  $this->template  = '';
 
-                 return $this->row();
+                 if ( $this->errno($db) == 0 ) return $this->row();
 
           }
 
           /******************************************/
 
+          function errno($db) {         			
+				return mysqli_errno($db);
+          }
           
           /* Get total rows */
 
@@ -94,7 +103,7 @@
                                             
                  $result = $rows[ 0 ];
 
-                 return $result;
+                 if ( $this->errno($db) == 0 ) return $result;
      
              }
 
@@ -166,7 +175,9 @@
                    $count = 0;
             //echo "SELECT $this->cols FROM $this->table $this->condition $this->group $this->order $this->limit";      
                    $select = mysqli_query($db, "SELECT $this->cols FROM $this->table $this->condition $this->group $this->order $this->limit");
-
+                   mysqli_query($db, "SET NAMES 'utf-8'");
+				   mysqli_set_charset($db, 'utf8');
+				   
                    while ( $result = mysqli_fetch_assoc($select) )  {
 
                            if ( $this->module && $this->template )  {
@@ -198,8 +209,8 @@
                                            $result[$colnames[$z]] = nl2br($result[$colnames[$z]]);*/
                                         
                                            if ($this->output_name == 1 && $z == 0) $firstname = $result[$colnames[$z]];
-                                           if ($this->output_name == 1) $this->array[$firstname][$colnames_formatted[$z]] = $result[$colnames[$z]];                                           
-                                           else
+                                           if ($this->output_name == 1 && $this->errno($db) == 0 ) $this->array[$firstname][$colnames_formatted[$z]] = $result[$colnames[$z]];                                           
+                                           else if ( $this->errno($db) == 0)
                                            $this->array[$count][$colnames_formatted[$z]] = $result[$colnames[$z]];
                          
                                      }
@@ -209,8 +220,8 @@
                                 }
 
                                 else  {
-                                       
-                                     return $result[$this->cols];
+                                  
+                                     if ( $this->errno($db) == 0 ) return $result[$this->cols];
 
                                 }
 
@@ -218,13 +229,13 @@
 
                     }
 
-                    if ( $this->multiSelect )  {
+                    if ( $this->multiSelect && $this->errno($db) == 0 )  {
 
                        return $this->array;
 
                     }
 
-                    if ( $this->module && $this->template )  {
+                    if ( $this->module && $this->template &&$this->errno($db) == 0 )  {
                     
                          if ($this->module == 'blog' || $this->module == 'gallery' ) include("./modules/$this->module/output_end.php");
 

@@ -5,6 +5,7 @@
      //header('Expires: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
      header("Cache-Control: private, no-cache, no-store, must-revalidate"); 
      header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+     header('Content-Type: text/html; charset=utf-8');
      //header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
      //header("Cache-Control: no-cache, must-revalidate");
      //header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
@@ -12,7 +13,7 @@
      session_start();
      ob_start();
      
-	 $debug_mode = "ON_PRINT"; //OFF, ON_DEV, ON_PRINT
+	 $debug_mode = "ON_PRINT"; //OFF, ON_DEV, ON_PRINT  	!= OFF --> considered DEV environment
 	
 	 if ($debug_mode == "ON_PRINT") error_reporting(E_ALL);
 	 else error_reporting(E_ERROR | E_WARNING | E_PARSE);
@@ -44,7 +45,9 @@
      global $tpl;
      global $img_enlarge_title;
      global $module;
-
+	 global $section;
+	 global $debug_mode; 
+	 
      define("ROOT_DIR", "http://127.0.0.1/happify/");
 
   /******************************************/
@@ -60,7 +63,8 @@
                           
   /******************************************/
       
-
+	 
+	
   /* Load :: Current time & date */
 
      $timestamp = time();
@@ -132,7 +136,7 @@
   /* Load :: Template settings */
 
      include('settings/template.php');
-
+    
   /******************************************/
   
   

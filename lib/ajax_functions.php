@@ -3,7 +3,7 @@
    require('lib/xajax/xajax_core/xajax.inc.php');
 
    $xajax = new xajax();
-   $xajax->configure('debug', true);
+   //$xajax->configure('debug', true);
    $xajax->configure('javascript URI', ROOT_DIR.'lib/xajax/');
    //$xajax->configure('defaultMode', "asynchronous");
    
@@ -82,39 +82,6 @@
 		   
 	 }
 	 	       
-      /* header ("Location:".ROOT_DIR."flash/newflash.html");
-                 
-     $select = new SelectEntrys();
-
-     $select->table      = $table;
-     $select->cols       = 'id, firstname, lastname, job_position, category, email, phone, description_DE, description_EN, position';
-     $select->condition  = " id = '$mid' ";                                                                    
-     $select->multiSelect      = '1';
-     $select->limit      = '1';
-
-     
-     $ay_select = $select->row();
-            
-   //  $ay_select[0]['description_DE'] = replaceBBcode($ay_select[0]['description_DE'], $set[0]["width_images"], 1);
-         	     
-     $tpl->assign('array_details', $select->row());
-     
-     unset($select);
-      /*
-     $new_height = 45 * ($ay_select[0]['position'] - 1);
-     if ($ay_select[0]['position'] < 5) $new_height = $new_height + 23;
-     if ($ay_select[0]['position'] > 4) $new_height = $new_height + 23;
-     if ($ay_select[0]['position'] > 10) $new_height = $new_height - 160;
-        
-     $html = $tpl->fetch("team/details.tpl");           
-     $p_name  = "team_profile";
-     
-     //$space = "<div style='height:".$new_height."px'>&nbsp;</div>";
-     //$space2 = "<div style='height:200px'>&nbsp;</div>";
-          
-     $objResponse->assign($p_name,"innerHTML",$html);
-                        */
-     
      return $objResponse;  
                
   }
@@ -166,8 +133,9 @@
 			  else $logon->cookie_duration = 0;
 	          $logon->cookieset('ly');
 
-	          $objResponse->redirect(ROOT_DIR);
-			  
+			  $objResponse->Script("document.getElementById('submit_login').onclick()");
+			  $objResponse->redirect(ROOT_DIR);
+			  //return true;
 	     }
 	
 	     else  {
@@ -180,7 +148,8 @@
 	     	  $objResponse->assign("p_logon_failure","innerHTML","Login information could not be verified.<br> Please try it again.");
 
 	          //$tpl->display("logon/login.tpl");
-	
+	          //return false;
+
 	     }
 	
 	     unset($logon);
@@ -192,6 +161,8 @@
   }
 
   function registerUser( $data ) {
+  	
+	     global $debug_mode;
   	
 		 $objResponse = new xajaxResponse(); 
   
@@ -229,31 +200,66 @@
 	
 	         $user_register->insert();    
 	         
-	         unset($user_register);  
-			 
-			 /*
-			 if (mysqli_errno() == 0) {
+
+			 if ($user_register->errno() == 0) {
 			 
 				  $Header = "MIME-Version: 1.0\n";
 				  $Header .= "Content-type: text/plain; charset=utf-8\n";
   				  $Header .= "From: noreply@happify.com";
 
-  //$from    = "From: admin@wiwistud.de"; 
+				  //$from    = "From: admin@wiwistud.de"; 
+				  //activation.html?c=bebf08f7af79422ced07be79c2f2f5c0&t=13140575844e52ed70736d2
+				  $act_link = ROOT_DIR."logon/activation.html?c=".$act_code."&t=".$token;
+				
+				  $subject = "Activation link happify.com";
+				
+				  $message = "Activation link: ".$act_link;
+				  				  
+				  if ($debug_mode != "OFF") {
+				  	
+					    require("../phpmailer/class.phpmailer.php");
+						$mail = new PHPMailer(); 
+						$mail->IsSMTP(); // send via SMTP
+						//IsSMTP(); // send via SMTP
+						$mail->SMTPSecure = "ssl";                 // sets the prefix to the servier						
+						$mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
+						$mail->Port       = 465;  
+						$mail->SMTPDebug  = 0;    
+						$mail->SMTPAuth = true; // turn on SMTP authentication
+						$mail->Username = "de.stefan.richter@gmail.com"; // SMTP username
+						$mail->Password = "121DB413#"; // SMTP password
+						$webmaster_email = "noreply@happify.com"; //Reply to this email ID
+						//$email="username@domain.com"; // Recipients email ID
+						//$name=$firstname; // Recipient's name
+						//$mail->From = $webmaster_email;
+						//$mail->FromName = "Happify";
+						$mail->SetFrom($webmaster_email, "Happify");
+						$mail->AddAddress($email,$firstname);
+						//$mail->AddReplyTo($webmaster_email,"Webmaster");
+						//$mail->WordWrap = 50; // set word wrap
+						//$mail->AddAttachment("/var/tmp/file.tar.gz"); // attachment
+						//$mail->AddAttachment("/tmp/image.jpg", "new.jpg"); // attachment
+						//$mail->IsHTML(true); // send as HTML
+						$mail->Subject = $subject;
+						$mail->Body = $message; //HTML Body
+						$mail->AltBody = $message; //Text Body
+						$mail->Send();
+												
+				  } else mail($email, $subject, $message, $Header);
 
-  $to = $_Sre_email; 
+	              $objResponse->assign("form_reg","style.display",'none');
+	              $objResponse->assign("reg_success","style.display",'block'); 
+						  
+			 	  unset($user_register);  
+			 		 
+			 }  
 
-  $act_link = "index.php?do=activate_user&activation_code=";
-
-  $subject = "Erfolgreiche Registrierung auf www.wiwistud.de"; 
-
-
-  $message = "Activ";
-			  
-	
-  mail($to, $subject, $message, $Header);*/
-	         
-	         $objResponse->assign("form_reg","style.display",'none');
-	         $objResponse->assign("reg_success","style.display",'block');   
+			 else {
+			 	
+	     	    $objResponse->assign("p_reg_failure","style.display",'block');         	
+	    	    $objResponse->assign("p_reg_failure","innerHTML","Registration not successful. Please try again.");				
+				
+			 }
 		 
 		 }
 		 

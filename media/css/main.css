@@ -38,7 +38,7 @@ min-height: 100%;
 #main{
 position: relative;
 z-index: 2;
-padding-top:85px;
+padding-top:100px;
 padding-bottom: 50px;
 background: url(../images/main-bg.png) repeat-x top;
 }
@@ -81,7 +81,7 @@ height: 100px;
 height: 55px;
 top:0px;
 left:0px;
-//background:  url(../images/tile1.jpg) fixed;
+background:  url(../images/tile1.jpg) fixed;
 
 z-index: 3;
 }
@@ -537,6 +537,11 @@ top:-20px;
 }
 .image-box.active .arrow{
  	top:0px;
+}
+.img_flag {
+	border:1px solid #000;
+	cursor:pointer;
+	
 }
 
 

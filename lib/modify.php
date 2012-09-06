@@ -52,7 +52,9 @@
 
           
           function errno() {         			
-				return mysqli_errno();
+				 global $db; 
+
+				return mysqli_errno($db);
           }
 
           /* Delete entry */

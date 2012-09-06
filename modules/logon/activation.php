@@ -38,4 +38,4 @@
   
   }     
   
-  else $tpl->display("errorpage.tpl");
+  else $tpl->assign('e', "nopermission"); 

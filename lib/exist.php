@@ -31,7 +31,7 @@
 
               $result = $rows[ 0 ];  
 
-              return $result;
+              if ( $this->errno($db) == 0 ) return $result;
 
           }
 

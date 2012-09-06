@@ -26,7 +26,7 @@
 		   
       } 
 	  
-	  print_r($user_data);
+	  //print_r($user_data);
 
 
       $tpl->assign('usr_data', $user_data); 

@@ -30,7 +30,7 @@
 
 <!--script type="text/javascript" src="{$root_dir}js/jquery.js"></script-->
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
-
+<script type="text/javascript" src="{$dir_js}change_settings.js"></script> 
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -62,7 +62,7 @@
 	$('a.close, #mask').live('click', function() { 
 	  $('#mask , .login-popup').fadeOut(300 , function() {
 		$('#mask').remove();  
-		$('#p_logon_failure').remove();  
+		$('#p_logon_failure').hide();  
 	}); 
 	return false;
 	});
@@ -95,18 +95,29 @@
 	$('a.close, #mask').live('click', function() { 
 	  $('#mask , .register-popup').fadeOut(300 , function() {
 		$('#mask').remove();  
-		$('#p_logon_failure').remove();  
+		$('#p_reg_failure').hide();  
 	}); 
 	return false;
 	});
 	
+	//enter on login or register mask
+	$(document).keypress(function(e) {
+	    if(e.which == 13 && $('#mask').length && $('.register-popup').length) {
+	        $('#reg_submit').click();          
+	    }
 
-	  $('#reg_submit').click(function() {
-	      xajax_register(xajax.getFormValues('register'), Math.random());
-	          $.ajaxSetup({ cache: false });
-	          return false;
-	  });
-                  
+	});
+
+	//enter on login or register mask
+	$(document).keypress(function(e) {
+
+	    if(e.which == 13 && $('#mask').length && $('.login-popup').length) {
+	        $('#log_submit').click();  
+	        return false;
+	    }
+
+	});
+	                  
 });
 </script>
   
@@ -114,36 +125,45 @@
 
 <body>
 
+
+
 {if $logon != 1}
 <div id="login-box" class="login-popup">
+
           <a href="#" class="close"><img src="{$dir_img}close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>
           <p id="p_logon_failure"></p>
-          <form method="get" class="signin" action="#" id="signin">
-                <fieldset class="textbox">
-            	<label class="username">
-                <span>Email</span>
-                <input id="email" name="email" value="" type="text" autocomplete="on" placeholder="Email">
-                </label>
-                <label class="password">
-                <span>Password</span>
-                <input id="password" name="password" value="" type="password" autocomplete="on" placeholder="Password">
-                </label>
-                <label class="logon_add" style="padding:0 !important">
+          <form method="post" class="signin" id="signin" onkeypress="" autocomplete="on" action="index.php">
 
-                <span>Remember Login?
+                <fieldset class="textbox">
+            	<label class="email" for="email">
+                <span>Email</span>
+                 <input name="email" type="text" value="" required="required" autocomplete="on" placeholder="Email" />
+                <!--input id="email" name="email" value="" type="text" autocomplete="on" placeholder="Email" required="required"-->
+                </label>
+                <label class="password" for="password">
+                <span>Password</span>
+                 <input name="password" type="password" value="" required="required" placeholder="Password" />
+                <!--input id="password" name="password" value="" type="password" autocomplete="off" placeholder="Password" required="required"-->
+                </label>
+                <label class="logon_add" for="autologon" style="padding:0 !important">
+
+                <span>Keep me logged in
         
-                <input type="checkbox" name="autologon" value="1" checked="checked" class="checkbox">
+                <input type="checkbox" name="autologon" id="autologon" value="1" checked="checked" class="checkbox">
                 </span>
                 </label>
                       	              	
-                <button class="submit button" type="button" onclick="xajax_login(xajax.getFormValues('signin'));return false">Sign in</button>
+                <button class="submit button" id="log_submit" type="button" onclick="xajax_login(xajax.getFormValues('signin'));return false">Sign in</button>
+                <!--input type="submit" class="submit button" id="submit_login" value="New Sign in" {*onclick="xajax_login(xajax.getFormValues('signin'))"*} name="submit_login" style="{*visibility:hidden*}"-->
+                
+                <input type="submit" name="doLogin" value="Login" id="submit_login" name="submit_login" onclick="form.submit()" style="display:none" />
                 <p>
                 <a class="forgot" href="#">Forgot your password?</a>
-                </p>        
+                </p>  
+                <!--input type="submit" id="submit_login" value="" name="submit_login" style="{*visibility:hidden;width:0px;height:0px*}"-->      
                 </fieldset>
           </form>
 </div>
-
 
 <div id="register-box" class="register-popup">
           <a href="#" class="close"><img src="{$dir_img}close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>
@@ -155,23 +175,23 @@
 	                <fieldset class="textbox">
 	            	<label class="username">
 	                <span>Email</span>
-	                <input id="email" name="email" value="" type="text" autocomplete="on" placeholder="Email" >
+	                <input id="email" name="email" value="" type="text" autocomplete="off" placeholder="Email" >
 	                </label>
 	                <label class="password">
 	                <span>Password</span>
-	                <input id="password" name="password" value="" type="password" placeholder="Password">
+	                <input id="password" name="password" value="" type="password" autocomplete="off" placeholder="Password">
 	                </label>
 	                <label class="password">
 	                <span>Repeat Password</span>
-	                <input id="password2" name="password2" value="" type="password" placeholder="Repeat Password">
+	                <input id="password2" name="password2" value="" type="password" autocomplete="off" placeholder="Repeat Password">
 	                </label>
 	                <label class="username">
 	                <span>Firstname</span>
-	                <input id="firstname" name="firstname" value="" type="text" placeholder="Firstname">
+	                <input id="firstname" name="firstname" value="" type="text" autocomplete="off" placeholder="Firstname">
 	                </label>
 	            	
 	            	            	            	
-	                <button class="submit button" type="button" id="reg_submit2" onclick="xajax_registerUser(xajax.getFormValues('register'));">Create Account</button>
+	                <button class="submit button" type="button" id="reg_submit" onclick="xajax_registerUser(xajax.getFormValues('register'));">Create Account</button>
 	
 	                </fieldset>
 	          </form>
@@ -237,6 +257,7 @@
 		
 	</div>
 
+
     <div id="main" role="main" {if $logon != 1}style="padding-top:100px"{/if}>
     	<div class="main-bg">
     	<div class="main-wrapper wrapper"><div style="display: block;" class="content">		
@@ -244,3 +265,15 @@
       <div class="entry-content">
 	
 	  	<div class="ani-spacer"></div>
+
+{*if $log_ja == 0}
+<form id="login_form" method="post" action="{$root_dir}">
+  <fieldset>
+
+<input type="text" name="UserEmail" autocomplete="on" class="login_inp">
+ <input type="password" name="UserPass" autocomplete="on" class="login_inp">
+     <input id="login_submit" class="submit" type="submit" value="drtd" name="login">
+ 
+</fieldset>
+</form>
+{/if*}
