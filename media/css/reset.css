@@ -9,7 +9,7 @@ audio:not([controls]) { display: none; }
 
 html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
 body { margin: 0; font-size: 14px; line-height: 1.231; }
-body, button, input, select, textarea { font-family: sans-serif; color: #222; }
+body, button, input, select, textarea { font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; color: #222; }
 
 ::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
 ::selection { background: #fe57a1; color: #fff; text-shadow: none; }
@@ -138,7 +138,7 @@ clear: both;
 width: 760px;
 margin: 0px auto;
 position: relative;
-min-height: 100%;
+//min-height: 100%;
 }
 
 
@@ -350,7 +350,7 @@ width: 100%;
 max-width: 760px;
 margin: 0px auto;
 position: relative;
-min-height: 100%;
+//min-height: 100%;
 }
 
 .isMobile .wrapper{
@@ -381,3 +381,19 @@ min-height: 100%;
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3 { page-break-after: avoid; }
 }
+
+p::-moz-selection,::-moz-selection{
+background: #839885;
+color: #fff;
+} 
+
+p::-webkit-selection, ::-webkit-selection{
+background: #839885;
+color: #fff;
+} 
+
+p::selection, ::selection {
+background: #839885;
+color: #fff;
+}
+

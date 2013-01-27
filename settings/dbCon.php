@@ -1,9 +1,6 @@
-	 
 <?php
 
-  /* Create Object :: CONNECT */
-
-     require_once('lib/dbCon.php');
+     require_once('lib/classes/dbCon.php');
 
      $DBcon = new EstablishDBConnection();
 
@@ -13,5 +10,3 @@
      $DBcon->dbname   = 'happify';
 
      $DBcon->connectDB();
-
-  /******************************************/

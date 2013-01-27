@@ -10,7 +10,7 @@
           public $username;
           public $tbl_users;
           public $timestamp;
-
+		  public $distinct;
           public $cols;
           public $table;
           public $condition;
@@ -87,6 +87,8 @@
 
           function errno($db) {         			
 				return mysqli_errno($db);
+				
+			die();
           }
           
           /* Get total rows */
@@ -98,7 +100,7 @@
                  if ( !$this->table ) $this->table = 'users';
 
                  $query = mysqli_query($db, "SELECT COUNT(1) AS result from $this->table $this->condition LIMIT 1");
-  //echo "SELECT COUNT(1) AS result from $this->table $this->condition LIMIT 1";
+  				 //echo "SELECT COUNT(1) AS result from $this->table $this->condition LIMIT 1";
                  $rows  = mysqli_fetch_row( $query );
                                             
                  $result = $rows[ 0 ];
@@ -171,79 +173,48 @@
               $totalrows = $this->getrows();
           
               if ( $totalrows > 0 )  {
-                       
+                 
                    $count = 0;
-            //echo "SELECT $this->cols FROM $this->table $this->condition $this->group $this->order $this->limit";      
-                   $select = mysqli_query($db, "SELECT $this->cols FROM $this->table $this->condition $this->group $this->order $this->limit");
+            
+            	   if (!$this->distinct) $col_mod = $this->cols;
+				   else $col_mod = "DISTINCT($this->cols)";
+				   
                    mysqli_query($db, "SET NAMES 'utf-8'");
 				   mysqli_set_charset($db, 'utf8');
-				   
+				   				   
+				   //echo "SELECT $col_mod FROM $this->table $this->condition $this->group $this->order $this->limit";     
+                   $select = mysqli_query($db, "SELECT $col_mod FROM $this->table $this->condition $this->group $this->order $this->limit");
+
                    while ( $result = mysqli_fetch_assoc($select) )  {
-
-                           if ( $this->module && $this->template )  {
-                                                  
-                                include("./settings/config.php");
-
-                                include("./settings/template.php");
-
-                                include("./modules/$this->module/output.php");
-
-                           }
-
-                           else  { 
-
-                                if ( $this->multiSelect )  {
-
-                                     $colnames = str_replace(" ", "", $this->cols);
-
-                                     $colnames = explode(",", $colnames);
-
-                                     for ( $z = 0; $z < count($colnames); $z++)  {        
-                                                                 
-                                           $colnames_formatted = str_replace("(id)","id",$colnames);
-                                           $colnames_formatted = str_replace("(time)","time",$colnames);
-                                       
-                                           $result[$colnames_formatted[$z]] =  htmlentities($result[$colnames[$z]]);
-                                           
-                                           /*if ($colnames == 'comment' && $br == 1)
-                                           $result[$colnames[$z]] = nl2br($result[$colnames[$z]]);*/
-                                        
-                                           if ($this->output_name == 1 && $z == 0) $firstname = $result[$colnames[$z]];
-                                           if ($this->output_name == 1 && $this->errno($db) == 0 ) $this->array[$firstname][$colnames_formatted[$z]] = $result[$colnames[$z]];                                           
-                                           else if ( $this->errno($db) == 0)
-                                           $this->array[$count][$colnames_formatted[$z]] = $result[$colnames[$z]];
-                         
-                                     }
-
-                                     $count++;
-
-                                }
-
-                                else  {
-                                  
-                                     if ( $this->errno($db) == 0 ) return $result[$this->cols];
-
-                                }
-
-                           }
+  
+	                        if ( $this->multiSelect )  {
+	
+	                             $colnames = str_replace(" ", "", $this->cols);
+	
+	                             $colnames = explode(",", $colnames);
+	
+	                             for ( $z = 0; $z < count($colnames); $z++)  {
+	
+	                                   $result[$colnames[$z]] =  htmlentities($result[$colnames[$z]]);
+	                                   if ( $this->errno($db) == 0) $this->array[$count][$colnames[$z]] = $result[$colnames[$z]];
+	                 
+	                             }
+	
+	                             $count++;
+	
+	                        }
+	
+	                        else  {
+	                          
+	                             if ( $this->errno($db) == 0 ) return $result[$this->cols];
+	
+	                        }
 
                     }
 
                     if ( $this->multiSelect && $this->errno($db) == 0 )  {
 
                        return $this->array;
-
-                    }
-
-                    if ( $this->module && $this->template &&$this->errno($db) == 0 )  {
-                    
-                         if ($this->module == 'blog' || $this->module == 'gallery' ) include("./modules/$this->module/output_end.php");
-
-                         if ($this->extended) $tpl->assign('folder_error', true);
-
-                         $tpl->assign('array', $this->array);
-
-                         $tpl->display($this->template);
 
                     }
 

@@ -8,7 +8,7 @@
 <div id="bottom-spacer"></div>
 
 </div>
-<div class="footer">
+<div class="footer" style="position:fixed;bottom:0;width:100%">
 	<div class="menu-footer-menu-container">
 
 		<ul id="menu-footer-menu" class="menu">

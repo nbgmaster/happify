@@ -49,8 +49,8 @@
 
   }
 
-  if (selected_lang == "2") document.getElementById("change_lang").selectedIndex = selected_lang - 2;
-  if (selected_lang == "3") document.getElementById("change_lang").selectedIndex = selected_lang - 2;
+ // if (selected_lang == "2") document.getElementById("change_lang").selectedIndex = selected_lang - 2;
+  //if (selected_lang == "3") document.getElementById("change_lang").selectedIndex = selected_lang - 2;
   
 
   
@@ -78,7 +78,7 @@
 
   function change_lang(id)  {
   
-          id = id + 2;
+          id = id + 1;
 
           setCookie( 'lang', id, '1', '/', '', '' );
 

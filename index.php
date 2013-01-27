@@ -1,7 +1,5 @@
 <?php
 
-  //$country = file_get_contents('http://api.hostip.info/country.php?ip='.$_SERVER['REMOTE_ADDR']);
- 
       /* Load :: Configuration settings */
     
          include('settings/config.php');
@@ -9,8 +7,8 @@
       /******************************************/
     
     
-      /* Download Attachment */
-    
+      /* Download Attachment 
+    	//maybe requires function createFromString from former lib
          if ( isset($_GET['fid']) )  {
     
               require_once('lib/download.php');
@@ -19,7 +17,7 @@
     
          }
          
-      /******************************************/
+      ******************************************/
     
     
       /* Load :: Header Content */
@@ -30,27 +28,62 @@
 
       /******************************************/
 
-      
+
       /* Load :: Page Content */
-      
-                            
+
 	   if ( !isset ($_GET['section']) ) $_GET['section'] = 'index';
 				               
 	   if ( isset ($_GET["module"]) && isset ($_GET["section"]) ) {
 	  	
 	       if ($logon_true != 1 && $_GET["module"] != "logon" && $_GET["section"] != "activation") header("Location:".ROOT_DIR);
-		  				
-		   if (file_exists('modules/'.$_GET['module']."/".$_GET['section'].".php") && file_exists('tpl/modules/'.$_GET['module']."/".$_GET['section'].".tpl"))  {
+		   	   
+		   $page_load = 0;
+		   
+		   if (isset($_GET['subsection'])) {
+		   	
+		           if (file_exists('modules/'.$_GET['module']."/".$_GET['section']."/".$_GET['subsection'].".php") && file_exists('tpl/modules/'.$_GET['module']."/".$_GET['section']."/".$_GET['subsection'].".tpl"))  {
 
-	           $tpl->display("breadcrumb.tpl");
-				
-	           include("modules/".$_GET['module']."/".$_GET['section'].".php"); 
-			   	   
-	           $tpl->display("modules/".$_GET['module']."/".$_GET['section'].".tpl"); 
-	 
+		               $tpl->display("breadcrumb.tpl");
+				   
+		               include("modules/".$_GET['module']."/".$_GET['section']."/".$_GET['subsection'].".php"); 
+				   	   
+		               $tpl->display("modules/".$_GET['module']."/".$_GET['section']."/".$_GET['subsection'].".tpl"); 
+				   				   												   
+					   $page_load = 1;
+				   
+				   }
+		   	
 		   }
 		   
-	      else $tpl->display("errorpage.tpl");
+		   else {
+
+			   if (file_exists('modules/'.$_GET['module']."/".$_GET['section'].".php") && file_exists('tpl/modules/'.$_GET['module']."/".$_GET['section'].".tpl"))  {
+	
+		           $tpl->display("breadcrumb.tpl");
+
+			       include("modules/".$_GET['module']."/".$_GET['section'].".php"); 
+				  	   
+			       $tpl->display("modules/".$_GET['module']."/".$_GET['section'].".tpl"); 
+	
+				   $page_load = 1;
+				   				
+			   }
+			   
+			   elseif (file_exists('modules/'.$_GET['module']."/".$_GET['section']."/index.php") && file_exists('tpl/modules/'.$_GET['module']."/".$_GET['section']."/index.tpl"))  {
+	
+		           $tpl->display("breadcrumb.tpl");
+
+			       include("modules/".$_GET['module']."/".$_GET['section']."/index.php"); 
+				  	   
+			       $tpl->display("modules/".$_GET['module']."/".$_GET['section']."/index.tpl"); 
+	
+				   $page_load = 1;
+				 					
+			   }			   					
+
+		   }
+		   
+	       if ($page_load == 0) $tpl->display("errorpage.tpl");
 			         
 	  }
 	 
@@ -70,8 +103,8 @@
       
   /* Close :: Session */
 
-     $diff_max = 60*10; // clear session after 10 minutes
-     $diff_actual = $timestamp - strtotime($user_data['last_online_time']);
+     //$diff_max = 60*10; // clear session after 10 minutes
+     //$diff_actual = $timestamp - strtotime($user_data['last_online_time']);
 
      //if ($diff_actual > $diff_max) 
         //$memcache->delete('user_data_'.$user_data['ID']);  
@@ -80,4 +113,3 @@
   /******************************************/
   
   //print_r($user_data["fb_friends"]);
-  

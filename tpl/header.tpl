@@ -27,105 +27,20 @@
 <link rel="stylesheet" type="text/css" media="all" href="{$root_dir}media/css/main.css">
 <link rel="stylesheet" type="text/css" media="all" href="{$root_dir}media/css/subsites.css">
 <link rel="stylesheet" type="text/css" media="all" href="{$root_dir}media/css/logon.css">
-
+<link rel="stylesheet" type="text/css" media="all" href="{$root_dir}media/css/jquery-ui-1.8.23.custom.css">	
+<link rel="stylesheet" type="text/css" media="all" href="{$root_dir}media/css/forum.css">	
+          
 <!--script type="text/javascript" src="{$root_dir}js/jquery.js"></script-->
+<!--http://jqueryui.com/demos/button/#radio-->
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+<script type="text/javascript" src="{$dir_js}/jquery-ui-1.8.23.custom.min.js"></script>
 <script type="text/javascript" src="{$dir_js}change_settings.js"></script> 
+<script type="text/javascript" src="{$dir_js}login_register.js"></script> 
 
-<script type="text/javascript">
-	$(document).ready(function() {
-	$('a.login-btn').click(function() {
-		
-                //Getting the variable's value from a link 
-		var loginBox = $(this).attr('href');
 
-		//Fade in the Popup
-		$(loginBox).fadeIn(300);
-		
-		//Set the center alignment padding + border see css style
-		var popMargTop = ($(loginBox).height() + 24) / 2; 
-		var popMargLeft = ($(loginBox).width() + 24) / 2; 
-		
-		$(loginBox).css({ 
-			'margin-top' : -popMargTop,
-			'margin-left' : -popMargLeft
-		});
-		
-		// Add the mask to body
-		$('body').append('<div id="mask"></div>');
-		$('#mask').fadeIn(300);
-		
-		return false;
-	});
-	
-	// When clicking on the button close or the mask layer the popup closed
-	$('a.close, #mask').live('click', function() { 
-	  $('#mask , .login-popup').fadeOut(300 , function() {
-		$('#mask').remove();  
-		$('#p_logon_failure').hide();  
-	}); 
-	return false;
-	});
-	
-		$('a.register-btn').click(function() {
-	
-                //Getting the variable's value from a link 
-		var registerBox = $(this).attr('href');
-
-		//Fade in the Popup
-		$(registerBox).fadeIn(300);
-		
-		//Set the center alignment padding + border see css style
-		var popMargTop = ($(registerBox).height() + 24) / 2; 
-		var popMargLeft = ($(registerBox).width() + 24) / 2; 
-		
-		$(registerBox).css({ 
-			'margin-top' : -popMargTop,
-			'margin-left' : -popMargLeft
-		});
-		
-		// Add the mask to body
-		$('body').append('<div id="mask"></div>');
-		$('#mask').fadeIn(300);
-		
-		return false;
-	});
-	
-	// When clicking on the button close or the mask layer the popup closed
-	$('a.close, #mask').live('click', function() { 
-	  $('#mask , .register-popup').fadeOut(300 , function() {
-		$('#mask').remove();  
-		$('#p_reg_failure').hide();  
-	}); 
-	return false;
-	});
-	
-	//enter on login or register mask
-	$(document).keypress(function(e) {
-	    if(e.which == 13 && $('#mask').length && $('.register-popup').length) {
-	        $('#reg_submit').click();          
-	    }
-
-	});
-
-	//enter on login or register mask
-	$(document).keypress(function(e) {
-
-	    if(e.which == 13 && $('#mask').length && $('.login-popup').length) {
-	        $('#log_submit').click();  
-	        return false;
-	    }
-
-	});
-	                  
-});
-</script>
-  
 </head>
 
 <body>
-
-
 
 {if $logon != 1}
 <div id="login-box" class="login-popup">
@@ -220,7 +135,7 @@
 								    <a href="#register-box" class="register-btn"><span>Create account</span></a>
 					{/if}
 					{if $logon == 1}
-							{$usr_data.UserEmail}
+							<span style="color:#fff;font-weight:800px;padding-right:12px">{$usr_data.UserEmail}</span>
 							<a href="{$root_dir}logout/" class="btn"><span>Logout</span></a>
 					{/if}					
 
@@ -229,35 +144,33 @@
 
 		</div>
 	</div>
+	{$logon}
+
 	<div style="position: fixed;" class="header animated stick">
 		<div class="bg">
-
-				<div style="display: block;" class="menu submenu ">
+	{if $logon == 1}
+				<div style="display: block;" class="menu submenu">
 			<ul>
-				<li class="pulse active">
+				<li class="pulse {if !$module}active{/if}">
 					<a class="qjax" href="{$root_dir}">Start</a>
 				</li>
-				<li class="tactus">
-					<a class="qjax" href="http://www.qriously.com/products/tactus/">My Dreams</a>
+				<li class="pulse {if $module == 'analyze'}active{/if}">
+					<a class="qjax" href="{$root_dir}analyze/index.html">{$header_nav_li1}</a>
 				</li>
-				<li class="censio">
-					<a class="qjax" href="http://www.qriously.com/products/censio/">My Diary</a>
+				<li class="pulse {if $module == 'improve'}active{/if}">
+					<a class="qjax" href="{$root_dir}improve/index.html">{$header_nav_li2}</a>
 				</li>
-				<li class="tactus">
-					<a class="qjax" href="{$root_dir}da_scale/index.html">My Diagram</a>
-				</li>
-				<li class="tactus">
-					<a class="qjax" href="{$root_dir}distorted_thoughts/index.html">My Distorted Thoughts</a>
+				<li class="pulse {if $module == 'connect'}active{/if}">
+					<a class="qjax" href="{$root_dir}connect/index.html">{$header_nav_li3}</a>
 				</li>
 
 			</ul>
 				  			
-		</div>
+		</div>	{/if}
 		</div>
 		
 	</div>
-
-
+	
     <div id="main" role="main" {if $logon != 1}style="padding-top:100px"{/if}>
     	<div class="main-bg">
     	<div class="main-wrapper wrapper"><div style="display: block;" class="content">		

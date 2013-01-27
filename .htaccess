@@ -22,6 +22,9 @@ RewriteEngine on
 # Home
 RewriteRule ^index(\.html|/)?$ index.php [QSA,NC]
 
+RewriteRule ^([a-z0-9_]+)/([a-z0-9_]+)/([a-z0-9_]+)(\.html|/)(\/)?$ index.php?module=$1&section=$2&subsection=$3 [QSA,NC]
+RewriteRule ^([a-z0-9_]+)/([a-z0-9_]+)/([a-z0-9_]+)(\.htm|/)(\/)?$ index.php?module=$1&section=$2&subsection=$3 [QSA,NC]
+RewriteRule ^([a-z0-9_]+)/([a-z0-9_]+)/([a-z0-9_]+)(\/)?$ index.php?module=$1&section=$2&subsection=$3 [QSA,NC]
 
 RewriteRule ^([a-z0-9_]+)/([a-z0-9_]+)(\.html|/)(\/)?$ index.php?module=$1&section=$2 [QSA,NC]
 RewriteRule ^([a-z0-9_]+)/([a-z0-9_]+)(\.htm|/)(\/)?$ index.php?module=$1&section=$2 [QSA,NC]

@@ -1,0 +1,89 @@
+
+.cellbg {
+ background-image:  url(../images/forum/cellpic.gif);
+ color            : #222222;
+ padding:4px;
+
+}
+
+
+.catbg {
+ background-image : url(../images/forum/catpic.png);
+ color            : #FFFFFF;
+
+}
+
+.tableinborder {
+ background-color : #000;
+}
+
+.tablea { 
+ background-color : #8fab92;
+color:#383932;
+ padding:4px;
+
+}
+
+
+.tableb {
+ background-color : #829784;
+ padding:4px;
+
+}
+
+.tablec {
+ background-color : #e6efea;
+ padding:4px;
+
+}
+
+.catFont {
+ color            : #FFFFFF;
+
+ font-size        : 14px;
+ text-transform   : uppercase;
+}
+
+a.catFont:link {
+ color           : #FFFFFF;
+ text-decoration : none;
+}
+
+
+a.catFont:visited {
+ color           : #FFFFFF;
+ text-decoration : none;
+        }
+
+
+a.catFont:active {
+ color           : #FFFFFF;
+ text-decoration : none;
+}
+
+
+a.catFont:hover {
+ color           : #444444;
+ text-decoration : none;
+}
+
+.mouseover { 
+
+ background-color : #617163;
+ cursor           : pointer;
+  padding:4px;
+  color:#fff;
+
+}
+
+.mouseout {  
+ background-color : #8fab92;
+ cursor           : pointer;
+  padding:4px;
+  color:#383932;
+
+}
+
+
+.divIcon {text-align: center; float: left;width: 24px; height:13px;padding:5px 0 0 0px; }
+

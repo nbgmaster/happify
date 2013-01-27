@@ -1,0 +1,1 @@
+            		<a href="#"  onclick="xajax_sortdata('{$tbl_goals}', 'progress', '{$sort_progress}');return false;" class="sort">Progress</a>

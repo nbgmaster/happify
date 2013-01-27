@@ -14,7 +14,7 @@
 	position:relative; padding: 0;
 	overflow:hidden;
  	border-bottom:1px solid #ccc;
-    background:#e6efea; /* column 4 background colour */ 
+    background:#e6efea; /* column 3 background colour */ 
 
 }
 #container2 {
@@ -37,10 +37,10 @@
 	float:left;
 	//width:13%;
 	position:relative;
-	left:70.1%;
+	left:70.2%;
 	overflow:hidden;
 	padding:0; 
-	font-weight: bold;
+	//font-weight: bold;
 	line-height:18px;
 	font-size: 12px;
 }
@@ -83,7 +83,8 @@
 
 #col1.headline, #col2.headline, #col3.headline, #col4.headline  {
   font-weight:bold;
-  background-color:#d3e2d4; 
+  background-color:#617163; 
+  color: #fff;
 }
 
  #col1.headline {
@@ -100,5 +101,19 @@ border-top-right-radius: 14px;
 
 .spacing {
 	padding: 10px;    
+}
+
+a.sort:link, a.sort:visited, a.sort:active {
+	
+	color: #fff;
+	text-decoration:underline;
+	
+}
+
+a.sort:hover {
+	
+	color: #fff;
+	text-decoration: none;
+	
 }
 	

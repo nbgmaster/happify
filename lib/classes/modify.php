@@ -71,7 +71,7 @@
 
                  $delete = "DELETE FROM $this->table $this->condition";     
 
-                 mysqli_query($db, delete); 
+                 mysqli_query($db, $delete); 
 
              }
 

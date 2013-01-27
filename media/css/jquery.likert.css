@@ -1,0 +1,110 @@
+/* Main likert scale widget */
+.likert {
+        display: inline-block;
+        padding: 10px;
+        margin: 5px;
+        
+        font-family: geneva, arial, helvetica, sans-serif;
+        
+        border: 0px;
+        -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+    
+    -moz-box-shadow: 0px 0px 3px #E65544;
+    -webkit-box-shadow: 0px 0px 3px #E65544;
+    box-shadow: 0px 0px 3px #E65544;
+    
+    background-image: -webkit-gradient(
+                linear,
+                left bottom,
+                left top,
+                color-stop(0.26, rgb(251,255,143)),
+                color-stop(0.54, rgb(255,253,214))
+        );
+        
+        background-image: -moz-linear-gradient(
+                center bottom,
+                rgb(251,255,143) 26%,
+                rgb(255,253,214) 54%
+        );
+        
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFD6', endColorstr='#FBFF8F');
+}
+
+/* Displays the question icon. */
+.likert-question-icon{
+        margin-left: auto;
+        color: #E65544;
+        font-weight: bold;
+        font-size: 170%;
+        text-shadow: 1px 1px 1px #333;
+        display: block;
+        float: left;
+        padding: 5px;
+        margin-right: 5px;
+}
+
+.likert-container {
+        overflow: auto;
+}
+
+/* Contains the question text. */
+.likert-question-text {
+        margin: auto;
+        display: inline-block;
+        margin-bottom: 3px;
+        padding: 5px;
+        padding-left: 0px;
+}
+
+/* Container for likert scale and labels */
+.likert-scale {
+        overflow: auto;
+        vertical-align: middle;
+}
+
+/* Label at start of scale */
+.likert-scale-start {
+        float: left;
+        padding-right: 5px;
+        font-weight: bold;
+        color: #E65544;
+}
+
+/* Label at end of scale */
+.likert-scale-end {
+        display: inline-block;
+        float: left;
+        padding-left: 5px;
+        font-weight: bold;
+        color: #E65544;
+}
+
+/* Container for radio buttons on the scale */
+.likert-scale-container {
+        float: left;
+        margin: auto;
+        padding: 0;
+        list-style-type: none;
+}
+
+/* li */
+.likert-button  {
+        float: left;
+        padding-right: 2px;
+}
+Hide details
+Change log
+r10 by euan04 on Jul 8, 2011   Diff
+Fixed minor problem where the right-side
+label was floating a bit too far.
+Go to: 	
+Older revisions
+ r7 by euan04 on Jun 30, 2011   Diff 
+ r6 by euan04 on Jun 30, 2011   Diff 
+ r5 by euan04 on Jun 30, 2011   Diff 
+All revisions of this file
+File info
+Size: 1767 bytes, 96 lines
+View raw file
