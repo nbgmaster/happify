@@ -25,7 +25,7 @@ $graph->yaxis->scale->ticks->Set(2,1);
 
 $graph->xaxis->SetLabelMargin(20); 
 
-$graph->xaxis->SetFont(FF_VERDANA,FS_BOLD,8);
+//$graph->xaxis->SetFont(FF_VERDANA,FS_BOLD,8);
 
 $graph->xaxis->scale->ticks->SetSize(8,3);
 $graph->xaxis->scale->ticks->SetWeight(5);

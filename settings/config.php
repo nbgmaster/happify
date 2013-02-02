@@ -55,7 +55,7 @@
      define("ROOT_DIR", "http://127.0.0.1/happify/");
      
 	 //Enable Memcache?
-     define("mod_memcache", 0);
+     define("mod_memcache", 1);
 	 define("memcache_duration", 500);   //needs to be changed in production
 	 define("trigger_memcache_del", 0);   
 	 define("trigger_session_del", 0);   
