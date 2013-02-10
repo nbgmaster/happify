@@ -52,7 +52,7 @@
 	 global $user_data;
 	 global $debug_mode; 
 	 
-     define("ROOT_DIR", "http://127.0.0.1/happify/");
+     define("ROOT_DIR", "http://localhost/happify/");
      
 	 //Enable Memcache?
      define("mod_memcache", 0);

@@ -36,7 +36,7 @@
 				               
 	   if ( isset ($_GET["module"]) && isset ($_GET["section"]) ) {
 	  	
-	       if ($logon_true != 1 && $_GET["module"] != "logon" && $_GET["section"] != "activation") header("Location:".ROOT_DIR);
+	       if ($logon_true != 1 && $_GET["module"] != "logon" && $_GET["section"] != "activation" && $_GET["module"] != "learnmore") header("Location:".ROOT_DIR);
 		   	   
 		   $page_load = 0;
 		   

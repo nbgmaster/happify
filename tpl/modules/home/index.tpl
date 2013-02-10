@@ -9,6 +9,8 @@
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 <div style="width:100%;">
 	<div style="padding:10px">
@@ -21,22 +23,27 @@
 	    <p>&nbsp;</p>
 	    <p>&nbsp;</p>
 	    <p>&nbsp;</p>
-		<a href="{$root_dir}analyze/da_scale/index.html" class="btn"><span>Learn more</span></a>
+		<a href="{$root_dir}learnmore/index.html" class="btn"><span>Learn more</span></a>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<a href="{$root_dir}analyze/bd_scale/index.html" class="btn"><span>Create an account</span></a>
 		<p>&nbsp;</p>
 	</div>
 </div>
 
+<!--p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
 
-<!--span style="font-size:14px;line-height:24px">
-<i>Happiness in intelligent people is the rarest thing I know.</i>
+<span style="font-size:14px;line-height:24px;text-align:right">
+	<b>Happiness in intelligent people is the rarest thing I know.</b>
 <p></p>
-- Ernest Hemingway
+<i>- Ernest Hemingway</i>
 </span-->
+
 </center>

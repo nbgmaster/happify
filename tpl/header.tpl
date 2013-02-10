@@ -9,11 +9,13 @@
 <title>Happify | helps you to fully enjoy your life</title>
 <meta name="description" content="Happify helps you to fully enjoy your life">
 <meta name="keywords" content="Happify">
-<meta name="copyright" content="(c) 2012 Copyright: Happify Inc.">
+<meta name="copyright" content="(c) 2013 Copyright: Happify Inc.">
 
 <link rel="apple-touch-icon" href="">
 <meta name="google-site-verification" content="">
 <meta name="bitly-verification" content="">  
+
+<link rel="shortcut icon" href="{$root_dir}media/images/favicon.ico" type="image/x-icon">
 
 <meta property="fb:app_id" content="">
 <meta property="og:site_name" content="Happify.me">
