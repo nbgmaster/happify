@@ -16,6 +16,15 @@ $(function()
     };
     ticker();
 });
+
+function edit_desc() {
+    
+    $("#desc_me").hide();
+    $("#desc_input").show();   
+    
+    return true;
+}
+
 </script>
 {/literal}
 
@@ -27,8 +36,24 @@ $(function()
 	</div>
 	
 	<div style="float:left;width:580px;padding:16px;font-weight:700;font-size:12px;line-height:1.3em">
-		Ich bin ein selbstbewusster Mann, der authentisch und zuverlässig ist. Ich schaue anders aus und lasse mich nicht beirren.
-	    Das macht mich einzigartig.
+	    
+		<div id="desc_me">{$usr_data.description}</div>
+	    <div id="desc_input" style="display:none">
+	        <div style="float:left">
+                <form method="get" id="update_desc">
+                   <input type="text" value="{$usr_data.description}" name="desc_me" style="border:1px solid #b4bbcd;width:500px;outline: none;resize: none;padding:8px;height:36px; margin-top:4px">
+                </form>
+	        </div>
+	        
+	        <!-- add personal_goal data storage -->
+	        
+	        <div style="float:left;margin-top:4px;padding:8px">
+	        <a href="#" onclick="xajax_updatedata('{$tbl_users}', 'update_desc', xajax.getFormValues('update_desc'));return false;" class="btn"><span>Send</span></a>
+	        </div>
+	        <div style="clear:both"></div>
+	    </div>
+	    
+	    <a href="#" onclick="edit_desc();">edit</a>
 		<p>&nbsp;</p>
 		<span style="font-weight:700;font-size:14px;color:#859a87">
 		Become an inspiring CEO of a start-up within the next 5 years

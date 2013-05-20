@@ -6,7 +6,7 @@
 
            $usr_data = new SelectEntrys();
            //$usr_data->token   = $l["token"];
-           $usr_data->cols    = 'ID, UserToken, UserEmail, UserPass, firstname, language, last_online_time';
+           $usr_data->cols    = 'ID, UserToken, UserEmail, UserPass, firstname, language, last_online_time, description, personal_goal';
            $usr_data->condition =  "UserToken = '$token_identifier' ";
            $usr_data->multiSelect = '1';       
 

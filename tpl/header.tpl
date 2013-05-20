@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<xml version="1.0" encoding="UTF-8">
 <html class="no-js gtMobile isFull" lang="en">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">

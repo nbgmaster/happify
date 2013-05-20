@@ -8,15 +8,18 @@
 	   $xajax->configure('debug', true);
 	   $xajax->configure('javascript URI', ROOT_DIR.'lib/xajax/');
 	   //$xajax->configure('defaultMode', "asynchronous");
+       $xajax->configure('allowAllResponseTypes', true);
 	
 	  /******************************************/
 	
 	  if ( $section == 'bd_scale' && $subsection == 'new' || $section == 'da_scale' && $subsection == 'new' || $logon_true == 1 && !$module || $section == 'goals' && $subsection == "index") {	
 
 		   $xajax->register(XAJAX_FUNCTION, "insertdata");
-		
+           $xajax->register(XAJAX_FUNCTION, "updatedata");
+           		
 		   require_once('lib/functions/insertdata.php');
-	
+           require_once('lib/functions/updatedata.php');
+           	
 	  }
 
 	  if ( $section == 'goals' && $subsection == 'index' ) { 

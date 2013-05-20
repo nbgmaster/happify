@@ -29,7 +29,7 @@
 		   		 
 	       include("lib/functions/fetch_diary.php");
 	       $tpl->assign('ay_diary', $ay_diary);
-					   	   
+			   	   
            $html = $tpl->fetch("modules/home/diary_entries.tpl");   
            $objResponse->assign("diary_entries","innerHTML",$html);   
 	   

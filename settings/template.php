@@ -12,7 +12,7 @@
 
      /* Miscellaneous */
 
-        $tpl->assign('root_dir', ROOT_DIR);  
+  $tpl->assign('root_dir', ROOT_DIR);  
         $tpl->assign("logon", $logon_true);             
         $tpl->assign("debug_mode", "debug_mode");
              

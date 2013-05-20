@@ -1,12 +1,19 @@
 <?php
 
-  function updatedata( $table, $part, $data, $id ) {
-	  
+  function updatedata( $table, $part, $data, $id = NULL ) {
+
+     //global $tpl;
+     global $memcache;
+     global $l;
+     global $tpl;
+     global $user_data;
+     	  
      $objResponse = new xajaxResponse();  
    
      //include('settings/template.php');   
      include('settings/tables.php');    
 
+     //update progress state of a goal
 	 if ($table == $tbl_goals && $part == 'progress') {
 
 	       $goals = new ModifyEntry();
@@ -29,6 +36,27 @@
 	       unset($goals);
 		           
       }
+     
+      //update description of personal profile on main.tpl
+      if ($table == $tbl_users && $part == 'update_desc') {
+         
+           $update_desc = new ModifyEntry();
+           $update_desc->table  = $table;
+           
+           $desc_me = mysql_real_escape_string($data['desc_me']);
+           
+           $update_desc->changes   = " description = '".$desc_me."' ";
+           $update_desc->condition = " ID = '".$user_data['ID']."' ";
+
+           $update_desc->update();  
+           unset($update_desc);
+
+           $mem_key1  = "user_data_".$l["token"];           
+           if (mod_memcache == 1) $memcache->delete($mem_key1);   
+           else unset($_SESSION['$mem_key1']); 
+                    
+      }
+
 	 
 	  return $objResponse;  
        
