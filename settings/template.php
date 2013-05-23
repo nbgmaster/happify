@@ -4,7 +4,7 @@
   
         $tpl = new Smarty;
         $tpl->debugging = false;
-        //$tpl->caching = false;
+        //$tpl->caching = true;
         //$tpl->cache_lifetime = 120;
         $tpl->setTemplateDir('./tpl');
 		$tpl->setCompileDir('./lib/smarty/templates_c');
@@ -12,7 +12,7 @@
 
      /* Miscellaneous */
 
-  $tpl->assign('root_dir', ROOT_DIR);  
+        $tpl->assign('root_dir', ROOT_DIR);  
         $tpl->assign("logon", $logon_true);             
         $tpl->assign("debug_mode", "debug_mode");
              

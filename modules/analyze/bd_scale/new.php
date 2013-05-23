@@ -1,5 +1,7 @@
 <?php
 
+        /* Retrieve questions from database for the form */
+
 	    $bd_scale_c            = new SelectEntrys();
 	    $bd_scale_c->cols      = "date";
 		$bd_scale_c->distinct  = 1;
@@ -10,7 +12,8 @@
 	    $bd_scale_dates = $bd_scale_c->row();
 		 
 	  	$total_entries = count($bd_scale_dates);
-		 
+		
+		//check if time_ban is active 
 		$last_item = $total_entries - 1;		 
 		$latest_entrydate = strtotime($bd_scale_dates[$last_item]["date"]);
 
@@ -20,7 +23,8 @@
 		$tpl->assign('time_ban', $time_ban);	
 		$tpl->assign('total_entries', $total_entries);
 		$tpl->assign('max_items_bd_scale', max_items_bd_scale);
-						
+		
+		//if new entry is allowed				
 		if ($time_ban == 0 AND $total_entries < max_items_bd_scale) {
 
 		    /* Print :: SELECT Categories */ 
@@ -46,6 +50,8 @@
 		    /******************************************/
 		    
 		   
+		    /* Prepare array of items */
+		     
 		    $count = 0;
 		    foreach($ay_cats as $foo) $ay_all_cats[$foo['ID']] = $foo["name_$lang_active"]; 
 		    foreach($ay_cats as $foo2) $ay_all_cats[$foo2["name_$lang_active"]] = $foo2["description_EN"]; 
@@ -64,6 +70,7 @@
 				
 		    }
 			
+			//forward to template
 		    $tpl->assign('ay_cats', $ay_all_cats);
 		    $tpl->assign('ay_final', $ay_final);
 		    $tpl->assign('cats_total', count($ay_cats));

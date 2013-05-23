@@ -1,6 +1,6 @@
 <?php
   
-  //2012-06-17 00:14:43
+  //from 2012-06-17 00:14:43 to a format like "1 week ago"
   function convert_date($date, $module) {
   	
            $c_time = date("H:i",time());         

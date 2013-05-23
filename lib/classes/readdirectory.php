@@ -1,6 +1,11 @@
 <?php
 
+  /* copyright Stefan Richter. class should not be modified unless absolutely necessary and logic is well understood */
+
   /* Read directory */
+  
+  /* Returns array of items that are in a specified folder
+   * Also provides method to upload pictures, which are compressed, to a gallery folder */
 
      class readdirectory  {
 
@@ -140,7 +145,7 @@
          /*********************************************/
 
 
-         /* Proof files on allowed format */
+         /* Check files on allowed format */
 
             function checkformat($action)  {
 

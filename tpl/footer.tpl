@@ -1,3 +1,4 @@
+
 </div><!-- .entry-content -->
 
 </div>
@@ -6,6 +7,8 @@
 </div>
 </div>
 <div id="bottom-spacer"></div>
+
+
 
 </div>
 <div class="footer" style="position:fixed;bottom:0;width:100%">
@@ -29,5 +32,5 @@
 {$rendering_time} 
 </div>
 
-
+			
 </body></html>

@@ -1,4 +1,6 @@
 <?php
+
+     /* XAJAX - asynchronous call: retrieve updated data */
      
      require_once('lib/functions/convert_date.php');
 	 			 

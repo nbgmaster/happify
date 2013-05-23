@@ -1,7 +1,21 @@
 <?php
 
-  /* Download Datafile */
-
+  /* Download Attachment */
+ 
+  /*
+   * needs to be executed in the head of the index.php:
+   *  
+   *      //simply submit the fileID from the database to retrieve the file
+          if ( isset($_GET['fid']) )  {
+    
+              require_once('lib/download.php');
+    
+              download ($_GET['fid'], 'attachments', 'blog');
+    
+         }
+       
+   */  
+		 
      function download($id, $directory, $table)  {
 
          /* Check Fileformat for correct header */

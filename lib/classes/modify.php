@@ -1,8 +1,16 @@
 <?php
 
-  /* Establish :: Class -> Insert, Update, Delete */
+  /* copyright Stefan Richter. class should not be modified unless absolutely necessary and logic is well understood */
 
-     class ModifyEntry extends readdirectory  {
+  /* Establish :: Class -> Insert, Update, Delete, Attach */
+  
+  /* Class used to insert, update, or delete sql entries
+   * Also used to upload any meta files (pictures, documents, etc.) */
+   
+     //require_once('readdirectory.php');
+   
+     //class ModifyEntry extends readdirectory  {
+     class ModifyEntry {
 
           public $table;
           public $changes;
@@ -20,11 +28,17 @@
              	 
 				 global $db; 
 
+                 mysqli_query($db, "SET NAMES 'utf-8'");
+				 mysqli_set_charset($db, 'utf8');
+				            
                  $query   = "INSERT into $this->table ($this->cols)";
                  $query  .= "VALUES ($this->values)";
 
-                 $result  = @mysqli_query($db, $query) OR die(mysql_error());
+                 //$result  = @mysqli_query($db, $query) OR die(mysql_error());
 
+                 if ( $this->errno($db) == 0 ) mysqli_query($db, $query);
+				 //else echo sql_error_modify;
+								 
              }
 
           /*************************/
@@ -41,20 +55,26 @@
                       $this->condition  = 'WHERE ' . $this->condition;
 
                  }
-         
-                 $sql = "UPDATE $this->table Set $this->changes $this->condition"; 
 
-                 $update = mysqli_query($db, $sql);
+                 mysqli_query($db, "SET NAMES 'utf-8'");
+				 mysqli_set_charset($db, 'utf8');
+				            
+                 $sql = "UPDATE $this->table Set $this->changes $this->condition"; 
+				 
+                 if ( $this->errno($db) == 0 ) mysqli_query($db, $sql);
+				 //else echo sql_error_modify;
 
              }
 
           /*************************/
 
           
-          function errno() {         			
-				 global $db; 
+          function errno() {
+          	         			
+				global $db; 
 
 				return mysqli_errno($db);
+				
           }
 
           /* Delete entry */
@@ -69,10 +89,11 @@
 
                  }
 
-                 $delete = "DELETE FROM $this->table $this->condition";     
-
-                 mysqli_query($db, $delete); 
-
+                 $delete = "DELETE FROM $this->table $this->condition";   
+				 
+				 if ( $this->errno($db) == 0 ) mysqli_query($db, $delete); 
+	             //else echo sql_error_modify;
+				 
              }
 
           /*************************/
@@ -104,13 +125,13 @@
 
                  }
 
-                 if ( $this->upload_access == "1" )  { 
-
-                      copy("$this->tempname", "$this->file");
-
-                 }
+                 if ( $this->upload_access == "1" ) {
+                 	  copy("$this->tempname", "$this->file");
+					  return $this->attachment;
+				 }
+                 //else echo sql_error_modify;
               
-                 return $this->attachment;
+                 
 
              }
 

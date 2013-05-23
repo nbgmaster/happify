@@ -1,15 +1,22 @@
 <?php
 
+    /* Landing Page */
+    
+
+    //LOGIN == TRUE
 	if ($logon_true == 1) {
          
-        //require_once('././lib/functions/convert_date.php');
+         //require_once('././lib/functions/convert_date.php');
      	
+     	 //Load Data that is displayed on landing page (diary, etc.)
+     	 
    	     include("././lib/functions/fetch_diary.php");
 	     $tpl->assign('ay_diary', $ay_diary);
 			 
 	     include("././lib/functions/fetch_goals.php");		
 	     $tpl->assign('ay_goals', $ay_goals);
 	
+	     //TODO fetch_happifiers
 		 $happifiers        = new SelectEntrys();
 	     $happifiers->cols      = "ID, activity, lastdone";
 	     $happifiers->table     = $tbl_happifiers;
@@ -28,6 +35,7 @@
 	 					 
          $tpl->assign('ay_happifiers', $ay_happifiers);
 
+         //TODO fetch_rules
 		 $rules        = new SelectEntrys();
          $rules->cols      = "ID, rule";
          $rules->table     = $tbl_rules;
@@ -42,7 +50,8 @@
 		$tpl->display("modules/home/main.tpl");
 	
 	}
-		
+
+    //LOGIN == FALSE		
     else {
 
           $tpl->display("modules/home/index.tpl");

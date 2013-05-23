@@ -1,5 +1,10 @@
 <?php
 
+  /* Using XAJAX Library to make asynchronous calls
+   * here all methods are defined, and for each section only those that are really necessary
+   * needs to be checked and updated in the end 
+   */
+
   if ($logon_true != 1 || $section == 'bd_scale' && $subsection == 'new' || $section == 'da_scale' && $subsection == 'new' || $logon_true == 1 && !$module || $section == 'goals' && $subsection == 'index' || $section == 'goals' && $subsection == "index") {
 
 	   require('lib/xajax/xajax_core/xajax.inc.php');

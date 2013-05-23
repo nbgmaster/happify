@@ -1,5 +1,7 @@
 <?php
 
+        /* Retrieve questions from database for the form */
+
 	    $da_scale_c            = new SelectEntrys();
 	    $da_scale_c->cols      = "date";
 		$da_scale_c->distinct  = 1;
@@ -44,8 +46,10 @@
 		         $ay_items = $da_scale_i->row();
 		
 		    /******************************************/
+	
 		    
-		   
+		    /* Prepare array of items */
+		     		   
 		    $count = 0;
 		    foreach($ay_cats as $foo) $ay_all_cats[$foo['ID']] = $foo["name_$lang_active"]; 
 		    foreach($ay_cats as $foo2) $ay_all_cats[$foo2["name_$lang_active"]] = $foo2["description_EN"]; 
@@ -63,7 +67,8 @@
 				$count++;
 				
 		    }
-			
+
+			//forward to template			
 		    $tpl->assign('ay_cats', $ay_all_cats);
 		    $tpl->assign('ay_final', $ay_final);
 		    $tpl->assign('cats_total', count($ay_cats));

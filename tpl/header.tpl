@@ -32,14 +32,17 @@
 <link rel="stylesheet" type="text/css" media="all" href="{$root_dir}media/css/logon.css">
 <link rel="stylesheet" type="text/css" media="all" href="{$root_dir}media/css/jquery-ui-1.8.23.custom.css">	
 <link rel="stylesheet" type="text/css" media="all" href="{$root_dir}media/css/forum.css">	
+
+<link rel="stylesheet" type="text/css" media="all" href="{$root_dir}media/css/jquery.dropdown.css">
           
 <!--script type="text/javascript" src="{$root_dir}js/jquery.js"></script-->
 <!--http://jqueryui.com/demos/button/#radio-->
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
-<script type="text/javascript" src="{$dir_js}/jquery-ui-1.8.23.custom.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<script type="text/javascript" src="{$dir_js}jquery-ui-1.8.23.custom.min.js"></script>
 <script type="text/javascript" src="{$dir_js}change_settings.js"></script> 
 <script type="text/javascript" src="{$dir_js}login_register.js"></script> 
 
+<script type="text/javascript" src="{$dir_js}jquery.dropdown.js"></script> 
 
 </head>
 
@@ -138,8 +141,23 @@
 								    <a href="#register-box" class="register-btn"><span>Create account</span></a>
 					{/if}
 					{if $logon == 1}
-							<span style="color:#fff;font-weight:800px;padding-right:12px">{$usr_data.UserEmail}</span>
-							<a href="{$root_dir}logout/" class="btn"><span>Logout</span></a>
+					
+							<div id="dropdown-1" class="dropdown dropdown-tip">
+						    <ul class="dropdown-menu" style="position:relative;z-index:999999">
+						        <li><a href="#1">Edit User Picture</a></li>
+						        <li><a href="#2">Edit User</a></li>
+						        <li><a href="#3">Item 3</a></li>
+						        <li class="dropdown-divider"></li>
+						        <li><a href="{$root_dir}logout/">Logout</a></li>
+						        <li><a href="#5">Item 5</a></li>
+						        <li><a href="#5">Item 6</a></li>
+						    </ul>
+							</div>
+							<a href="#" data-dropdown="#dropdown-1" class="btn">{$usr_data.UserEmail}</a>
+	         
+							<!--span style="color:#fff;font-weight:800px;padding-right:12px">{$usr_data.UserEmail}</span>
+							<a href="{$root_dir}logout/" class="btn"><span>Logout</span></a-->
+								
 					{/if}					
 
 					
@@ -147,6 +165,8 @@
 
 		</div>
 	</div>
+	
+	
 	{$logon}
 
 	<div style="position: fixed;" class="header animated stick">
@@ -174,6 +194,7 @@
 		
 	</div>
 	
+	
     <div id="main" role="main" {if $logon != 1}style="padding-top:100px"{/if}>
     	<div class="main-bg">
     	<div class="main-wrapper wrapper"><div style="display: block;" class="content">		
@@ -193,3 +214,4 @@
 </fieldset>
 </form>
 {/if*}
+

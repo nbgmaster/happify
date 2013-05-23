@@ -1,5 +1,8 @@
 <?php
 
+  /* XAJAX - asynchronous call, initiated in ajax_requests.php: 
+   * insert data und display updated data without refreshing the complete page */
+  
   function insertdata( $table, $data ) {
   
      //global $tpl;
@@ -19,6 +22,7 @@
 		 			 
   		   $diary_note = mysql_real_escape_string($data['note']);
 	
+	       //insert new entry
 	       $diary = new ModifyEntry();
 	       $diary->table  = $table;
 	       $diary->cols   = 'userID, entry, date';
@@ -26,7 +30,8 @@
 	
 	       $diary->insert();  
 	       unset($diary);
-		   		 
+		   
+		   //refresh content		 
 	       include("lib/functions/fetch_diary.php");
 	       $tpl->assign('ay_diary', $ay_diary);
 			   	   
@@ -40,7 +45,8 @@
 	       $mysqldate = date( 'Y-m-d H:i:s', time() );
 		 			 
   		   $note = mysql_real_escape_string($data['note']);
-	
+
+	       //insert new entry	
 	       $goals = new ModifyEntry();
 	       $goals->table  = $table;
 	       $goals->cols   = 'userID, goal, created';
@@ -48,7 +54,8 @@
 	
 	       $goals->insert();  
 	       unset($goals);
-		   		 
+
+		   //refresh content			   		 
 	       include("lib/functions/fetch_goals.php");
 	       $tpl->assign('ay_goals', $ay_goals);
 					   	   
@@ -64,17 +71,20 @@
 		 
 	       $mysqldate = date( 'Y-m-d H:i:s', time() );
 		 
+		   //check if all items have been answered
 		   for($i=1; $i<=$data['items_total']; $i++) {
 		   	
 		   	   if (!isset($data[$i]))	{
-		   	       $objResponse->alert('Please answer all items');
+		   	       $objResponse->alert('Please answer all items'); // TODO put string in language file
 				   $dataValid = 0;
 			       break;
 		       }
 		   }
 		   
+		   //all items have been answered
 		   if ($dataValid == 1) {   
 
+				   //insert new entry
 		           $scale_data = new ModifyEntry();
 			       $scale_data->table  = $table;
 				   			  			 
@@ -95,7 +105,9 @@
 				   
 				       				 
 		   }
-                                    
+ 
+ 		   //update cached data in memcache or session
+ 			                                       
            //$l["token"] = substr($_COOKIE["l"], 3, -35);  		   
 		   if ( $table == $tbl_da_scale_results ) {
 		   	
@@ -124,7 +136,8 @@
 				else unset($_SESSION['$mem_key3']);	
 						   	
 		   }     
-		  		   						
+		  
+		   //redirect to overview/result page	   						
 		   if ($dataValid == 1 && $scale_data->errno() == 0 && $table == $tbl_da_scale_results) $objResponse->redirect(ROOT_DIR.'analyze/da_scale/index.html');
 		   if ($dataValid == 1 && $scale_data->errno() == 0 && $table == $tbl_bd_scale_results) $objResponse->redirect(ROOT_DIR.'analyze/bd_scale/index.html');
 		   		   

@@ -1,4 +1,16 @@
 <?php
+
+     /* As most content is controlled by the user (no updates from other users or so), we can cache most content, as it is also not expected to change frequently.
+	  * The charts will be done once and do not have to be selected from the database all the time. Once the user edit or inserts a new entry, the database is updated and the object is retrieved from the database.
+	  * For the user object, we never ask the database. It is cached from the beginning. If an item changes, it is saved to the database and the cached object is updated, but not asked for in the database.
+	  * This will hugely reduce the number of database accesses.
+	  * 
+	  * Currently cached: User Object, DA_Scale results, BD_Scale results
+	  * TODO: Diary (also update the object after changes and do not retrieve from the DB), Happifiers, Distorted Thoughts, goals
+	  * 
+	  * Caching is done via memcache if the server supports it, otherwise stored in a session 
+	  * */
+	  
      //instanciate items that get cached	 
 	 $bd_scale_data = "";
 	 $da_scale_data = "";

@@ -1,5 +1,17 @@
 <?php
 
+  /* This functionality is necessary if you have smarty variables in your mysql data entries */
+  
+  /* initialized via:
+   * 
+   *        require_once('./lib/tpl_dbaccess.php');
+   *
+   *        $tpl->register_resource("db", array("db_template_blocks","db_timestamp","db_secure","db_trusted"));
+   * 
+   * 		$tpl->display('db:index.tpl');
+   *          
+   */
+   
   function db_template_cms ($tpl_name, &$tpl_source, &$smarty_obj)  {
 
       include('./settings/config.php');

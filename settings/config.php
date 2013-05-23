@@ -16,9 +16,9 @@
 	 $debug_mode = "ON_PRINT"; //OFF, ON_DEV, ON_PRINT  	!= OFF --> considered DEV environment
 	
 	 if ($debug_mode == "ON_PRINT") error_reporting(E_ALL);
+	 else if ($debug_mode == "OFF") error_reporting(0); 
 	 else error_reporting(E_ERROR | E_WARNING | E_PARSE);
-	 
-
+ 
      $start = microtime(true); 
   
   /* Load :: Smarty */
@@ -59,13 +59,17 @@
 	 define("memcache_duration", 500);   //needs to be changed in production
 	 define("trigger_memcache_del", 0);   
 	 define("trigger_session_del", 0);   
-
+	 
+	 //error handling
+	 define("sql_error_select","One or more SQL SELECT errors occured.");
+	 define("sql_error_modify","One or more SQL UPDATE errors occured.");
+	 define("sql_error_exist","One or more SQL EXIST errors occured.");
 
      define("diff_max", 600); //// update last_online_time after 10 minutes
 
      /* DA_SCALE */
      define("da_min_waittime", 0);  //60*60*24*30; //1month waiting time for da_scale
-	 define("max_items_da_scale", 20);  //5          
+	 define("max_items_da_scale", 20);  //5     number would also need to be changed in result.php!     
 
      /* BD_SCALE */
      define("bd_min_waittime", 0);  //60*60*24*7; //1week waiting time for bd_scale
@@ -148,7 +152,7 @@
   /******************************************/
   
   
-  /* Load :: XAJAX  */
+  /* Load :: XAJAX for asynchronous calls */
          
      require_once('./lib/functions/ajax_requests.php');
      

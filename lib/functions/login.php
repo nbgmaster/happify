@@ -1,5 +1,7 @@
 <?php
 
+  /* XAJAX - asynchronous call: Login of the user */
+
   function login( $data ) {
   
      //global $tpl;
@@ -10,7 +12,7 @@
 
 	  /* Crypt Password with MD5 Method */
 	
-	     $pw_crypted = MD5(mysql_real_escape_string($data['password']));
+	     $pw_crypted = MD5(mysql_real_escape_string($data['password'])); //encrypt password with MD5
 		 $email = mysql_real_escape_string($data['email']);
 	
 	  /******************************************/
@@ -42,6 +44,7 @@
 	
 	          $logon->tbl_users = $tbl_users;
 	          
+			  //setcookie
 	          if (isset($data['autologon'])) $logon->cookie_duration = 1;
 			  else $logon->cookie_duration = 0;
 	          $logon->cookieset('ly');
@@ -58,7 +61,7 @@
 	
 	          //$logon->cookieset('l');
 	     	  $objResponse->assign("p_logon_failure","style.display",'block');         	
-	     	  $objResponse->assign("p_logon_failure","innerHTML","Login information could not be verified.<br> Please try it again.");
+	     	  $objResponse->assign("p_logon_failure","innerHTML","Login information could not be verified.<br> Please try it again."); //TODO move string to language file
 
 	          //$tpl->display("logon/login.tpl");
 	          //return false;

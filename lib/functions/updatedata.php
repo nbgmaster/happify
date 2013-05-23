@@ -1,5 +1,7 @@
 <?php
 
+  /* XAJAX - asynchronous call: Update data entries */
+  
   function updatedata( $table, $part, $data, $id = NULL ) {
 
      //global $tpl;
@@ -34,6 +36,8 @@
 
 	       $goals->update();  
 	       unset($goals);
+		   
+		   //no refresh necessary as dropdown has latest change
 		           
       }
      
@@ -43,17 +47,24 @@
            $update_desc = new ModifyEntry();
            $update_desc->table  = $table;
            
-           $desc_me = mysql_real_escape_string($data['desc_me']);
+           //$desc_me = mysql_real_escape_string($data['desc_me']);
            
-           $update_desc->changes   = " description = '".$desc_me."' ";
+           $update_desc->changes   = " description = '".$data['desc_me']."' ";
            $update_desc->condition = " ID = '".$user_data['ID']."' ";
 
            $update_desc->update();  
            unset($update_desc);
 
-           $mem_key1  = "user_data_".$l["token"];           
-           if (mod_memcache == 1) $memcache->delete($mem_key1);   
-           else unset($_SESSION['$mem_key1']); 
+           //update cached user object
+
+           // $mem_key1  = "user_data_".$l["token"];           
+ 
+           $user_data['description'] = $data['desc_me'];
+		  
+		   if (mod_memcache == 1)  $memcache->replace($mem_key1, $user_data, false); 
+		   else $_SESSION['$mem_key1'] = $user_data;
+		   
+		   //TODO refresh view
                     
       }
 

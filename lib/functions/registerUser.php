@@ -1,5 +1,7 @@
 <?php
 
+ /* register new user */
+
   function registerUser( $data ) {
   	
 	     global $debug_mode;
@@ -13,10 +15,13 @@
          $email    = trim(stripslashes(mysql_real_escape_string($data['email'])));         
          $password = trim(stripslashes(mysql_real_escape_string(md5($data['password']))));
          $password2 = trim(stripslashes(mysql_real_escape_string(md5($data['password2']))));
-         $firstname = trim(stripslashes(mysql_real_escape_string($data['firstname'])));    
+         $firstname = trim(stripslashes(mysql_real_escape_string($data['firstname'])));
+		 
+		 //generate activation code    
          $act_code = md5 ( uniqid ( rand() ) );
          $token    = time().uniqid();
-		 		 
+		 
+		 //check if email is already registered		 
 		 $checkemail = new CheckExist();
 	
 	     $checkemail->tableE     = $tbl_users;
@@ -24,15 +29,18 @@
 	
 	     $CheckData = $checkemail->exist();  
 
-		 if(!preg_match('/^([a-zA-Z0-9])+([\.a-zA-Z0-9_-])*@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-]+)+/', $email))  $reg_failure = "Email not valid.";
-		 elseif ( strlen($email) < 5 ) $reg_failure = "Email not valid.";
-		 elseif ($CheckData > 0) $reg_failure = "Email already taken.";
-		 elseif ($password != $password2 ) $reg_failure = "Passwords do not match. Please correct your information and try it again.";
-		 elseif (strlen($data['password']) < 5 || strlen($data['password2']) < 5 ) $reg_failure = "Password is too short. Please correct your information and try it again.";
-		 elseif (strlen($firstname) < 3 ) $reg_failure = "Firstname is too short. Please correct your information and try it again.";
+		 //error handling and validation
+		 if(!preg_match('/^([a-zA-Z0-9])+([\.a-zA-Z0-9_-])*@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-]+)+/', $email))  $reg_failure = "Email not valid."; // TODO move string to language file
+		 elseif ( strlen($email) < 5 ) $reg_failure = "Email not valid."; // TODO move string to language file
+		 elseif ($CheckData > 0) $reg_failure = "Email already taken."; // TODO move string to language file
+		 elseif ($password != $password2 ) $reg_failure = "Passwords do not match. Please correct your information and try it again."; // TODO move string to language file
+		 elseif (strlen($data['password']) < 5 || strlen($data['password2']) < 5 ) $reg_failure = "Password is too short. Please correct your information and try it again."; // TODO move string to language file
+		 elseif (strlen($firstname) < 3 ) $reg_failure = "Firstname is too short. Please correct your information and try it again."; // TODO move string to language file
 		 
+		 //registration validation successful
 		 if ($reg_failure == "") {
-                                                          
+              
+			 //create new user in database                                             
 	         $user_register = new ModifyEntry();         
 	         $user_register->table  = $tbl_users;
 	         $user_register->cols   = 'UserToken, UserEmail, UserPass, firstname, activation_code, language';
@@ -43,6 +51,7 @@
 
 			 if ($user_register->errno() == 0) {
 			 
+			      //send email confirmation with activation link to user
 				  $Header = "MIME-Version: 1.0\n";
 				  $Header .= "Content-type: text/plain; charset=utf-8\n";
   				  $Header .= "From: noreply@happify.com";
@@ -97,7 +106,7 @@
 			 else {
 			 	
 	     	    $objResponse->assign("p_reg_failure","style.display",'block');         	
-	    	    $objResponse->assign("p_reg_failure","innerHTML","Registration not successful. Please try again.");				
+	    	    $objResponse->assign("p_reg_failure","innerHTML","Registration not successful. Please try again.");	// TODO move string to language file			
 				
 			 }
 		 

@@ -25,14 +25,25 @@ function edit_desc() {
     return true;
 }
 
+   $(".removeService").hide();     
+   
+    $("div.profile_pic img").hover(
+    function(){  //this is fired when the mouse hovers over
+        $(this).find('.remoteService').show();
+    },
+    function(){  //this is fired when the mouse hovers out
+         $(this).find('.remoteService').hide();
+    });
+    
 </script>
 {/literal}
 
 
 <div style="width:100%;background-color:#f2f2f2;border:1px solid #cccccc;height:120px;margin-top:0px">
 	
-	<div style="width:120px;float:left">
-		<img src="{$dir_img}user/{$usr_data.ID}.png" width="120" height="120" border="0" style="border-right:1px solid #ccc">
+	<div style="width:120px;float:left" id="profile_pic">
+		<img src="{$dir_img}user/{$usr_data.ID}.png" width="120" height="120" border="0" style="border-right:1px solid #ccc" class="profilfe_pic">
+		<div class="remoteService">klj</div>
 	</div>
 	
 	<div style="float:left;width:580px;padding:16px;font-weight:700;font-size:12px;line-height:1.3em">
@@ -73,6 +84,7 @@ function edit_desc() {
 	
 </div>
 
+
 <p>&nbsp;</p>
 <p>&nbsp;</p>
     
@@ -112,7 +124,8 @@ function edit_desc() {
      </div>
 
 </div>
-              
+
+ 
 <div style="float:left;width:60%;padding:0;margin:0">
 	
 	<div style="margin-right:0px;">
@@ -137,7 +150,7 @@ function edit_desc() {
 			
 			<div style="clear:both"></div>
 			
-			 <p id="diary_entries">{include file="modules/home/diary_entries.tpl"}</p>
+			 <span id="diary_entries">{include file="modules/home/diary_entries.tpl"}</span>
 					
      </div>
 

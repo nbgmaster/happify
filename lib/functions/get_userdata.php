@@ -1,5 +1,8 @@
 <?php 
 
+     /* Retrieve user_array */
+
+      //retrieve from database if not found in cache
       if ( $user_data == "" ) { 
       	
 		   $token_identifier = mysql_real_escape_string($l['token']); 
@@ -13,7 +16,8 @@
            $ay_user = $usr_data->row();
  
            unset($usr_data); 
-                                          
+           
+		   //store object in cache                               
            if (mod_memcache == 1)  $memcache->set($mem_key1, $ay_user[0], false, memcache_duration);
 		   else $_SESSION['$mem_key1'] = $ay_user[0];
            
@@ -27,6 +31,7 @@
 
       $diff_actual = $timestamp - strtotime($user_data['last_online_time']);
       
+	  //update last_online_time of the user
       if ($diff_actual > diff_max) {
       
           $upd_data = new ModifyEntry();

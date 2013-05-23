@@ -1,5 +1,7 @@
 <?php
 
+  /* copyright Stefan Richter. class should not be modified unless absolutely necessary and logic is well understood */
+
   /* CLASS :: Page Navigation */
 
   /**** Concept --> Shift the page numbers into an array; maximum of 5 entrys; *****/

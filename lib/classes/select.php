@@ -1,11 +1,15 @@
 <?php
 
+  /* copyright Stefan Richter. class should not be modified unless absolutely necessary and logic is well understood */
+
   /* Establish :: Class -> SELECT */
+  
+  /* Selects sql data from various defined sql statements; can also return the userObject via getUserData */
 
-     require_once('readdirectory.php');
-
-     class SelectEntrys extends readdirectory  { 
-
+     //class SelectEntrys extends readdirectory
+          
+     class SelectEntrys  { 
+     	 
           public $userid;
           public $username;
           public $tbl_users;
@@ -38,6 +42,7 @@
                  $this->template  = '';
 
                  if ( $this->errno($db) == 0 ) return $this->row();
+				 //else echo sql_error_select;
 
              }
 
@@ -59,6 +64,7 @@
                  $this->template  = '';
 
                  if ( $this->errno($db) == 0 ) return $this->row();
+				 //else echo sql_error_select;
 
           }
 
@@ -80,6 +86,7 @@
                  $this->template  = '';
 
                  if ( $this->errno($db) == 0 ) return $this->row();
+				 //else echo sql_error_select;
 
           }
 
@@ -87,8 +94,7 @@
 
           function errno($db) {         			
 				return mysqli_errno($db);
-				
-			die();
+				die();
           }
           
           /* Get total rows */
@@ -105,7 +111,8 @@
                                             
                  $result = $rows[ 0 ];
 
-                 if ( $this->errno($db) == 0 ) return $result;
+                 if ( $this->errno($db) == 0 ) return $result; 
+                 //else echo sql_error_select;
      
              }
 
@@ -196,7 +203,8 @@
 	                             for ( $z = 0; $z < count($colnames); $z++)  {
 	
 	                                   $result[$colnames[$z]] =  htmlentities($result[$colnames[$z]]);
-	                                   if ( $this->errno($db) == 0) $this->array[$count][$colnames[$z]] = $result[$colnames[$z]];
+	                                   if ( $this->errno($db) == 0) $this->array[$count][$colnames[$z]] = $result[$colnames[$z]]; 				 
+	                                   //else echo sql_error_select;
 	                 
 	                             }
 	
@@ -206,7 +214,8 @@
 	
 	                        else  {
 	                          
-	                             if ( $this->errno($db) == 0 ) return $result[$this->cols];
+	                             if ( $this->errno($db) == 0 ) return $result[$this->cols]; 
+	                             //else echo sql_error_select;
 	
 	                        }
 
@@ -216,7 +225,7 @@
 
                        return $this->array;
 
-                    }
+                    } //else echo sql_error_select;
 
                     mysqli_free_result($select);
 

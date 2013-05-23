@@ -1,6 +1,11 @@
 <?php
 
+  /* copyright Stefan Richter. class should not be modified unless absolutely necessary and logic is well understood */
+
   /* Establish :: Class -> Exist */
+  
+  /* Checks if SQL request has a non-empty response
+   * Also used to set a cookie after a successful login or to delete the cookie when user logs out */
 
      require_once('select.php');   
 
@@ -49,6 +54,7 @@
 
                       $usertoken = $this->getUserToken();
 
+					  //cookie consists of random strings, the user token, and the password
                       $cookie = "$more1$usertoken$more2$this->pw";
 	                  if ($this->cookie_duration == 0) setcookie($c_name, $cookie, 0, "/");           
 					  else setcookie($c_name, $cookie, time()+365*3600*24, "/");
