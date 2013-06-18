@@ -1,6 +1,6 @@
 <?php
 
-     require_once('lib/classes/dbCon.php');
+     require_once('./lib/classes/dbCon.php');
 
      $DBcon = new EstablishDBConnection();
 

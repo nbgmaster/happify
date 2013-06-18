@@ -159,10 +159,125 @@
 	$tpl->assign('ay_dates', $select_dates);
 			
 	$tpl->assign('datay', $da_scale_data);
+	
+
+	//start score interpretation calculation here
+	
+	$get_scores = explode('&',$da_scale_data);
+	
+	//NOTE: attention: works now with limit of 5 datasets, but with no more than 9!
+	//last item in array is always latest entry
+	$count = 1;
+	foreach ($get_scores as $key => $value) {
+		
+		if ($key & 1) {
+			$scores[$count] = unserialize(substr($value,7));
+			$count++;
+		}
+		
+	}
+	
+	unset($key);
+	unset($value);
+	//print_r($scores);
+	
+	if ($total_entries > 1) {
+			
+			$approval      = -11; $last_is_highest['approval'] = false; 
+			$love          = -11; $last_is_highest['love'] = false; 
+			$achievement   = -11; $last_is_highest['achievement'] = false; 	 		
+			$perfectionism = -11; $last_is_highest['perfectionism'] = false; 
+			$entitlement   = -11; $last_is_highest['entitlement'] = false; 
+			$omnipotence   = -11; $last_is_highest['omnipotence'] = false; 
+			$autonomy      = -11; $last_is_highest['autonomy'] = false; 
+
+		$count = 1;			
+		foreach ($scores as $value) {
+			
+			//calculate improvement compared to first test
+			if ($count == 1) {
+				$first_val['approval'] = $value[0]; 
+			    $first_val['love'] = $value[1]; 
+				$first_val['achievement'] = $value[2]; 
+			    $first_val['perfectionism'] = $value[3]; 
+				$first_val['entitlement'] = $value[4]; 
+			    $first_val['omnipotence'] = $value[5]; 
+			    $first_val['autonomy'] = $value[6]; 
+			}
+																					
+			if ($count == $total_entries) {
+				$last_val['approval'] = $value[0]; 
+				$last_val['love'] = $value[1]; 
+				$last_val['achievement'] = $value[2]; 			      				      				      
+				$last_val['perfectionism'] = $value[3]; 
+			    $last_val['entitlement'] = $value[4]; 
+				$last_val['omnipotence'] = $value[5]; 
+			    $last_val['autonomy'] = $value[6];
+			}				      							
+														
+			//check if latest score is highest overall score
+			if ($value[0] > $approval) {
+				if ($count == $total_entries) $last_is_highest['approval'] = true;       
+				$approval  = $value[0]; 
+		    }
+			
+			if ($value[1] > $love) {
+				if ($count == $total_entries) $last_is_highest['love'] = true;            
+				$love      = $value[1]; 
+			}
+			
+			if ($value[2] > $achievement) {
+				 if ($count == $total_entries)  $last_is_highest['achievement'] = true;     
+				 $achievement = $value[2]; 
+			}
+			
+			if ($value[3] > $perfectionism) {
+				 if ($count == $total_entries)  $last_is_highest['perfectionism'] = true; 
+				 $perfectionism = $value[3]; 
+			}
+			
+			if ($value[4] > $entitlement) {
+				if ($count == $total_entries)  $last_is_highest['entitlement'] = true;  
+				$entitlement = $value[4]; 
+			}
+			
+			if ($value[5] > $omnipotence) {
+				 if ($count == $total_entries) $last_is_highest['omnipotence'] = true;  
+				 $omnipotence = $value[5]; 
+			}
+			
+			if ($value[6] > $autonomy) {
+				 if ($count == $total_entries) $last_is_highest['autonomy'] = true;    
+				 $autonomy  = $value[6]; 
+			}
+															
+			$count++;
+
+		}
+
+		//calculate improvement compared to first test
+		$change['approval'] = round(- (  ($first_val['approval']+10)  - ($last_val['approval']+10)   ) /20*100);
+		$change['love'] = round(- (  ($first_val['love']+10)  - ($last_val['love']+10)   ) /20*100);
+		$change['achievement'] = round(- (  ($first_val['achievement']+10)  - ($last_val['achievement']+10)   ) /20*100);
+		$change['perfectionism'] = round(- (  ($first_val['perfectionism']+10)  - ($last_val['perfectionism']+10)   ) /20*100);
+		$change['entitlement'] = round(- (  ($first_val['entitlement']+10)  - ($last_val['entitlement']+10)   ) /20*100);
+		$change['omnipotence'] = round(- (  ($first_val['omnipotence']+10)  - ($last_val['omnipotence']+10)   ) /20*100);
+		$change['autonomy'] = round(- (  ($first_val['autonomy']+10)  - ($last_val['autonomy']+10)   ) /20*100);
+					
+		$tpl->assign('change', $change);
+		$tpl->assign('last_is_highest', $last_is_highest);
+													
+	}
+	
+	
 	$tpl->assign('data_sep_string', $da_scale_sep_strings);
 	$tpl->assign('data_sep_dates', $da_scale_sep_dates);
 				
 	$tpl->assign('total_entries', $total_entries);
 	$tpl->assign('max_items_da_scale', max_items_da_scale);
+
+	$tpl->assign('da_score_interpretation', $da_score_interpretation);
 	
+	$tpl->assign('scores', $scores);
+			
 ?>

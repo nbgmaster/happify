@@ -31,16 +31,16 @@
 
 
       /* Load :: Page Content */
-
+      
 	   if ( !isset ($_GET['section']) ) $_GET['section'] = 'index';
 				               
-	   if ( isset ($_GET["module"]) && isset ($_GET["section"]) ) {
+	   if ( isset ($_GET["module"]) && isset ($_GET["section"]) ) { 
 	  	
 	       if ($logon_true != 1 && $_GET["module"] != "logon" && $_GET["section"] != "activation" && $_GET["module"] != "learnmore") header("Location:".ROOT_DIR);
 		   	   
 		   $page_load = 0;
-		   
-		   if (isset($_GET['subsection'])) {
+
+		   if (isset($_GET['subsection'])) { 
 		   	
 		           if (file_exists('modules/'.$_GET['module']."/".$_GET['section']."/".$_GET['subsection'].".php") && file_exists('tpl/modules/'.$_GET['module']."/".$_GET['section']."/".$_GET['subsection'].".tpl"))  {
 
@@ -57,10 +57,27 @@
 		   }
 		   
 		   else {
+		   	
+			   if ($_GET['module'] == 'cms')  {
+			   		
+			       require_once('lib/functions/tpl_dbaccess.php');
+ 
+				   $tpl->registerResource("db", array("db_template_cms","db_timestamp","db_secure","db_trusted"));
+				  				
+				   if ( $_GET["section"] == "about" || $_GET["section"] == "contact" || $_GET["section"] == "faq" || $_GET["section"] == "press" | $_GET["section"] == "imprint" ) {
+				       
+				       $tpl->display('db:index.tpl');
+					   $page_load = 1;
+				
+				   }
 
-			   if (file_exists('modules/'.$_GET['module']."/".$_GET['section'].".php") && file_exists('tpl/modules/'.$_GET['module']."/".$_GET['section'].".tpl"))  {
+			   }
+
+			   elseif ($_GET['module'] == 'blog' && isset($_GET['section']) && $_GET['section'] != 'index')  include("modules/blog/index.php"); 
+				  												  	   				
+			   elseif (file_exists('modules/'.$_GET['module']."/".$_GET['section'].".php") && file_exists('tpl/modules/'.$_GET['module']."/".$_GET['section'].".tpl"))  {
 	
-		           $tpl->display("breadcrumb.tpl");
+		           if ($_GET["module"] != "blog") $tpl->display("breadcrumb.tpl"); 
 
 			       include("modules/".$_GET['module']."/".$_GET['section'].".php"); 
 				  	   
@@ -68,7 +85,7 @@
 	
 				   $page_load = 1;
 				   				
-			   }
+			   }			  
 			   
 			   elseif (file_exists('modules/'.$_GET['module']."/".$_GET['section']."/index.php") && file_exists('tpl/modules/'.$_GET['module']."/".$_GET['section']."/index.tpl"))  {
 	

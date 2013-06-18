@@ -2,9 +2,9 @@
 
   /* Header Nav */
   
-        $tpl->assign('header_nav_li1', 'Analyze');   
-        $tpl->assign('header_nav_li2', 'Improve');   
-        $tpl->assign('header_nav_li3', 'Connect');   
+        $tpl->assign('header_nav_li1', 'Analyze and Understand');   
+        $tpl->assign('header_nav_li2', 'Learn and Improve');   
+        $tpl->assign('header_nav_li3', 'Pursue Personal Fulfillment');   
 		
   /* Initialize :: Language Data */
 
@@ -31,8 +31,52 @@
                           12=>"December");
                           
      /******************************************/
-           
 
+           
+     /* Blog */
+           
+       $blog_getcat = array('Health'=>"Health",
+              'PD'=>"Personal Development",
+              'Inspiring'=>"Inspiring",
+              'Depression'=>"Depression",
+              'Positive'=>"Positive Thinking",
+              'SF'=>"Self-fullfillment",
+              'Productive'=>"Productiveness");
+
+       //$tpl->assign('blog_getcat', $getcat);
+					              
+     /******************************************/
+ 
+
+            
+     /* BD SCALE */
+           
+        $score_interpretation['happy'] = "Happy!";
+        $score_interpretation['unhappy'] = "unhappy!";		
+        $score_interpretation['mild'] = "Use the Dysfunctional Attitude Test to identify reasons for your mood swings. Then improve your mood by setting goals and fighting your distorting thoughts.";
+        $score_interpretation['moderate'] = "moderate!";		
+        $score_interpretation['severe'] = "severe!";
+        $score_interpretation['extreme'] = "extreme!";		
+        
+		$score_interpretation['improved'] = "Great!";
+		$score_interpretation['deteriorated'] = "Bad!";		
+              
+     /******************************************/
+
+     
+     /* DA SCALE */
+     
+       $da_score_interpretation['approval']['description'] = "Tendency to measure your self-esteem based on how people react to you and what they think of you";
+       $da_score_interpretation['love']['description'] = "Tendency to base your worth on whether or not you are loved";
+       $da_score_interpretation['achievement']['description'] = "Tendency to see yourself as a commodity in the marketplace and workaholic<p></p>Tendency to think your sense of self-worth and your capacity for joy are dependent on your productivity";
+       $da_score_interpretation['perfectionism']['description'] = "Tendency to perfectionism, to demand perfection in yourself";
+       $da_score_interpretation['entitlement']['description'] = "Tendency to feel 'entitled' to things (success, love, happiness, etc.) because of your inherent goodness or hard work";
+       $da_score_interpretation['omnipotence']['description'] = "Tendency to see yourself as the center of your personal universe to hold yourself responsible for much of what goes on around you<p></p>Tendency to blame yourself inappropriately for the negative actions and attitudes of others who are not really under your control";
+       $da_score_interpretation['autonomy']['description'] = "Tendency to find happiness within yourself";
+              
+     /******************************************/
+           
+                                 						  
      /* New AAA Names */
      
         $tpl->assign('titlebar_blog', 'Blog');

@@ -34,11 +34,24 @@
 	
 	    $tmp_object = new stdClass;  
 	
-	    //Think about when it should expire and get refreshed. otherwise all data for all users always stay in memcache; overload vs. inactive data
+	    //TODO Think about when it should expire and get refreshed. otherwise all data for all users always stay in memcache; overload vs. inactive data
 	    //$duration = 0;             // never expire
 	    //$duration_trigger = 300;   // 5 minutes
 	    //$duration_cats = 600;      // 10 minutes
 
+	    $user_data        = $memcache->get($mem_key1); 
+	    $da_scale_data    = $memcache->get($mem_key2); 
+	    $da_scale_sep_strings  = $memcache->get($mem_key2a); 
+	    $da_scale_sep_dates    = $memcache->get($mem_key2b); 
+	    $bd_scale_data    = $memcache->get($mem_key3); 
+		
+	    //$size = strlen(serialize($user_data));
+	    //echo $size." bytes";
+	    
+	    /* will only take effect after two reloads. attention: this is only for dev environment to force the app to select the data from the database. in production this functionality would need to
+	    be done via sql, so that we can store for each user if cache object has been updated. Here could also happen a bug: as for asynchronous calls we do not initiate the get_userdata.php as we 
+	    always expect a cache object available, doing two asynchronous calls in a row after the object deletion has been triggered, it cannot find a user object and thus it would through an error. */
+	    
 		if (trigger_memcache_del == 1) {
 		
 		    $memcache->delete($mem_key1);    
@@ -50,34 +63,29 @@
 			$memcache->flush();  
 	    	    
 		} 
-				
-	    $user_data        = $memcache->get($mem_key1); 
-	    $da_scale_data    = $memcache->get($mem_key2); 
-	    $da_scale_sep_strings  = $memcache->get($mem_key2a); 
-	    $da_scale_sep_dates    = $memcache->get($mem_key2b); 
-	    $bd_scale_data    = $memcache->get($mem_key3); 
-		
-	    //$size = strlen(serialize($user_data));
-	    //echo $size." bytes";
-
+			
 	}
 
     //work with php sessions
 	else {
-		
-		if (trigger_session_del == 1) {
-			
-		    session_unset();
-    	    session_destroy();					
-			    
-		}
-		
+
 	    if (isset($_SESSION['$mem_key1']))  $user_data = $_SESSION['$mem_key1'];
 	    if (isset($_SESSION['$mem_key2']))  $da_scale_data    = $_SESSION['$mem_key2']; 
 	    if (isset($_SESSION['$mem_key2a'])) $da_scale_sep_strings  = $_SESSION['$mem_key2a']; 
 	    if (isset($_SESSION['$mem_key2b'])) $da_scale_sep_dates    = $_SESSION['$mem_key2b']; 
 	    if (isset($_SESSION['$mem_key3']))  $bd_scale_data    = $_SESSION['$mem_key3']; 
-				
+
+	    /* will only take effect after two reloads. attention: this is only for dev environment to force the app to select the data from the database. in production this functionality would need to
+	    be done via sql, so that we can store for each user if cache object has been updated. Here could also happen a bug: as for asynchronous calls we do not initiate the get_userdata.php as we 
+	    always expect a cache object available, doing two asynchronous calls in a row after the object deletion has been triggered, it cannot find a user object and thus it would through an error. */	
+	    	
+		if (trigger_session_del == 1) {
+			
+		    session_unset();
+    	    session_destroy();	
+				    
+		}
+						
 	}
 	
 	/* MEMORY CALCULAION */

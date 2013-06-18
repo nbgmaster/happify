@@ -5,25 +5,28 @@
    * needs to be checked and updated in the end 
    */
 
-  if ($logon_true != 1 || $section == 'bd_scale' && $subsection == 'new' || $section == 'da_scale' && $subsection == 'new' || $logon_true == 1 && !$module || $section == 'goals' && $subsection == 'index' || $section == 'goals' && $subsection == "index") {
+  if ($logon_true != 1 || $section == 'bd_scale' && $subsection == 'new' || $section == 'da_scale' && $subsection == 'new' || $logon_true == 1 && !$module || $section == 'goals' && $subsection == 'index' || $section == 'distorted_thoughts' && $subsection == "index" || $section == 'diary' && $subsection == 'index') {
 
 	   require('lib/xajax/xajax_core/xajax.inc.php');
 	
 	   $xajax = new xajax();
-	   $xajax->configure('debug', true);
+	   //$xajax->configure('debug', true);
+	   //$xajax->configure('processData', false);
 	   $xajax->configure('javascript URI', ROOT_DIR.'lib/xajax/');
-	   //$xajax->configure('defaultMode', "asynchronous");
+	   $xajax->configure('defaultMode', "asynchronous");
        $xajax->configure('allowAllResponseTypes', true);
 	
 	  /******************************************/
 	
-	  if ( $section == 'bd_scale' && $subsection == 'new' || $section == 'da_scale' && $subsection == 'new' || $logon_true == 1 && !$module || $section == 'goals' && $subsection == "index") {	
+	  if ( $section == 'bd_scale' && $subsection == 'new' || $section == 'da_scale' && $subsection == 'new' || $logon_true == 1 && !$module || $section == 'goals' && $subsection == "index" || $section == 'distorted_thoughts' && $subsection == 'index' || $section == 'diary' && $subsection == 'index') {	
 
 		   $xajax->register(XAJAX_FUNCTION, "insertdata");
+		   $xajax->register(XAJAX_FUNCTION, "selectdata");
            $xajax->register(XAJAX_FUNCTION, "updatedata");
-           		
-		   require_once('lib/functions/insertdata.php');
-           require_once('lib/functions/updatedata.php');
+
+		   require_once('lib/functions/xajax/insertdata.php');
+		   require_once('lib/functions/xajax/selectdata.php');
+           require_once('lib/functions/xajax/updatedata.php');
            	
 	  }
 
@@ -32,8 +35,8 @@
 		   $xajax->register(XAJAX_FUNCTION, "updatedata");
 		   $xajax->register(XAJAX_FUNCTION, "sortdata");
 		   		
-		   require_once('lib/functions/updatedata.php');
-		   require_once('lib/functions/sortdata.php');
+		   require_once('lib/functions/xajax/updatedata.php');
+		   require_once('lib/functions/xajax/sortdata.php');
 		   	
 	  }	
 	
@@ -42,8 +45,8 @@
 		   $xajax->register(XAJAX_FUNCTION, "login");
 		   $xajax->register(XAJAX_FUNCTION, "registerUser");
 		
-		   require_once('lib/functions/login.php');
-		   require_once('lib/functions/registerUser.php');
+		   require_once('lib/functions/xajax/login.php');
+		   require_once('lib/functions/xajax/registerUser.php');
 		  
 	  }
 	

@@ -24,7 +24,9 @@
         $tpl->assign('module', $module); 
         $tpl->assign('section', $section); 
         $tpl->assign('subsection', $subsection); 
-        
+
+        $tpl->assign('test', 'Test'); 
+		        
      /******************************************/
      
 

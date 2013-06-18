@@ -28,7 +28,7 @@
 			  else if ($days > 7) {
 			  	$weeks = floor($days/7);
 				  if ($weeks > 4) {
-				  	if ($module == 'diary') $res = $day.".".$month.".".$year;
+				  	if ($module == 'diary' || $module == 'goals') $res = $day.".".$month.".".$year;
 					else $res = "> 1 month ago";
 				  }
 				  else

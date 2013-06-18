@@ -9,7 +9,7 @@
 
            $usr_data = new SelectEntrys();
            //$usr_data->token   = $l["token"];
-           $usr_data->cols    = 'ID, UserToken, UserEmail, UserPass, firstname, language, last_online_time, description, personal_goal';
+           $usr_data->cols    = 'ID, UserToken, UserEmail, UserPass, firstname, language, last_online_time, description, personal_goal, diary_start_month, diary_start_year';
            $usr_data->condition =  "UserToken = '$token_identifier' ";
            $usr_data->multiSelect = '1';       
 
@@ -27,9 +27,9 @@
 	  
 	  //print_r($user_data);
 
-      $tpl->assign('usr_data', $user_data); 
+      $tpl->assign('user_data', $user_data); 
 
-      $diff_actual = $timestamp - strtotime($user_data['last_online_time']);
+      $diff_actual = time() - strtotime($user_data['last_online_time']);
       
 	  //update last_online_time of the user
       if ($diff_actual > diff_max) {

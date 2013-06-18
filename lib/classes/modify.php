@@ -88,10 +88,14 @@
                       $this->condition  = 'WHERE ' . $this->condition;
 
                  }
-
+				 
+				 //echo "DELETE FROM $this->table $this->condition";
                  $delete = "DELETE FROM $this->table $this->condition";   
 				 
-				 if ( $this->errno($db) == 0 ) mysqli_query($db, $delete); 
+				 if ( $this->errno($db) == 0 ) {
+				 	 mysqli_query($db, $delete); 
+				 	 return true; 
+				 }
 	             //else echo sql_error_modify;
 				 
              }

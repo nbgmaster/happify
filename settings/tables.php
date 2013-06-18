@@ -16,5 +16,6 @@
      $tbl_goals 				= "goals";	 
      $tbl_happifiers 			= "happifiers";	 
      $tbl_users 				= "users";	 	 
-
+     $tbl_settings 				= "config";
+     $tbl_blog 			     	= "blog";
      

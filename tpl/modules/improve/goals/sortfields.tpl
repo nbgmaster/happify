@@ -13,9 +13,9 @@
             	</div>
             </div>
 
-            <div id="col3" class="headline" style="width:11%;background-color:#617163 !important">
+            <div id="col3" class="headline" style="width:11%;background-color:#617163 !important;text-align:right;">
             	<div class="spacing" style="color:#fff;padding-left:4px" id="sortdiv_created">
-            		{include file="modules/improve/goals/sort_created.tpl"}
+            		{include file="modules/improve/goals/sort_created.tpl"}&nbsp;
             	</div>
             </div>
             

@@ -34,19 +34,36 @@
 <link rel="stylesheet" type="text/css" media="all" href="{$root_dir}media/css/forum.css">	
 
 <link rel="stylesheet" type="text/css" media="all" href="{$root_dir}media/css/jquery.dropdown.css">
+
+<link rel="stylesheet" type="text/css" media="all"  href="{$root_dir}media/css/pinterest.css">
+<link rel="stylesheet" type="text/css" media="all"  href="{$root_dir}media/css/colorbox.css">
+
+
           
 <!--script type="text/javascript" src="{$root_dir}js/jquery.js"></script-->
 <!--http://jqueryui.com/demos/button/#radio-->
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<!--TODO store on own server -->
+<!-- jquery 1.8.0 min worked so far, changed .live to .on in colorbox-min and login_register // TESTS required -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
 <script type="text/javascript" src="{$dir_js}jquery-ui-1.8.23.custom.min.js"></script>
 <script type="text/javascript" src="{$dir_js}change_settings.js"></script> 
 <script type="text/javascript" src="{$dir_js}login_register.js"></script> 
 
+<script type="text/javascript" src="{$dir_js}jquery.flexibleArea.js"></script>
+
 <script type="text/javascript" src="{$dir_js}jquery.dropdown.js"></script> 
+
+<script type="text/javascript"  src="{$dir_js}jquery.colorbox-min.js"></script>
+<script type="text/javascript"  src="{$dir_js}jquery.masonry.min.js"></script>
+<script type="text/javascript"  src="{$dir_js}pinterest.js"></script>
+
 
 </head>
 
 <body>
+	
 
 {if $logon != 1}
 <div id="login-box" class="login-popup">
@@ -153,26 +170,26 @@
 						        <li><a href="#5">Item 6</a></li>
 						    </ul>
 							</div>
-							<a href="#" data-dropdown="#dropdown-1" class="btn">{$usr_data.UserEmail}</a>
+							<a href="#" data-dropdown="#dropdown-1" class="btn">{$user_data.UserEmail}</a>
 	         
-							<!--span style="color:#fff;font-weight:800px;padding-right:12px">{$usr_data.UserEmail}</span>
+							<!--span style="color:#fff;font-weight:800px;padding-right:12px">{$user_data.UserEmail}</span>
 							<a href="{$root_dir}logout/" class="btn"><span>Logout</span></a-->
 								
 					{/if}					
 
-					
+					&nbsp;
 			</div>
 
 		</div>
 	</div>
 	
 	
-	{$logon}
 
 	<div style="position: fixed;" class="header animated stick">
 		<div class="bg">
 	{if $logon == 1}
 				<div style="display: block;" class="menu submenu">
+					<div style="margin:0 auto;position:relative;max-width:1050px">
 			<ul>
 				<li class="pulse {if !$module}active{/if}">
 					<a class="qjax" href="{$root_dir}">Start</a>
@@ -183,12 +200,16 @@
 				<li class="pulse {if $module == 'improve'}active{/if}">
 					<a class="qjax" href="{$root_dir}improve/index.html">{$header_nav_li2}</a>
 				</li>
-				<li class="pulse {if $module == 'connect'}active{/if}">
-					<a class="qjax" href="{$root_dir}connect/index.html">{$header_nav_li3}</a>
+				<li class="pulse {if $module == 'achieve'}active{/if}">
+					<a class="qjax" href="{$root_dir}achieve/index.html">{$header_nav_li3}</a>
 				</li>
 
+				<!--li class="pulse {if $module == 'blog'}active{/if}">
+					<a class="qjax" href="{$root_dir}blog/index.html">Blog</a>
+				</li-->
+				
 			</ul>
-				  			
+				</div>  			
 		</div>	{/if}
 		</div>
 		

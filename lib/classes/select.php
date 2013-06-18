@@ -147,7 +147,8 @@
 
           function row() {
           		  
-          	  global $db;      
+          	  global $db; 
+			  global $tpl;     
 
               //if ( !eregi  ( "ORDER", $this->order ) && $this->order )  {
               if ( !preg_match("/ORDER/i", $this->order) && $this->order) {
@@ -193,8 +194,10 @@
                    $select = mysqli_query($db, "SELECT $col_mod FROM $this->table $this->condition $this->group $this->order $this->limit");
 
                    while ( $result = mysqli_fetch_assoc($select) )  {
-  
-	                        if ( $this->multiSelect )  {
+                   	
+					       //if ( $this->module && $this->template ) include("./modules/$this->module/output.php");
+
+						   if ( $this->multiSelect )  { 
 	
 	                             $colnames = str_replace(" ", "", $this->cols);
 	
@@ -212,7 +215,7 @@
 	
 	                        }
 	
-	                        else  {
+	                        else  { 
 	                          
 	                             if ( $this->errno($db) == 0 ) return $result[$this->cols]; 
 	                             //else echo sql_error_select;

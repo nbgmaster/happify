@@ -40,19 +40,21 @@
 	});
 	</script>
 	
+	<p></p>
+	
 	<form method="get" id="insert">
 <fieldset>
 	
-	Indicate how much you have experiences each symptom <b>during the past week, including today</b>.
+	Indicate how much you have experienced each symptom <b>during the past week, including today</b>.
 	You need to answer all 25 items.
 	
-
+<p>&nbsp;</p>
 <div id="container3" class="headline">
     <div id="container2" class="headline">
         <div id="container1" class="headline">
             <!--div id="col1" class="headline" style="width:13%"><div class="spacing">Category</div></div-->
-            <div id="col1" class="headline" style="width:68%;text-align:right"><div class="spacing">Item</div></div>
-            <div id="col3" class="headline" style="width:32%"><div class="spacing">Score</div></div>
+            <div id="col1" class="headline" style="width:64%;text-align:right"><div class="spacing">Item</div></div>
+            <div id="col3" class="headline" style="width:36%"><div class="spacing">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Score</div></div>
         </div>
     </div>
 </div>
@@ -73,9 +75,9 @@
 		                  <div style="display:table;border-collapse:collapse;width:100%;margin-top:10px">
 		                  	
 		                  			            	
-		            	<div style="width:66%;float:left;padding-left:20px;font-weight:bold;text-transform: uppercase">{$ay_cats.$count} {*$ay_cats.{$ay_cats.$count}*}</div>
+		            	<div style="width:64%;float:left;padding-left:20px;font-weight:bold;text-transform: uppercase">{$ay_cats.$count} {*$ay_cats.{$ay_cats.$count}*}</div>
 		            	
-		            	<div style="width:30%;float:left">
+		            	<div style="width:28%;float:left">
 			            	<div style="width:25%;float:left;padding-left:18px; text-valign:middle;font-weight:bold">Not at all</div>
 			            	<div align="center" style="width:40%;float:left;text-align:center;text-valign:middle;font-weight:bold">Moderately</div>
 			            	<div style="width:25%;float:right;padding-right:4px;text-align:right;font-weight:bold"><span style="">Extremely</span></div>
@@ -90,10 +92,10 @@
 							  {foreach from=$ay_final[$count] item=result} 
 							  
 							            <div style="display:table-row;">           	
-							            	<div style="display:table-cell;padding:6px;display:table-cell;width:530px;vertical-align:middle;text-align:right;">
+							            	<div style="display:table-cell;padding:6px;display:table-cell;width:596px;vertical-align:middle;text-align:right;">
 							            		{$result.title}
 							            	</div>
-							            	<div style="display:table-cell;vertical-align:middle;text-align:center;padding:6px;width:230px">
+							            	<div style="display:table-cell;vertical-align:middle;text-align:center;padding:6px;width:300px;">
 							            		
 								                {assign var=count3 value=$count2+1}  
 											    {assign var=count4 value=$count2+2}  

@@ -31,9 +31,10 @@ RewriteRule ^([a-z0-9_]+)/([a-z0-9_]+)(\.htm|/)(\/)?$ index.php?module=$1&sectio
 RewriteRule ^([a-z0-9_]+)/([a-z0-9_]+)(\/)?$ index.php?module=$1&section=$2 [QSA,NC]
 
 RewriteRule ^([a-z0-9_]+)(\/)?$ index.php?module=$1 [QSA,NC]
+RewriteRule ^([a-z0-9_]+)(\.html|/)?$ index.php?module=$1 [QSA,NC]
 
 
 #Error Pages
-ErrorDocument 404 /html/happify/html/404.html
+ErrorDocument 404 /happify/html/404.html
 
 

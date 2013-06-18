@@ -1,20 +1,38 @@
-  
-<div style="width:100%"><strong>This tool helps you to identify the reasons for your mood swings.</strong></div>
-<p></p>
-<i>developed by Dr. Arelende Weissmann</i>
-
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-{if $total_entries < $max_items_da_scale AND $time_ban == 0}
-	<div style="float:left">
-		<input type="button" class="btn" value="Create new entry" onclick="location.href='new.html'">
+	
+	<div style="float:left;width:70%">	
+			
+		  <span style="font-size:36px" class="coolvetica">Dysfunctional Attitude Scale</span>
+		  <p></p>
+		
+			<span style="font-size:18px;padding-top:8px" class="coolvetica">This tool helps you to identify the reasons for your mood swings.</span>
+			<p>&nbsp;</p>
+			<span style="font-size:12px;padding-top:8px" class="coolvetica"<i>developed by Dr. Arelende Weissmann</i></span>
+			
 	</div>
-{elseif $time_ban == 1}You can only do this analyzes again one month after the last one.
-{else if $total_entries >= $max_items_da_scale}You can have a maximum of {$max_items_da_scale} analyses.
-{/if}
+			
+	<div style="float:left;width:29%;text-align:right;padding-right:8px">	
+					
+		{if $total_entries < $max_items_da_scale AND $time_ban == 0}
+				<img src="{$dir_img}add.png" onclick="location.href='new.html'" style="cursor:pointer;width:32px">
+		{/if}
+				
+	</div> 
+				
+	<div style="clear:both"></div>	
+					   
+<p>&nbsp;</p>
 
 {if $total_entries >= 1}
+
+<p>&nbsp;</p>
+
+<span class="cms_title">Score result</span>
+<hr>
+
+{if $time_ban == 1}<ul class="bb-list-unordered"><li class="bb-listitem">You can only do this analyzes again one month after the last one.</li></ul>
+{else if $total_entries >= $max_items_da_scale}<ul class="bb-list-unordered"><li class="bb-listitem">You can have a maximum of {$max_items_da_scale} analyses.</li></ul>
+{/if}
+
 
 {if $total_entries == 1}
 
@@ -76,6 +94,137 @@
 </div>
 <div style="clear:both"></div>
 
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<span class="cms_title">Score interpretation</span>
+<hr>
+
+<div class="main_container">
+          
+     <div class="pin" id="pin_add" style="overflow:auto;min-height:300px;">
+     	
+     		<strong>Approval</strong>
+     		
+     		<p>&nbsp;</p>
+     			    	
+			{$da_score_interpretation.approval.description}
+			
+			Latest score: {$scores.$total_entries.0}
+			
+			{if $total_entries > 1}{if $last_is_highest.approval == false}you had a better score in the past, why?{/if}{/if}
+
+			{if $total_entries > 1}You {if $change.approval < 0}worsened{else}improved{/if} in this category compared to the first test by {$change.approval}%{/if}
+						
+     		<p>&nbsp;</p>
+     			  			 
+     </div>
+         
+     <div class="pin" id="pin_add" style="overflow:auto;min-height:300px;">
+     	
+     		<strong>Love</strong>
+     		
+     		<p>&nbsp;</p>
+     			    	
+			{$da_score_interpretation.love.description}
+
+			Latest score: {$scores.$total_entries.1}			
+
+			{if $total_entries > 1}{if $last_is_highest.love == false}you had a better score in the past, why?{/if}{/if}
+
+			{if $total_entries > 1}You {if $change.love < 0}worsened{else}improved{/if} in this category compared to the first test by {$change.love}%{/if}
+							
+     		<p>&nbsp;</p>
+     			  			 
+     </div>
+
+         
+     <div class="pin" id="pin_add" style="overflow:auto;min-height:300px;">
+     	
+     		<strong>Achievement</strong>
+     		
+     		<p>&nbsp;</p>
+     			    	
+			{$da_score_interpretation.achievement.description}
+			Latest score: {$scores.$total_entries.2}
+
+			{if $total_entries > 1}{if $last_is_highest.achievement == false}you had a better score in the past, why?{/if}{/if}
+
+			{if $total_entries > 1}You {if $change.achievement < 0}worsened{else}improved{/if} in this category compared to the first test by {$change.achievement}%{/if}
+													
+     		<p>&nbsp;</p>
+     			  			 
+     </div>
+         
+     <div class="pin" id="pin_add" style="overflow:auto;min-height:300px;">
+     	
+     		<strong>Perfectionism</strong>
+     		
+     		<p>&nbsp;</p>
+     			    	
+			{$da_score_interpretation.perfectionism.description}
+			Latest score: {$scores.$total_entries.3}			
+
+			{if $total_entries > 1}{if $last_is_highest.perfectionism == false}you had a better score in the past, why?{/if}{/if}
+
+			{if $total_entries > 1}You {if $change.approval < 0}worsened{else}improved{/if} in this category compared to the first test by {$change.approval}%{/if}
+							
+     		<p>&nbsp;</p>
+     			  			 
+     </div>
+         
+     <div class="pin" id="pin_add" style="overflow:auto;min-height:300px;">
+     	
+     		<strong>Entitlement</strong>
+     		
+     		<p>&nbsp;</p>
+     			    	
+			{$da_score_interpretation.entitlement.description}
+			Latest score: {$scores.$total_entries.4}			
+
+			{if $total_entries > 1}{if $last_is_highest.entitlement == false}you had a better score in the past, why?{/if}{/if}
+
+			{if $total_entries > 1}You {if $change.entitlement < 0}worsened{else}improved{/if} in this category compared to the first test by {$change.entitlement}%{/if}
+						
+     		<p>&nbsp;</p>
+     			  			 
+     </div>
+         
+     <div class="pin" id="pin_add" style="overflow:auto;min-height:300px;">
+     	
+     		<strong>Omnipotence</strong>
+     		
+     		<p>&nbsp;</p>
+     			    	
+			{$da_score_interpretation.omnipotence.description}
+			Latest score: {$scores.$total_entries.5}			
+
+			{if $total_entries > 1}{if $last_is_highest.omnipotence == false}you had a better score in the past, why?{/if}{/if}
+
+			{if $total_entries > 1}You {if $change.omnipotence < 0}worsened{else}improved{/if} in this category compared to the first test by {$change.omnipotence}%{/if}
+						
+     		<p>&nbsp;</p>
+     			  			 
+     </div>
+         
+     <div class="pin" id="pin_add" style="overflow:auto;min-height:300px;">
+     	
+     		<strong>Autonomy</strong>
+     		
+     		<p>&nbsp;</p>
+     			    	
+			{$da_score_interpretation.autonomy.description}
+			Latest score: {$scores.$total_entries.6}			
+
+			{if $total_entries > 1}{if $last_is_highest.autonomy == false}you had a better score in the past, why?{/if}{/if}
+
+			{if $total_entries > 1}You {if $change.autonomy < 0}worsened{else}improved{/if} in this category compared to the first test by {$change.autonomy}%{/if}
+						
+    		<p>&nbsp;</p>
+     			  			 
+     </div>
+
+</div>
 
 <script type="text/javascript">
 	

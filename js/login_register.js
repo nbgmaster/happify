@@ -25,7 +25,8 @@
 	});
 	
 	// When clicking on the button close or the mask layer the popup closed
-	$('a.close, #mask').live('click', function() { 
+	//NOTE: 1.9.0 changed deprecated .live to .on
+	$('a.close, #mask').on('click', function() { 
 	  $('#mask , .login-popup').fadeOut(300 , function() {
 		$('#mask').remove();  
 		$('#p_logon_failure').hide();  
@@ -58,7 +59,8 @@
 	});
 	
 	// When clicking on the button close or the mask layer the popup closed
-	$('a.close, #mask').live('click', function() { 
+    //NOTE: 1.9.0 changed deprecated .live to .on
+	$('a.close, #mask').on('click', function() { 
 	  $('#mask , .register-popup').fadeOut(300 , function() {
 		$('#mask').remove();  
 		$('#p_reg_failure').hide();  

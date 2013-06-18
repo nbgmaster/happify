@@ -5,7 +5,7 @@
      require_once('lib/functions/convert_date.php');
 	 			 
 	 $goals            = new SelectEntrys();
-     $goals->cols      = "ID, goal, progress, created";
+     $goals->cols      = "ID, goal, progress, created, achieved";
      $goals->table     = $tbl_goals;
      $goals->condition = " userID = '".$user_data['ID']."' ";
      if (!isset($goals_order)) $goals->order     = 'created DESC';
@@ -15,9 +15,15 @@
      $ay_goals = $goals->row();
 
 	 $count = 0;
-	 foreach ($ay_goals as $res2) {
-		
-		$ay_goals[$count]["created"] = convert_date($res2["created"], 'diary');
-		$count++;
-		
+	 
+	 if ( isset ($ay_goals[0]) ) {
+	 	
+		 foreach ($ay_goals as $res2) {
+			
+			$ay_goals[$count]["created"] = convert_date($res2["created"], 'goals');
+			$ay_goals[$count]["achieved"] = convert_date($res2["achieved"], 'goals');
+			$count++;
+			
+		 }
+	 
 	 }

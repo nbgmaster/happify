@@ -1,0 +1,1 @@
+{if {$goal.progress == 100}}<p style="height:4px"></p><span style="font-size:10px;"><img src="{$dir_img}checkmark.png">&nbsp;Achieved: {$goal.achieved}</span>{/if}

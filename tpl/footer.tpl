@@ -1,5 +1,5 @@
 
-</div><!-- .entry-content -->
+</div><!-- .entry-content-->
 
 </div>
     		
@@ -20,14 +20,14 @@
 &nbsp; 
 <img src="{$dir_img}flag_english.jpg" onclick="change_lang(1)" class="img_flag" title="{$title_flag2}"></li> 
 
-<li><a class="qjax" href="blog/">Blog</a></li>
-<li><a class="qjax" href="contact/">Contact</a></li>
-<li><a class="qjax" href="press/">Press</a></li>
-<li><a class="qjax" href="team/">Team</a></li>
-<li><a class="qjax" href="legal/">Imprint</a></li>
-<li><a class="qjax" href="login/">Login</a></li>
-<li><a class="qjax" href="register/">Create Account</a></li>
-<li><a class="qjax" href="http://www.happify.me/">© Happify 2012</a></li>
+<li><a class="qjax" href="{$root_dir}cms/contact/">Contact</a></li>
+<li><a class="qjax" href="{$root_dir}cms/faq/">FAQ</a></li>
+<li><a class="qjax" href="{$root_dir}cms/press/">Press</a></li>
+<li><a class="qjax" href="{$root_dir}cms/about/">About</a></li>
+<li><a class="qjax" href="{$root_dir}cms/imprint/">Imprint</a></li>
+<li><a class="qjax" href="{$root_dir}login/">Login</a></li>
+<li><a class="qjax" href="{$root_dir}register/">Create Account</a></li>
+<li><a class="qjax" href="http://www.happify.me/">© Happify 2013</a></li>
 </ul></div>
 {$rendering_time} 
 </div>

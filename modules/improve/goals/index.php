@@ -1,7 +1,7 @@
 <?php
 
     /* Goals of the user */
-    
+
     //delete entry
 	 if ( !empty($_POST['submit_del']) )  { 
  
@@ -30,4 +30,4 @@
     $tpl->assign('sort_goal', $sort_goal);
 	$tpl->assign('sort_progress', $sort_progress);
 	$tpl->assign('sort_created', $sort_created);
-	
+	$tpl->assign('total_goals', $count);	
