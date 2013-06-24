@@ -124,7 +124,7 @@
 	       $thoughts->values = " '".$user_data['ID']."', '".$thought."', '".$response."', '".$c_action."', '".$mysqldate."' ";
 	
 	       $thoughts->insert();  
-	       unset($thoughts);
+	       unset($thoughts);	     		  
 
 		   //refresh content			   		 
 	       include("lib/functions/fetch_thoughts.php");
@@ -157,7 +157,10 @@
 		   
 		   //TODO store aggregated values in user table
 		   //all items have been answered
-		   if ($dataValid == 1) {   
+		   if ($dataValid == 1) {
+		   			
+				   $bd_total_score = 0;   
+				   $da_total_score[0] = $da_total_score[1] = $da_total_score[2] = $da_total_score[3] = $da_total_score[4] = $da_total_score[5] = $da_total_score[6] = 0;
 
 				   //insert new entry
 		           $scale_data = new ModifyEntry();
@@ -171,14 +174,52 @@
 					       $scale_data->values = " '".$user_data['ID']."', '".$i."', '".$data[$i]."', '".$mysqldate."' ";
 					
 					       $scale_data->insert();  
-			
+						   
+						   if ($scale_data->errno() > 0) break; 
+						   
+						   if ($table == $tbl_da_scale_results) {
+				
+							   switch(true) { 
+					    			case $i <= 5:  $da_total_score[0] = $da_total_score[0] + $data[$i]; break;
+					    			case $i <= 10: $da_total_score[1] = $da_total_score[1] + $data[$i];	break;				 
+					    			case $i <= 15: $da_total_score[2] = $da_total_score[2] + $data[$i];	break;	
+					    			case $i <= 20: $da_total_score[3] = $da_total_score[3] + $data[$i];	break;	
+					    			case $i <= 25: $da_total_score[4] = $da_total_score[4] + $data[$i];	break;	
+					    			case $i <= 30: $da_total_score[5] = $da_total_score[5] + $data[$i];	break;	
+					    			case $i <= 35: $da_total_score[6] = $da_total_score[6] + $data[$i];	break;						
+							   }				
+																						 
+						   }
+						   
+						   if ($table == $tbl_bd_scale_results)  $bd_total_score = $bd_total_score + $data[$i];
+		
 					   }
-					   
-					   if($scale_data->errno() > 0) break; 
-					   
+					   			   
 				   }
+				  
+			  	   unset($scale_data);
 				   
-				       				 
+		           $scale_data = new ModifyEntry();					   
+			       $scale_data->table  = $tbl_users;	
+				   
+				   if ($table == $tbl_da_scale_results) ksort($da_total_score);
+				   
+				   if ($table == $tbl_da_scale_results) $scale_data->changes   = " da_latest_score = '".serialize($da_total_score)."' ";
+				   else  $scale_data->changes   = " bd_latest_score = '".$bd_total_score."' ";
+       			   $scale_data->condition = " ID = '".$user_data['ID']."' ";
+	   			    
+				   $scale_data->update();  	
+					   				   
+				   if($scale_data->errno() > 0) break; 
+				   
+				   if ($table == $tbl_da_scale_results) $user_data['da_latest_score'] = serialize($da_total_score);
+	  					
+				   if ($table == $tbl_bd_scale_results) $user_data['bd_latest_score'] = $bd_total_score;
+					   		  
+				   if (mod_memcache == 1)  $memcache->replace($mem_key1, $user_data, false); 
+				   else $_SESSION['$mem_key1'] = $user_data;
+		   
+					 				       				 
 		   }
  
  		   //update cached data in memcache or session

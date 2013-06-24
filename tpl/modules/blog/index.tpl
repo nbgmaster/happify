@@ -19,7 +19,9 @@
 				        {/if}
 	
 				    </div>
+				    {if $blog.title_EN != ''}		
 				    <p class="b_title">{$blog.title_EN}</p>
+				    {/if}
 				    {if $blog.pinterest_text != ''}
 				   	 <p class="b_text">{$blog.pinterest_text}</p>   
 				   	 {/if}
@@ -41,7 +43,47 @@
 		         </div>
 		         
 		         </a>
+
+	        	{else if $blog.click_action == 'URL'}
+	        	
+	        	<a class="cursor" href="{$blog.url}" target="_blank">
+	        	 		
+		        <div class="pin">
+		        	
+				    <div class="holder">
+
+				        {if $blog.pinterest_picture == 'Yes'}
+			
+				            <img src="{$dir_img}blog/{$blog.ID}/pinterest.png" width="100%">
+				        
+				        {/if}
+	
+				    </div>
+				    {if $blog.title_EN != ''}				    
+				    <p class="b_title">{$blog.title_EN}</p>
+				    {/if}
+				    {if $blog.pinterest_text != ''}
+				   	 <p class="b_text">{$blog.pinterest_text}</p>   
+				   	 {/if}
+				    
+					<p>&nbsp;</p>
+
+				    <p class="b_small_text">
+				    	<span>{*$blog.likes*}0 likes</span>
+				    	<span>{*$blog.comments*}0 comments</span>
+
+				    </p>
+				    
+				    <hr>
+
+				    <p class="info">
+				    	<b>{$blog.cat_str}</b>
+				    </p>
+
+		         </div>
 		         
+		         </a>
+		         		         
 		         {else if $blog.click_action == 'Subpage'}
 
 		         <div class="pin cursor" onclick="location.href='{$root_dir}blog/{$blog.permalink}.html'">
@@ -54,7 +96,9 @@
 				            {/if}
 				        </span>
 				    </div>
+				    {if $blog.title_EN != ''}		
 				    <p class="b_title">{$blog.title_EN}</p>
+				    {/if}
 				    {if $blog.pinterest_text != ''}
 				   	 <p class="b_text">{$blog.pinterest_text}</p>   
 				   	 {/if}
@@ -87,7 +131,9 @@
 				            {/if}
 				        </span>
 				    </div>
+				    {if $blog.title_EN != ''}		
 				    <p class="b_title">{$blog.title_EN}</p>
+				    {/if}
 				    {if $blog.pinterest_text != ''}
 				   	 <p class="b_text">{$blog.pinterest_text}</p>   
 				   	 {/if}

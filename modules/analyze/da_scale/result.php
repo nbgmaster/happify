@@ -48,7 +48,7 @@
 		
 		$p1->SetWeight(3); 
 		$p1->SetColor("#c54242");
-		$p1->SetLegend($_GET["date1"]);
+		$p1->SetLegend(substr($_GET["date1"],0,10));
 		$p1->SetStyle("solid");
 	
 	}
@@ -61,7 +61,7 @@
 	    $p2 = new LinePlot(unserialize($_GET["datay2"])); 
 	    $graph->Add($p2);
 		$p2->SetColor("#1e25af");
-	    $p2->SetLegend($_GET["date2"]);
+	    $p2->SetLegend(substr($_GET["date2"],0,10));
 	    $p2->SetStyle("solid");
 				
 	}
@@ -72,7 +72,7 @@
 	    $graph->Add($p3);
 		$p3->SetWeight(3); 	
 		$p3->SetColor("#ba42c5");
-	    $p3->SetLegend($_GET["date3"]);
+	    $p3->SetLegend(substr($_GET["date3"],0,10));
 	    $p3->SetStyle("solid");
 			
 	}
@@ -82,7 +82,7 @@
 	    $p4 = new LinePlot(unserialize($_GET["datay4"])); 
 	    $graph->Add($p4);
 		$p4->SetColor("#58af1e");
-	    $p4->SetLegend($_GET["date4"]);
+	    $p4->SetLegend(substr($_GET["date4"],0,10));
 	    $p4->SetStyle("solid");
 					
 	}
@@ -92,7 +92,7 @@
 	    $p5 = new LinePlot(unserialize($_GET["datay5"])); 
 	    $graph->Add($p5);
 		$p5->SetColor("#d4bb66");
-	    $p5->SetLegend($_GET["date5"]);
+	    $p5->SetLegend(substr($_GET["date5"],0,10));
 	    $p5->SetStyle("solid");
 					
 	}

@@ -33,7 +33,7 @@
    else {
    	
 	     $blog            = new SelectEntrys();
-	     $blog->cols      = "ID, permalink, title_EN, message_EN, category, pinterest_picture, pinterest_text, click_action, popup_title";
+	     $blog->cols      = "ID, permalink, title_EN, message_EN, category, pinterest_picture, pinterest_text, click_action, popup_title, url";
 	     $blog->table     = $tbl_blog;
 		 //$blog->condition =  "userID = '".$user_data['ID']."' ";
 	     $blog->order     = 'date DESC';

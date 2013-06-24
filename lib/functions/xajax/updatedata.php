@@ -38,7 +38,7 @@
 		   $achieved_date = date( 'Y-m-d H:i:s', time() );
 		   
 		   if ($progress == 100) $goals->changes   = " progress = '".$progress."', achieved = '".$achieved_date."' ";
-		   else  $goals->changes   = " progress = $progress, achieved = '' ";
+		   else  $goals->changes   = " progress = '".$progress."', achieved = '' ";
 
            $goals->condition = " ID = '$id' ";
 

@@ -5,7 +5,7 @@
    * needs to be checked and updated in the end 
    */
 
-  if ($logon_true != 1 || $section == 'bd_scale' && $subsection == 'new' || $section == 'da_scale' && $subsection == 'new' || $logon_true == 1 && !$module || $section == 'goals' && $subsection == 'index' || $section == 'distorted_thoughts' && $subsection == "index" || $section == 'diary' && $subsection == 'index') {
+  if ($logon_true != 1 || $section == 'bd_scale' && $subsection == 'new' || $section == 'da_scale' && $subsection == 'new' || $logon_true == 1 && !$module || $section == 'goals' && $subsection == 'index' || $section == 'distorted_thoughts' && $subsection == "index" || $section == 'diary') {
 
 	   require('lib/xajax/xajax_core/xajax.inc.php');
 	
@@ -18,7 +18,7 @@
 	
 	  /******************************************/
 	
-	  if ( $section == 'bd_scale' && $subsection == 'new' || $section == 'da_scale' && $subsection == 'new' || $logon_true == 1 && !$module || $section == 'goals' && $subsection == "index" || $section == 'distorted_thoughts' && $subsection == 'index' || $section == 'diary' && $subsection == 'index') {	
+	  if ( $section == 'bd_scale' && $subsection == 'new' || $section == 'da_scale' && $subsection == 'new' || $logon_true == 1 && !$module || $section == 'goals' && $subsection == "index" || $section == 'distorted_thoughts' && $subsection == 'index' || $section == 'diary') {	
 
 		   $xajax->register(XAJAX_FUNCTION, "insertdata");
 		   $xajax->register(XAJAX_FUNCTION, "selectdata");

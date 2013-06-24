@@ -9,7 +9,7 @@
 
            $usr_data = new SelectEntrys();
            //$usr_data->token   = $l["token"];
-           $usr_data->cols    = 'ID, UserToken, UserEmail, UserPass, firstname, language, last_online_time, description, personal_goal, diary_start_month, diary_start_year';
+           $usr_data->cols    = 'ID, UserToken, UserEmail, UserPass, firstname, language, last_online_time, description, personal_goal, diary_start_month, diary_start_year, bd_latest_score, da_latest_score';
            $usr_data->condition =  "UserToken = '$token_identifier' ";
            $usr_data->multiSelect = '1';       
 

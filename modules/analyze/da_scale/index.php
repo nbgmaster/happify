@@ -4,9 +4,13 @@
     * delete entries and retrieve all entries
     * displaying the results (result.php) is initiated in the template file index.tpl */
 
+    //print_r(unserialize($user_data['da_latest_score']));
+
      //delete item
-	 if ( !empty($_POST['submit_del']) )  { 
-  
+     
+     //TODO TESTING!!
+	 if ( !empty($_POST['submit_del']) )  {
+
           $del_scale            = new ModifyEntry();
           $del_scale->table     = $tbl_da_scale_results;
           $del_scale->condition   = "userID = '".$user_data['ID']."' && date = '".$_POST['date_to_delete']."' ";
@@ -14,7 +18,51 @@
           $del_scale->delete();
 
           unset($del_scale);
+		  		
+  	      $get_date = explode('=', $da_scale_data);	
+		  $latest_date = end($get_date);
+	
+		  $new_latest_score = "";
+
+		  //only if latest entry is deleted and at least 2 entries exist we have to update the aggregated numbers
+          if ($latest_date == $_POST['date_to_delete'] && count($get_date) > 3) {
+          		  
+	    	  $da_scale_score_ser = explode('&datay', $da_scale_data);	
+
+			  $get_latest_key = end($da_scale_score_ser);
+	  	      $latest_key = array_keys($da_scale_score_ser);
+	  	      $last = end($latest_key);
+
+			  $get_new_latest_score = explode('&', $da_scale_score_ser[$last-1]);	
+			  
+
+			  $new_latest_score = substr($get_new_latest_score[0],2);
+
+		  }
 		  
+		  else if (count($get_date) <=3) $new_latest_score = -1;
+		  
+		  if ($new_latest_score != "") {
+
+	          $scale_data = new ModifyEntry();					   
+		      $scale_data->table  = $tbl_users;	
+			   
+			  if ($new_latest_score == -1) $scale_data->changes   = " da_latest_score = '' ";
+			  else $scale_data->changes   = " da_latest_score = '".$new_latest_score."' ";
+			  	
+			  $scale_data->condition = " ID = '".$user_data['ID']."' ";
+			    
+			  $scale_data->update();  
+			  	
+	          unset($scale_data);
+		          			            
+	          $user_data['da_latest_score'] = $new_latest_score;
+
+			  if (mod_memcache == 1)  $memcache->replace($mem_key1, $user_data, false); 
+			  else $_SESSION['$mem_key1'] = $user_data;
+			  			  			
+		  }
+		  		 					  
 		  if (mod_memcache == 1) {
   		  	  $memcache->delete($mem_key2);        
 	   		  $memcache->delete($mem_key2a);    
@@ -29,6 +77,8 @@
 		  header ("Location:".ROOT_DIR."analyze/da_scale/index.html");
 		  
     }
+
+	$tpl->assign('time_ban', 0);	
 
 	//if result object is not cached  
     if ($da_scale_data == "") {
@@ -48,11 +98,11 @@
 		 else $total_entries = count($da_scale_dates);
 
 		//retrieve arrays of dates for selection menu	
-		 if ($total_entries > 1) {
+		 if ($total_entries > 0) {
 		 
 			 $select_dates[] = "Show All";
-			 foreach($da_scale_dates as $key => $value) $select_dates[] = substr($value["date"],0,10); 
-		
+			 //foreach($da_scale_dates as $key => $value) $select_dates[] = substr($value["date"],0,10); 
+		     foreach($da_scale_dates as $key => $value) $select_dates[] = $value["date"]; 
 		 }
 
 	     //sum up points for total score for each date entry		 
@@ -86,9 +136,9 @@
 					
 					    //$datay1 = serialize($datay1); 
 	
-						$da_scale_data .= "&datay".$i."=".serialize($datay)."&date".$i."=".substr($da_scale_dates[$x]['date'],0,10);
+						$da_scale_data .= "&datay".$i."=".serialize($datay)."&date".$i."=".$da_scale_dates[$x]['date'];
 						
-						$da_scale_sep_strings[$i] = "&datay".$i."=".serialize($datay)."&date".$i."=".substr($da_scale_dates[$x]['date'],0,10);  
+						$da_scale_sep_strings[$i] = "&datay".$i."=".serialize($datay)."&date".$i."=".$da_scale_dates[$x]['date'];  
 						$da_scale_sep_dates[$i] = $da_scale_dates[$x]['date'];
 					
 						unset($ay_items);
@@ -142,24 +192,16 @@
 		$latest_entrydate = strtotime($get_total_entries[$last_item]);
 		
 		//retrieve arrays of dates for selection menu
-	    if ($total_entries > 1) {
+	    if ($total_entries >= 1) {
 		 
 			 $select_dates[] = "Show All";
 			 foreach($get_total_entries as $key => $value) 
-			 	if (substr($value,0,4) == 'date') $select_dates[] = substr($value,6,10); 
+			 	if (substr($value,0,4) == 'date') $select_dates[] = substr($value,6); 
 	 
 	    }
 						
 	}
 
-	//check time ban
-	if ( time() - $latest_entrydate < da_min_waittime) $tpl->assign('time_ban', 1);				
-	else  $tpl->assign('time_ban', 0);		
-	
-	$tpl->assign('ay_dates', $select_dates);
-			
-	$tpl->assign('datay', $da_scale_data);
-	
 
 	//start score interpretation calculation here
 	
@@ -181,8 +223,13 @@
 	unset($value);
 	//print_r($scores);
 	
-	if ($total_entries > 1) {
-			
+	if ($total_entries >= 1) {
+
+			//check time ban
+			if ( time() - $latest_entrydate < da_min_waittime) $tpl->assign('time_ban', 1);				
+
+			$tpl->assign('ay_dates', $select_dates);
+										
 			$approval      = -11; $last_is_highest['approval'] = false; 
 			$love          = -11; $last_is_highest['love'] = false; 
 			$achievement   = -11; $last_is_highest['achievement'] = false; 	 		
@@ -266,18 +313,21 @@
 					
 		$tpl->assign('change', $change);
 		$tpl->assign('last_is_highest', $last_is_highest);
-													
-	}
-	
-	
-	$tpl->assign('data_sep_string', $da_scale_sep_strings);
-	$tpl->assign('data_sep_dates', $da_scale_sep_dates);
-				
-	$tpl->assign('total_entries', $total_entries);
-	$tpl->assign('max_items_da_scale', max_items_da_scale);
 
-	$tpl->assign('da_score_interpretation', $da_score_interpretation);
+		$tpl->assign('data_sep_string', $da_scale_sep_strings);
+		$tpl->assign('data_sep_dates', $da_scale_sep_dates);
 	
-	$tpl->assign('scores', $scores);
+		$tpl->assign('da_score_interpretation', $da_score_interpretation);
+		
+		$tpl->assign('scores', $scores);
+														
+	}
+
+	$tpl->assign('max_items_da_scale', max_items_da_scale);
+	
+	$tpl->assign('datay', $da_scale_data);
+							
+	$tpl->assign('total_entries', $total_entries);
+
 			
 ?>

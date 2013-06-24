@@ -96,11 +96,15 @@
                 
                 <input type="submit" name="doLogin" value="Login" id="submit_login" name="submit_login" onclick="form.submit()" style="display:none" />
                 <p>
-                <a class="forgot" href="#">Forgot your password?</a>
+                <a class="forgot" href="#" onclick="javascript:document.getElementById('reset_password').style.display='block'">Forgot your password?</a>
                 </p>  
+
                 <!--input type="submit" id="submit_login" value="" name="submit_login" style="{*visibility:hidden;width:0px;height:0px*}"-->      
                 </fieldset>
           </form>
+          
+                          
+                <p id="reset_password" style="display:none;width:212px;font-size:10px;border-top-color:#60852A;border-top-style:solid;border-top-width:1px;margin-top:10px; color:white">Please send an E-Mail to resetpw@happifier.info to request a new password.</p>
 </div>
 
 <div id="register-box" class="register-popup">
@@ -154,8 +158,8 @@
 			<div style="display: block;" class="login animated" align="right">
 
 					{if $logon != 1}
-									<a href="#login-box" class="login-btn"><span>Login</span></a>
-								    <a href="#register-box" class="register-btn"><span>Create account</span></a>
+									<a href="#login-box" class="login-btn" id="login_header"><span>Login</span></a>
+								    <a href="#register-box" class="register-btn" id="register_header"><span>Create account</span></a>
 					{/if}
 					{if $logon == 1}
 					

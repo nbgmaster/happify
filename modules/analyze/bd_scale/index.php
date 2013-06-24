@@ -5,6 +5,8 @@
     * displaying the results (result.php) is initiated in the template file index.tpl */
 
     //delete item
+    
+    //TODO TESTING!!
     if ( !empty($_POST['submit_del']) )  { 
 		  $del_scale            = new ModifyEntry();
           $del_scale->table     = $tbl_bd_scale_results;
@@ -13,13 +15,50 @@
           $del_scale->delete();
 
           unset($del_scale);
+		  
+    	  $bd_scale_scores_ser = explode('&fscores=', $bd_scale_data);
+		  $get_latest_date = unserialize(substr($bd_scale_scores_ser[0],7));
+		  		  	
+	      $latest_date = end($get_latest_date);
 
+		  $bd_scale_scores = unserialize($bd_scale_scores_ser[1]);
+	      $latest_key = array_keys($bd_scale_scores);
+
+		  $new_latest_score = "";	
+			  			  		  
+		  //only if latest entry is deleted and at least 2 entries exist we have to update the aggregated numbers
+          if ($latest_date['date'] == $_POST['date_to_delete'] && end($latest_key) > 0) $new_latest_score = $bd_scale_scores[end($latest_key) - 1];
+		  else if (end($latest_key) == 0) $new_latest_score = -1;
+		
+		  if ($new_latest_score != "") {
+		           	
+	     	  $scale_data = new ModifyEntry();
+		  		  			   
+		      $scale_data->table  = $tbl_users;	
+			   
+			  if ($new_latest_score == -1) $scale_data->changes   = " bd_latest_score = '".$new_latest_score."' ";
+			  else $scale_data->changes   = " bd_latest_score = '' ";
+			  $scale_data->condition = " ID = '".$user_data['ID']."' ";
+			    
+			  $scale_data->update(); 
+			   
+			  unset($scale_data);			  
+			 		          			            
+	          $user_data['bd_latest_score'] = $new_latest_score;
+
+			  if (mod_memcache == 1)  $memcache->replace($mem_key1, $user_data, false); 
+			  else $_SESSION['$mem_key1'] = $user_data;
+			  			  			  	
+		  }
+				   		
   	      if (mod_memcache == 1) $memcache->delete($mem_key3);   
 		  else unset($_SESSION['$mem_key3']);
 						   	   		  
 		  header ("Location:".ROOT_DIR."analyze/bd_scale");
 		  
     }
+
+	$tpl->assign('time_ban', 0);	
 
 	//if result object is not cached	
 	if ($bd_scale_data == "") {
@@ -106,53 +145,58 @@
 		$latest_entrydate = strtotime($bd_scale_dates[$last_item]['date']);
 							
 	}
-
-	//Start here to calculate values for interpretation section
 	
-    require_once("./././lib/functions/get_score_interpretation.php");		
-			
-    $bd_scale_scores = explode('&fscores', $bd_scale_data);
-	$bd_scale_scores = unserialize(substr($bd_scale_scores[1],1));
+	if ($total_entries > 0) {
 
-	$latest_score = end($bd_scale_scores);
-	
-	$change = 500;
-	if ($total_entries > 1) {
+		//Start here to calculate values for interpretation section
 		
-		//compare first and last
-		$first_score  = $bd_scale_scores[0];		
-		$change = round(($first_score - $latest_score) / $first_score * 100);
-    	$tpl->assign('score_interpretation_avg', get_score_interpretation('average', intval($change), $score_interpretation));		
-		
-		//find lowest score
-		$lowest_score = min($bd_scale_scores);
-		if ($latest_score > $lowest_score) $better_day = 1;
-		else $better_day = 0;
-		$tpl->assign('better_day', $better_day);	
+	    require_once("./././lib/functions/get_score_interpretation.php");		
 				
+	    $bd_scale_scores = explode('&fscores', $bd_scale_data);
+		$bd_scale_scores = unserialize(substr($bd_scale_scores[1],1));
+	
+		$latest_score = end($bd_scale_scores);
+		
+		$change = 500;
+		if ($total_entries > 1) {
+			
+			//compare first and last
+			$first_score  = $bd_scale_scores[0];		
+			$change = round(($first_score - $latest_score) / $first_score * 100);
+	    	$tpl->assign('score_interpretation_avg', get_score_interpretation('average', intval($change), $score_interpretation));		
+			
+			//find lowest score
+			$lowest_score = min($bd_scale_scores);
+			if ($latest_score > $lowest_score) $better_day = 1;
+			else $better_day = 0;
+			$tpl->assign('better_day', $better_day);	
+					
+		}
+	
+		$time_since_last_entry = time() - $latest_entrydate;
+		$in_days = round($time_since_last_entry / 60 / 60 / 24);
+			 
+	 		//check time ban
+		$repeat_in_days = bd_min_waittime * 24 * 60 * 60;
+		if ( $time_since_last_entry < $repeat_in_days) $tpl->assign('time_ban', 1);					
+			
+	    $tpl->assign('score_interpretation_latest', get_score_interpretation('latest', intval($latest_score), $score_interpretation));			
+	
+	    //format dates for select box 
+    	foreach($bd_scale_dates as $key => $value) $select_dates[] = $value["date"]; 
+	
+		$tpl->assign('in_days', $in_days);	
+		$tpl->assign('latest_score', $latest_score);	
+		$tpl->assign('change', $change);		
+		$tpl->assign('select_dates', $select_dates);	
+			
 	}
 
-	$time_since_last_entry = time() - $latest_entrydate;
-	$in_days = round($time_since_last_entry / 60 / 60 / 24);
-	
-	//check time ban
-	$repeat_in_days = bd_min_waittime * 24 * 60 * 60;
-	if ( $time_since_last_entry < $repeat_in_days) $tpl->assign('time_ban', 1);				
-	else  $tpl->assign('time_ban', 0);	
-
-    $tpl->assign('score_interpretation_latest', get_score_interpretation('latest', intval($latest_score), $score_interpretation));			
-
-    //format dates for select box 
-    foreach($bd_scale_dates as $key => $value) $select_dates[] = $value["date"]; 
-	 
     //fill template variables	     
 	$tpl->assign('datay', $bd_scale_data); 
 	$tpl->assign('total_entries', $total_entries);
 	$tpl->assign('max_items_bd_scale', max_items_bd_scale);
-	$tpl->assign('in_days', $in_days);	
-	$tpl->assign('latest_score', $latest_score);	
-	$tpl->assign('change', $change);		
 	$tpl->assign('repeat_in_days', bd_min_waittime);		
-	$tpl->assign('select_dates', $select_dates);	
+
 		
 ?>

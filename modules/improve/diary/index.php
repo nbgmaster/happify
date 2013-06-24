@@ -25,7 +25,7 @@
 
 		 } 
 		  		  					   	   		  
-	     header ("Location:".ROOT_DIR);
+	     header ("Location:".ROOT_DIR."improve/diary/index.html");
 
     }
 

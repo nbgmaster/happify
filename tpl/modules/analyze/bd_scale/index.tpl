@@ -129,6 +129,8 @@
       
 {/if}
 
+{if $total_entries > 0}
+
 <p>&nbsp;</p>
 
 <div style="float:left">
@@ -164,3 +166,5 @@
 	} 
 	
 </script>
+
+{/if}

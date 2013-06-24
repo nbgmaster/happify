@@ -20,13 +20,14 @@
 &nbsp; 
 <img src="{$dir_img}flag_english.jpg" onclick="change_lang(1)" class="img_flag" title="{$title_flag2}"></li> 
 
-<li><a class="qjax" href="{$root_dir}cms/contact/">Contact</a></li>
+<li><a class="qjax" href="{$root_dir}cms/about/">About</a></li>
+<li><a class="qjax" href="{$root_dir}cms/contact/">Feedback</a></li>
 <li><a class="qjax" href="{$root_dir}cms/faq/">FAQ</a></li>
 <li><a class="qjax" href="{$root_dir}cms/press/">Press</a></li>
-<li><a class="qjax" href="{$root_dir}cms/about/">About</a></li>
+
 <li><a class="qjax" href="{$root_dir}cms/imprint/">Imprint</a></li>
-<li><a class="qjax" href="{$root_dir}login/">Login</a></li>
-<li><a class="qjax" href="{$root_dir}register/">Create Account</a></li>
+{if $logon == 0}<li><a href="#" class="qjax" onclick="document.getElementById('login_header').click()">Login</a></li>{/if}
+{if $logon == 0}<li><a href="#" class="qjax" onclick="document.getElementById('register_header').click()">Create Account</a></li>{/if}
 <li><a class="qjax" href="http://www.happify.me/">© Happify 2013</a></li>
 </ul></div>
 {$rendering_time} 

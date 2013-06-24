@@ -24,17 +24,18 @@
 
 {if $total_entries >= 1}
 
-<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	
+	<span class="cms_title">Score result</span>
+	<hr>
+	
+	{if $time_ban == 1}<ul class="bb-list-unordered"><li class="bb-listitem">You can only do this analyzes again one month after the last one.</li></ul>
+	{else if $total_entries >= $max_items_da_scale}<ul class="bb-list-unordered"><li class="bb-listitem">You can have a maximum of {$max_items_da_scale} analyses.</li></ul>
 
-<span class="cms_title">Score result</span>
-<hr>
-
-{if $time_ban == 1}<ul class="bb-list-unordered"><li class="bb-listitem">You can only do this analyzes again one month after the last one.</li></ul>
-{else if $total_entries >= $max_items_da_scale}<ul class="bb-list-unordered"><li class="bb-listitem">You can have a maximum of {$max_items_da_scale} analyses.</li></ul>
 {/if}
 
 
-{if $total_entries == 1}
+{*if $total_entries == 1}
 
 <div style="float:left">
 
@@ -48,9 +49,9 @@
  
 </div>
     
-{/if}
+{/if*}
 
-{if $total_entries > 1}
+{if $total_entries >= 1}
 
 <div style="float:left">
 	<select name="select_date" size="{*$ay_dates|@count*}" onChange="change_graph(this.selectedIndex)">

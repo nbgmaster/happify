@@ -4,7 +4,7 @@
     	 
     //LOGIN == TRUE
 	 if ($logon_true == 1) {
-	 	
+	 	/*
 		 if (!isset($bd_scale_dates[0])) { 
          
 	         $bd_check = new CheckExist();
@@ -13,7 +13,7 @@
 	         $validity = $validity_check->exist();
 		 
 		 }
-      
+      */
          //require_once('././lib/functions/convert_date.php');
      	
      	 //Load Data that is displayed on landing page (diary, etc.)
