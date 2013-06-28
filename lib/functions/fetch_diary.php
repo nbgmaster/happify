@@ -7,9 +7,18 @@
 	         $diary            = new SelectEntrys();
 	         $diary->cols      = "ID, entry, date, picture";
 	         $diary->table     = $tbl_diary;
-	         $diary->condition = " userID = '".$user_data['ID']."' ";
-	         $diary->order     = 'date DESC';
-			 $diary->limit     = 50;
+			 //TODO analyze performance
+			 if (isset ($diary_show_random) == true) {
+			 	 //$diary->condition = " userID = '".$user_data['ID']."' AND DATE_FORMAT(date,'%Y-%m-%d') = CURDATE()";
+			 	 $diary->condition = " userID = '".$user_data['ID']."'";
+		         $diary->order     = 'RAND()';
+				 $diary->limit     = 1;
+			 }
+			 else {
+			 	$diary->condition = " userID = '".$user_data['ID']."' ";
+	         	$diary->order     = 'date DESC';
+			 	$diary->limit     = 50;				
+			 }
 	         $diary->multiSelect     = 1;
 	         $ay_diary = $diary->row();
 			 

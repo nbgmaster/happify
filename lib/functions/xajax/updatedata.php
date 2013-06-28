@@ -140,7 +140,12 @@
 		   else $_SESSION['$mem_key1'] = $user_data;
 		   
 		   //TODO refresh view
-                    
+		   					   	             
+           $objResponse->assign("desc_me","innerHTML",$data['desc_me']);   
+           $objResponse->assign("inp_me","value",$data['desc_me']);   
+           $objResponse->assign("desc_me","style.display","block");   
+           $objResponse->assign("desc_input","style.display","none");   		   
+		   	   		                       
       }
 
      //update diary entry

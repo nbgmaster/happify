@@ -1,5 +1,7 @@
 <?php
 
+  //TODO cache strings locally
+
   /* Header Nav */
   
         $tpl->assign('header_nav_li1', 'Analyze and Understand');   
@@ -50,7 +52,14 @@
 
             
      /* BD SCALE */
-           
+     
+        $bd_score_severity[0] = "This indicates that you are currently happy with your life and have no signs of a depression.";
+        $bd_score_severity[1] = "This indicates that you are currently not depressed but not fully happy with your life.";
+        $bd_score_severity[2] = "This indicates that you currently have a mild depression.";
+        $bd_score_severity[3] = "This indicates that you currently have a moderate depression.";
+        $bd_score_severity[4] = "This indicates that you currently have a severe depression.";    
+        $bd_score_severity[5] = "This indicates that you currently have an extreme depression.";    
+	       	                   
         $score_interpretation['happy'] = "Happy!";
         $score_interpretation['unhappy'] = "unhappy!";		
         $score_interpretation['mild'] = "Use the Dysfunctional Attitude Test to identify reasons for your mood swings. Then improve your mood by setting goals and fighting your distorting thoughts.";
@@ -66,6 +75,14 @@
      
      /* DA SCALE */
      
+       $da_reasons[0] = 'Approval';
+       $da_reasons[1] = 'Love';
+       $da_reasons[2] = 'Achievement';	   
+       $da_reasons[3] = 'Perfectionism';	   
+       $da_reasons[4] = 'Entitlement';
+       $da_reasons[5] = 'Omnipotence';	   
+       $da_reasons[6] = 'Autonomy';	   
+	   	        
        $da_score_interpretation['approval']['description'] = "Tendency to measure your self-esteem based on how people react to you and what they think of you";
        $da_score_interpretation['love']['description'] = "Tendency to base your worth on whether or not you are loved";
        $da_score_interpretation['achievement']['description'] = "Tendency to see yourself as a commodity in the marketplace and workaholic<p></p>Tendency to think your sense of self-worth and your capacity for joy are dependent on your productivity";
