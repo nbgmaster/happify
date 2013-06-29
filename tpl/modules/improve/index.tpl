@@ -48,6 +48,36 @@
    </div>
     
    <div class="pin" style="width:271px; height:280px">
+        
+        <span style="font-size:18px;font-weight:bold">Rules</span>
+        <hr style="" size="1">
+        <p class="b_text" style="height:80px">Adhere to these rules and you'll become a happier person than ever before.</p>
+        
+        <center>
+        <p>&nbsp;</p>
+        <a href="{$root_dir}improve/distorted_thoughts/index.html" class="btn" style="display:inline-block;width:140px"><span>Learn more</span></a>
+        <p>&nbsp;</p>           <p>&nbsp;</p>
+        <a href="{$root_dir}improve/rules/index.html" class="btn" style="display:inline-block;width:140px"><span>View</span></a>
+        <p>&nbsp;</p>           <p>&nbsp;</p>
+        </center>
+        
+   </div>
+ 
+    <div class="pin" style="width:271px; height:280px">
+        
+        <span style="font-size:18px;font-weight:bold">Books</span>
+        <hr style="" size="1">
+        <p class="b_text" style="height:80px">List of books that you should read.</p>
+        
+        <center>
+        <p>&nbsp;</p>       <p>&nbsp;</p>
+        <p>&nbsp;</p>       <p>&nbsp;</p>
+        <b>in development &dash; coming soon</b>
+        </center>
+        
+   </div>
+      
+   <div class="pin" style="width:271px; height:280px">
      	
 		<span style="font-size:18px;font-weight:bold">Happifiers</span>
 		<hr style="" size="1">

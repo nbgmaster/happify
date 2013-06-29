@@ -235,7 +235,7 @@ CREATE TABLE IF NOT EXISTS `blog` (
   `file2` varchar(50) NOT NULL,
   `filename2` varchar(50) NOT NULL,
   `file3` varchar(50) NOT NULL,
-  `filename3` varchar(50) CHARACTER SET utf16 NOT NULL,
+  `filename3` varchar(50) NOT NULL,
   `visibility` int(1) NOT NULL DEFAULT '1',
   `comments` int(1) NOT NULL DEFAULT '1',
   `deleted` int(1) NOT NULL DEFAULT '0',

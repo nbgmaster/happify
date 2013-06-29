@@ -46,7 +46,10 @@
          $thoughts_landing = true;
 	     include("././lib/functions/fetch_thoughts.php");		
 	     $tpl->assign('ay_thoughts', $ay_thoughts);	
-		 
+     
+         include("././lib/functions/fetch_rules.php");       
+         $tpl->assign('ay_rules', $ay_rules);
+         		 
 	/*
 	     //TODO fetch_happifiers
 	     	     
@@ -71,16 +74,7 @@
 
 	 * 
 	 */
-         //TODO fetch_rules
-		 $rules        = new SelectEntrys();
-         $rules->cols      = "ID, rule";
-         $rules->table     = $tbl_rules;
-         $rules->order     = 'ID DESC';
-         $rules->multiSelect     = 1;
-         $ay_rules = $rules->row();
-
-         $tpl->assign('ay_rules', $ay_rules);
-		 			 			 	 
+			 			 	 
     /******************************************/
     
         if ($user_data['da_latest_score'] != '') {
