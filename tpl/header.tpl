@@ -70,7 +70,7 @@
 
           <a href="#" class="close"><img src="{$dir_img}close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>
           <p id="p_logon_failure"></p>
-          <form method="post" class="signin" id="signin" onkeypress="" autocomplete="on" action="index.php">
+          <form method="post" class="signin" id="signin" onkeypress="" autocomplete="on" action="{$root_dir_ssl}index.php">
 
                 <fieldset class="textbox">
             	<label class="email" for="email">

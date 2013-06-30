@@ -29,8 +29,8 @@
 					<p>&nbsp;</p>
 
 				    <p class="b_small_text">
-				    	<span>{*$blog.likes*}0 likes</span>
-				    	<span>{*$blog.comments*}0 comments</span>
+				    	<span>{$blog.fb_likes} likes</span>
+				    	<span>{$blog.fb_comments} comments</span>
 
 				    </p>
 				    
@@ -69,8 +69,8 @@
 					<p>&nbsp;</p>
 
 				    <p class="b_small_text">
-				    	<span>{*$blog.likes*}0 likes</span>
-				    	<span>{*$blog.comments*}0 comments</span>
+				    	<span>{$blog.fb_likes} likes</span>
+				    	<span>{$blog.fb_comments} comments</span>
 
 				    </p>
 				    
@@ -106,8 +106,8 @@
 					<p>&nbsp;</p>
 
 				    <p class="b_small_text">
-				    	<span>{*$blog.likes*}0 likes</span>
-				    	<span>{*$blog.comments*}0 comments</span>
+				    	<span>{$blog.fb_likes} likes</span>
+				    	<span>{$blog.fb_comments} comments</span>
 
 				    </p>
 				    
@@ -141,8 +141,8 @@
 					<p>&nbsp;</p>
 
 				    <p class="b_small_text">
-				    	<span>{*$blog.likes*}0 likes</span>
-				    	<span>{*$blog.comments*}0 comments</span>
+				    	<span>{$blog.fb_likes} likes</span>
+				    	<span>{$blog.fb_comments} comments</span>
 
 				    </p>
 

@@ -55,7 +55,8 @@
           
           unset($del_diary_entry);
 
-		  header ("Location:".ROOT_DIR);
+          //TODO
+	      header ("Location:".ROOT_DIR."improve/diary/index.html");
 
     }
 	 

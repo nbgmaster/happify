@@ -70,9 +70,10 @@
         <p class="b_text" style="height:80px">List of books that you should read.</p>
         
         <center>
-        <p>&nbsp;</p>       <p>&nbsp;</p>
-        <p>&nbsp;</p>       <p>&nbsp;</p>
-        <b>in development &dash; coming soon</b>
+        <a href="{$root_dir}improve/distorted_thoughts/index.html" class="btn" style="display:inline-block;width:140px"><span>Learn more</span></a>
+        <p>&nbsp;</p>           <p>&nbsp;</p>
+        <a href="{$root_dir}improve/books/index.html" class="btn" style="display:inline-block;width:140px"><span>View</span></a>
+        <p>&nbsp;</p>           <p>&nbsp;</p>
         </center>
         
    </div>

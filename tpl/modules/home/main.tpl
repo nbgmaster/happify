@@ -72,7 +72,7 @@ function edit_desc() {
 			<a href="{$root_dir}improve/diary/index.html" class="btn" style="display:inline-block;width:140px"><span>View</span></a>
 			<p>&nbsp;</p>			<p>&nbsp;</p>
 			
-			{if $user_data.bd_latest_score > 0}Your latest score on the Burns Depression Scale is X. 
+			{if $user_data.bd_latest_score > 0}Your latest score on the Burns Depression Scale is {$user_data.bd_latest_score}. 
 				{if $user_data.bd_latest_score <= 5}{$bd_score_severity[0]}
 					{elseif $user_data.bd_latest_score <= 10}{$bd_score_severity[1]}
 					{elseif $user_data.bd_latest_score <= 25}{$bd_score_severity[2]}

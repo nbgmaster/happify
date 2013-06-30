@@ -78,10 +78,6 @@
         	
      <div class="pin" id="pin_add" style="overflow:auto;min-height:300px;min-width:250px">
      	
-     		<strong>Score Interpretation</strong>
-     		
-     		<p>&nbsp;</p>
-     			    	
 			<img src="{$dir_img}status_{if $latest_score < 5}0{else if $latest_score < 50}1{else}2{/if}.png" width="16">&nbsp;&nbsp;<b>Your latest score is {$latest_score} out of 100 points.</b>
 
 			<p>&nbsp;</p>
