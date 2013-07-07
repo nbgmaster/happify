@@ -9,6 +9,7 @@
      global $l;
      global $tpl;
      global $user_data;
+	 global $getmonth;
      	  
      $objResponse = new xajaxResponse();  
    
@@ -46,7 +47,7 @@
 	       unset($goals);
 		   
 		   $ay_goals["progress"] = $progress;
-		   $ay_goals["achieved"] = convert_date($achieved_date, 'goals');
+		   $ay_goals["achieved"] = convert_date($achieved_date, 0, $getmonth);
 		   
 		   $tpl->assign('goal', $ay_goals);
 					   	   
@@ -143,8 +144,18 @@
 		   					   	             
            $objResponse->assign("desc_me","innerHTML",$data['desc_me']);   
            $objResponse->assign("inp_me","value",$data['desc_me']);   
-           $objResponse->assign("desc_me","style.display","block");   
-           $objResponse->assign("desc_input","style.display","none");   		   
+           $objResponse->assign("desc_me","style.display","block");    
+		   
+		   if ($user_data['description'] == '') {
+	           $objResponse->assign("initial_msg","style.display","block");   
+	           $objResponse->assign("desc_input","style.display","block");  		   				
+           	   $objResponse->assign("desc_edit","style.display","none");   
+		   } 
+		   else {
+	           $objResponse->assign("desc_edit","style.display","block");   
+	           $objResponse->assign("initial_msg","style.display","none");   
+	           $objResponse->assign("desc_input","style.display","none"); 		   				
+		   }		   
 		   	   		                       
       }
 

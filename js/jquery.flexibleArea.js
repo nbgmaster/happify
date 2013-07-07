@@ -34,8 +34,9 @@
 			return this.each(function(){
 
 				if (this.type !== 'textarea')	return false;
-					
-				var $textarea = $(this).css({'resize': 'none', overflow: 'hidden'});
+				
+				//switch between 'both' and 'none'
+				var $textarea = $(this).css({'resize': 'both', overflow: 'hidden'});
 				
 				var	$clone = $('<div></div>').css({
 					'position' : 'absolute',

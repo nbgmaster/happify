@@ -69,7 +69,10 @@
 				$count++;
 				
 		    }
-			
+
+			$tpl->assign('head_title', $head_title['analyze']['bd_scale']['index']);	    
+			$tpl->assign('head_subtitle', $head_subtitle['analyze']['bd_scale']['new']);	
+						
 			//forward to template
 		    $tpl->assign('ay_cats', $ay_all_cats);
 		    $tpl->assign('ay_final', $ay_final);

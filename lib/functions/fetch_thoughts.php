@@ -2,6 +2,7 @@
 
      /* XAJAX - asynchronous call: retrieve updated data */
      
+     //TODO convert date
      require_once('lib/functions/convert_date.php');
 	 
 	     /* Print :: SELECT */

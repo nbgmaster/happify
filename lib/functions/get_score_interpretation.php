@@ -10,7 +10,7 @@
 	    			case $val < 25:  return $score_interpretation['mild']; break;
 	    			case $val < 50:  return $score_interpretation['moderate']; break;
 	    			case $val < 75:  return $score_interpretation['severe']; break;
-	    			case $val < 100: return $score_interpretation['extreme']; break;
+	    			case $val <= 100: return $score_interpretation['extreme']; break;
 			 }
 		 
 		}

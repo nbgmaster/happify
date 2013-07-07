@@ -19,21 +19,40 @@
 
      /* Get Date & time values */
 
-        $getmonth = array(1=>"January",
-                          2=>"February",
-                          3=>"March",
-                          4=>"April",
-                          5=>"May",
-                          6=>"June",
-                          7=>"July",
-                          8=>"August",
-                          9=>"September",
-                          10=>"October",
-                          11=>"November",
-                          12=>"December");
+        $getmonth = array(1=>'January',
+                          2=>'February',
+                          3=>'March',
+                          4=>'April',
+                          5=>'May',
+                          6=>'June',
+                          7=>'July',
+                          8=>'August',
+                          9=>'September',
+                          10=>'October',
+                          11=>'November',
+                          12=>'December');
                           
      /******************************************/
+     
+     /* Headline */
 
+        $head_title['home']['index'] = "Happify yourself";                
+     	$head_title['analyze']['bd_scale']['index'] = "Burns Depression Scale";
+     	$head_title['analyze']['da_scale']['index'] = "Dysfunctional Attitude Scale";
+     	$head_title['improve']['diary']['index'] = "My Happy Diary";
+		
+     	$head_subtitle['home']['index'] = "yo yo yo";
+		     	
+     	$head_subtitle['analyze']['bd_scale']['index'] = "This tool is a reliable mood-measuring device that detects the presence of depression and accurately rates its severity. <p>&nbsp;</p><span style=\"font-size:12px\"><i>developed by David D. Burns, M.D. &copy;, 1984 (Revised, 1996)</i></span>";
+     	$head_subtitle['analyze']['bd_scale']['new'] = "Indicate how much you have experienced each symptom <b>during the past week, including today</b>. You need to answer all 25 items.";
+
+     	$head_subtitle['analyze']['da_scale']['index'] = "This tool helps you to identify the reasons for your mood swings. <p>&nbsp;</p><span style=\"font-size:12px\"><i>developed by Dr. Arelende Weissmann</i></span>";
+     	$head_subtitle['analyze']['da_scale']['new'] = "Indicate how much you agree or disagree with the following statements. You need to answer all 35 items.";
+  
+     	$head_subtitle['improve']['diary']['index'] = "Tell yourself something nice about the day";
+			  
+     /******************************************/
+ 
            
      /* Blog */
            
@@ -53,23 +72,25 @@
             
      /* BD SCALE */
      
-        $bd_score_severity[0] = "This indicates that you are currently happy with your life and have no signs of a depression.";
-        $bd_score_severity[1] = "This indicates that you are currently not depressed but not fully happy with your life.";
-        $bd_score_severity[2] = "This indicates that you currently have a mild depression.";
-        $bd_score_severity[3] = "This indicates that you currently have a moderate depression.";
-        $bd_score_severity[4] = "This indicates that you currently have a severe depression.";    
-        $bd_score_severity[5] = "This indicates that you currently have an extreme depression.";    
+        $bd_score_severity[0] = "This indicates that <b>you are currently happy with your life</b> and have no signs of a depression.";
+        $bd_score_severity[1] = "This indicates that you are currently not depressed but <b>not fully happy with your life</b>.";
+        $bd_score_severity[2] = "This indicates that you currently have a <b>mild depression</b>.";
+        $bd_score_severity[3] = "This indicates that you currently have a <b>moderate depression</b>.";
+        $bd_score_severity[4] = "This indicates that you currently have a <b>severe depression</b>.";    
+        $bd_score_severity[5] = "This indicates that you currently have an <b>extreme depression</b>.";    
 	       	                   
-        $score_interpretation['happy'] = "Happy!";
-        $score_interpretation['unhappy'] = "unhappy!";		
-        $score_interpretation['mild'] = "Use the Dysfunctional Attitude Test to identify reasons for your mood swings. Then improve your mood by setting goals and fighting your distorting thoughts.";
-        $score_interpretation['moderate'] = "moderate!";		
-        $score_interpretation['severe'] = "severe!";
-        $score_interpretation['extreme'] = "extreme!";		
+        $score_interpretation['happy'] = "You live without doubts or negative thoughts, great! Keep up the positive mood and constantly look for ways to grow as a person.";
+        $score_interpretation['unhappy'] = "You are not fully happy with your life. <br>But don't worry. Our tools in the Learn and Improve section will help you to improve quickly. <br>Use the Dysfunctional Attitude Test to identify reasons for your mood swings. Then improve your mood by setting goals and fighting your distorting thoughts. Also try out the other tools, e.g. write a happy entry into your happy diary every day.";		
+        $score_interpretation['mild'] = "You have a mild depression. <br>But don't worry. Our tools in the Learn and Improve section will help you to improve quickly. <br>Use the Dysfunctional Attitude Test to identify reasons for your mood swings. Then improve your mood by setting goals and fighting your distorting thoughts. Also try out the other tools, e.g. write a happy entry into your happy diary every day.";
+        $score_interpretation['moderate'] = "You have a moderate depression. <br>But don't worry. Our tools in the Learn and Improve section will help you to improve quickly. <br>Use the Dysfunctional Attitude Test to identify reasons for your mood swings. Then improve your mood by setting goals and fighting your distorting thoughts. Also try out the other tools, e.g. write a happy entry into your happy diary every day.";		
+        $score_interpretation['severe'] = "You have a severe depression. <br>You must act immediately and start to fight your depression. Our tools in the Learn and Improve section can help you to improve your situation. <br>Use the Dysfunctional Attitude Test to identify reasons for your mood swings. Then improve your mood by setting goals and fighting your distorting thoughts.<br><br><b>In addition you should consider professional help!</b>";
+        $score_interpretation['extreme'] = "You have an extreme depression! <br>You must act immediately and start to fight your depression. Our tools in the Learn and Improve section can help you to improve your situation. <br>Use the Dysfunctional Attitude Test to identify reasons for your mood swings. Then improve your mood by setting goals and fighting your distorting thoughts.<br><br><b>In addition you should ask for professional help immediately!</b>";		
         
-		$score_interpretation['improved'] = "Great!";
-		$score_interpretation['deteriorated'] = "Bad!";		
-              
+		$score_interpretation['improved'] = "<b>Fantastic!! Keep up the positive spirit and continue to learn and improve!</b>";
+		$score_interpretation['deteriorated'] = "Why is that? Try to identify the reasons of your mood let-down and fight them. <br><br> Also, remember the positive events/habits/thoughts during the time around your first test and see if you still have them integrated in your life.";		
+
+		$score_interpretation['happier_in_past'] = "There was a point of time in the past when you felt better than when you did the test for the last time. Why is that? Try to identify the reasons of your mood let-down and fight them. <br><br> Also, remember the positive events/habits/thoughts during the time when you felt better and see if you still have them integrated in your life.";		
+                     
      /******************************************/
 
      
@@ -83,13 +104,13 @@
        $da_reasons[5] = 'Omnipotence';	   
        $da_reasons[6] = 'Autonomy';	   
 	   	        
-       $da_score_interpretation['approval']['description'] = "Tendency to measure your self-esteem based on how people react to you and what they think of you";
-       $da_score_interpretation['love']['description'] = "Tendency to base your worth on whether or not you are loved";
-       $da_score_interpretation['achievement']['description'] = "Tendency to see yourself as a commodity in the marketplace and workaholic<p></p>Tendency to think your sense of self-worth and your capacity for joy are dependent on your productivity";
-       $da_score_interpretation['perfectionism']['description'] = "Tendency to perfectionism, to demand perfection in yourself";
-       $da_score_interpretation['entitlement']['description'] = "Tendency to feel 'entitled' to things (success, love, happiness, etc.) because of your inherent goodness or hard work";
-       $da_score_interpretation['omnipotence']['description'] = "Tendency to see yourself as the center of your personal universe to hold yourself responsible for much of what goes on around you<p></p>Tendency to blame yourself inappropriately for the negative actions and attitudes of others who are not really under your control";
-       $da_score_interpretation['autonomy']['description'] = "Tendency to find happiness within yourself";
+       $da_score_interpretation['approval']['description'] = "Tendency to measure your self-esteem based on how people react to you and what they think of you.";
+       $da_score_interpretation['love']['description'] = "Tendency to base your worth on whether or not you are loved.";
+       $da_score_interpretation['achievement']['description'] = "Tendency to see yourself as a commodity in the marketplace and workaholic, and thus you think your sense of self-worth and your capacity for joy are dependent on your productivity.";
+       $da_score_interpretation['perfectionism']['description'] = "Tendency to perfectionism, to demand perfection in yourself.";
+       $da_score_interpretation['entitlement']['description'] = "Tendency to feel 'entitled' to things (success, love, happiness, etc.) because of your inherent goodness or hard work.";
+       $da_score_interpretation['omnipotence']['description'] = "Tendency to see yourself as the center of your personal universe to hold yourself responsible for much of what goes on around you, and thus blaming yourself inappropriately for the negative actions and attitudes of others who are not really under your control.";
+       $da_score_interpretation['autonomy']['description'] = "Tendency to find happiness within yourself.";
               
      /******************************************/
            

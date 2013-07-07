@@ -82,6 +82,7 @@
 	     include("././lib/functions/fetch_goals.php");		
 	     $tpl->assign('ay_goals', $ay_goals);
 	
+	/*
 	     //TODO fetch_happifiers
 	     	     
 		 $happifiers        = new SelectEntrys();
@@ -102,6 +103,7 @@
 		 }
 		 			 
          $tpl->assign('ay_happifiers', $ay_happifiers);
+*/
 
          //TODO fetch_rules
 		 $rules        = new SelectEntrys();
@@ -112,6 +114,10 @@
          $ay_rules = $rules->row();
 
          $tpl->assign('ay_rules', $ay_rules);
+		 
+		 $tpl->assign('head_title', $head_title['improve']['diary']['index']);	    
+		 $tpl->assign('head_subtitle', $head_subtitle['improve']['diary']['index']);	
+	
 		 			 			 	 
     /******************************************/
     

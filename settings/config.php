@@ -62,7 +62,7 @@
      define("mod_memcache", 0);
 	 define("memcache_duration", 500);   //needs to be changed in production
 	 define("trigger_memcache_del", 0);   
-	 define("trigger_session_del", 0);  
+	 define("trigger_session_del", 1); 
 	 
 	 //error handling
 	 define("sql_error_select","One or more SQL SELECT errors occured.");
@@ -73,11 +73,11 @@
 
      /* DA_SCALE */
      define("da_min_waittime", 0);  //60*60*24*30; //1month waiting time for da_scale, TODO: fix recalculation
-	 define("max_items_da_scale", 20);  //5     number would also need to be changed in result.php and in the javascript code of the index.tpl!     
+	 define("max_items_da_scale", 5);  //5     number would also need to be changed in result.php and in the javascript code of the index.tpl!     
 
      /* BD_SCALE */
      define("bd_min_waittime", 0);  //in days; 1week waiting time for bd_scale
-	 define("max_items_bd_scale", 10);   //8
+	 define("max_items_bd_scale", 8);   //8
 
 	 //redirect values	 
      if (isset($_GET["module"])) 		$module 		= $_GET["module"]; 		else $module 		= '';

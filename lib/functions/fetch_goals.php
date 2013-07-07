@@ -21,8 +21,8 @@
 	 	
 		 foreach ($ay_goals as $res2) {
 			
-			$ay_goals[$count]["created"] = convert_date($res2["created"], 'goals');
-			$ay_goals[$count]["achieved"] = convert_date($res2["achieved"], 'goals');
+			$ay_goals[$count]["created"] = convert_date($res2["created"], 0, $getmonth);
+			$ay_goals[$count]["achieved"] = convert_date($res2["achieved"], 0, $getmonth);
 			$count++;
 			
 		 }

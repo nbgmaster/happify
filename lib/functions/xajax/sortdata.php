@@ -6,6 +6,7 @@
 
 	 global $tpl;
 	 global $user_data;
+	 global $getmonth;
 		  
      $objResponse = new xajaxResponse();  
    

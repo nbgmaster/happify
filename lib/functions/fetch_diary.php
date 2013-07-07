@@ -41,10 +41,11 @@
 					  $ay_diary[$count]["entry"] = $entry_new_string;
 					
 					}
-										
-					$ay_diary[$count]["date"] = convert_date($res["date"], 'diary');
-					$count++;
+	
+					$ay_diary[$count]["date"] = convert_date($res["date"], 0, $getmonth);
 					
+					//echo $ay_diary[$count]["date"]; echo"<br>";
+					$count++;
 				 }
 	
 		     	 if ( $user_data['diary_start_month'] > 0 && $user_data['diary_start_year'] > 0 ) {

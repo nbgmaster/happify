@@ -10,6 +10,7 @@
 	 global $l;
 	 global $tpl;
 	 global $user_data;
+	 global $getmonth;
 		  
      $objResponse = new xajaxResponse();  
    
@@ -27,8 +28,7 @@
 			   //         $objResponse->assign("add_pin","style.className",'pin');   
 				     
 		           $objResponse->assign("add_pin","innerHTML",$html); 
-				   
-				
+				   				
 				   $objResponse->includeScript("js/pinterest.js");
 		           $objResponse->call("m_reload");
 			   				     	 

@@ -99,10 +99,15 @@
 
 		//retrieve arrays of dates for selection menu	
 		 if ($total_entries > 0) {
-		 
+
+			 require_once('./lib/functions/convert_date.php');			 
 			 $select_dates[] = "Show All";
+			 $select_dates_formatted[] = "Show All";
 			 //foreach($da_scale_dates as $key => $value) $select_dates[] = substr($value["date"],0,10); 
-		     foreach($da_scale_dates as $key => $value) $select_dates[] = $value["date"]; 
+		     foreach($da_scale_dates as $key => $value) {
+		     	$select_dates[] = $value["date"]; 
+			    $select_dates_formatted[] = convert_date($value["date"],1,$getmonth); 
+		     } 
 		 }
 
 	     //sum up points for total score for each date entry		 
@@ -191,13 +196,18 @@
 	    //check time_ban - get latest entry date
 		$latest_entrydate = strtotime($get_total_entries[$last_item]);
 		
+		require_once('./lib/functions/convert_date.php');		
 		//retrieve arrays of dates for selection menu
 	    if ($total_entries >= 1) {
 		 
 			 $select_dates[] = "Show All";
+			 $select_dates_formatted[] = "Show All";
 			 foreach($get_total_entries as $key => $value) 
-			 	if (substr($value,0,4) == 'date') $select_dates[] = substr($value,6); 
-	 
+			 	if (substr($value,0,4) == 'date') {
+			 		$select_dates[] = substr($value,6); 
+			 		$select_dates_formatted[] = convert_date(substr($value,6),1,$getmonth); 
+				}
+
 	    }
 						
 	}
@@ -229,7 +239,8 @@
 			if ( time() - $latest_entrydate < da_min_waittime) $tpl->assign('time_ban', 1);				
 
 			$tpl->assign('ay_dates', $select_dates);
-										
+			$tpl->assign('ay_dates_formatted', $select_dates_formatted);
+													
 			$approval      = -11; $last_is_highest['approval'] = false; 
 			$love          = -11; $last_is_highest['love'] = false; 
 			$achievement   = -11; $last_is_highest['achievement'] = false; 	 		
@@ -323,6 +334,13 @@
 														
 	}
 
+    
+	$tpl->assign('head_title', $head_title['analyze']['da_scale']['index']);	    
+	$tpl->assign('head_subtitle', $head_subtitle['analyze']['da_scale']['index']);	
+	
+	$tpl->assign('getmonth', serialize($getmonth));	
+	$tpl->assign('happier_in_past', $score_interpretation['happier_in_past']);
+			
 	$tpl->assign('max_items_da_scale', max_items_da_scale);
 	
 	$tpl->assign('datay', $da_scale_data);

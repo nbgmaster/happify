@@ -130,68 +130,8 @@ function edit_desc() {
 	
 	<div style="margin-right:0px;"-->
 		
-			<div style="float:left;width:70%">		
-			    <span style="font-size:36px" class="coolvetica">My Happy Diary</span>
-			    <p></p>
-			    <span style="font-size:18px;padding-top:8px" class="coolvetica">Tell yourself something nice about the day</span>
-		     </div>
-		
-			<div style="float:left;width:29%;text-align:right;padding-right:8px">	
-				<img src="{$dir_img}add.png" onclick="xajax_insertdata('{$tbl_diary}', '', '1');return false;" style="cursor:pointer;width:32px">
-				
-					{if $ay_years != ''}&nbsp;<img src="{$dir_img}filter.png" style="cursor:pointer;width:32px;cursor:pointer" onclick="javascript:document.getElementById('filter').style.display='block'">{/if}
+		{include file="fractions/headline.tpl"}
 			
-			<p>&nbsp;</p>
-
-				<div style="display:none" id="filter">
-									
-					 {if $ay_years != ''}
-					 
-					 <form method="get" id="diary_date_selection">
-						<fieldset>
-					 
-					 	 <!--div style="display:table-cell"><b>Filter:</b></div-->
-		
-						 	<select name="month">
-						 			<!--option value="0">Month</option-->
-						 			<option value="1" {if $c_month == '1'}selected="selected"{/if}>January</option>
-						 			<option value="2" {if $c_month == '2'}selected="selected"{/if}>February</option>
-						 			<option value="3" {if $c_month == '3'}selected="selected"{/if}>March</option>
-						 			<option value="4" {if $c_month == '4'}selected="selected"{/if}>April</option>
-						 			<option value="5" {if $c_month == '5'}selected="selected"{/if}>May</option>
-						 			<option value="6" {if $c_month == '6'}selected="selected"{/if}>June</option>
-						 			<option value="7" {if $c_month == '7'}selected="selected"{/if}>July</option>
-						 			<option value="8" {if $c_month == '8'}selected="selected"{/if}>August</option>
-						 			<option value="9" {if $c_month == '9'}selected="selected"{/if}>September</option>
-						 			<option value="10" {if $c_month == '10'}selected="selected"{/if}>October</option>
-						 			<option value="11" {if $c_month == '11'}selected="selected"{/if}>November</option>
-						 			<option value="12" {if $c_month == '12'}selected="selected"{/if}>December</option>
-						 	</select>
-					
-						 	<select name="year">
-						 		{foreach from=$ay_years item=years name=years}  				 		   
-						 			<option value="{$years.year}" {if $years.year == $c_year}selected="selected"{/if}>{$years.year}</option>
-						 		{/foreach}
-						 	</select>
-						
-						 	 <img src="{$dir_img}go.png" href="#" onclick="xajax_selectdata('{$tbl_diary}', xajax.getFormValues('diary_date_selection'));return false;" width="20" style="cursor:pointer">
-						
-						 	 <img src="{$dir_img}refresh.png" href="#" onclick="xajax_selectdata('{$tbl_diary}', 'clear_filter');return false;" width="20" style="cursor:pointer">			
-			 	 	 
-					    </fieldset>
-					    
-				  	 </form>	
-			 
-				 {/if}
-				 				 			  	 
-			  	 </div>			  	 		 
-			 
-			</div> 
-			
-			<div style="clear:both"></div>	
-				     
-            <p>&nbsp;</p>
-           		 	 				
 			<div class="main_container" id="diary_entries">{include file="modules/improve/diary/diary_entries.tpl"}</div>
 					
      </div>

@@ -6,6 +6,7 @@
 
     //delete item
     
+    //print_r($user_data);
     //TODO TESTING!!
     if ( !empty($_POST['submit_del']) )  { 
 		  $del_scale            = new ModifyEntry();
@@ -37,7 +38,7 @@
 		      $scale_data->table  = $tbl_users;	
 			   
 			  if ($new_latest_score == -1) $scale_data->changes   = " bd_latest_score = '".$new_latest_score."' ";
-			  else $scale_data->changes   = " bd_latest_score = '' ";
+			  else $scale_data->changes   = " bd_latest_score = '500' ";
 			  $scale_data->condition = " ID = '".$user_data['ID']."' ";
 			    
 			  $scale_data->update(); 
@@ -155,9 +156,8 @@
 	    $bd_scale_scores = explode('&fscores', $bd_scale_data);
 		$bd_scale_scores = unserialize(substr($bd_scale_scores[1],1));
 	
-		$latest_score = end($bd_scale_scores);
+		$latest_score = $user_data['bd_latest_score'];
 		
-		$change = 500;
 		if ($total_entries > 1) {
 			
 			//compare first and last
@@ -170,29 +170,44 @@
 			if ($latest_score > $lowest_score) $better_day = 1;
 			else $better_day = 0;
 			$tpl->assign('better_day', $better_day);	
-					
+			
+			if ($better_day = 1) $tpl->assign('happier_in_past', $score_interpretation['happier_in_past']);	
+						
 		}
 	
 		$time_since_last_entry = time() - $latest_entrydate;
 		$in_days = round($time_since_last_entry / 60 / 60 / 24);
 			 
-	 		//check time ban
+	 	//check time ban
 		$repeat_in_days = bd_min_waittime * 24 * 60 * 60;
 		if ( $time_since_last_entry < $repeat_in_days) $tpl->assign('time_ban', 1);					
 			
 	    $tpl->assign('score_interpretation_latest', get_score_interpretation('latest', intval($latest_score), $score_interpretation));			
 	
+		require_once('./lib/functions/convert_date.php');
 	    //format dates for select box 
-    	foreach($bd_scale_dates as $key => $value) $select_dates[] = $value["date"]; 
+
+    	foreach($bd_scale_dates as $key => $value) {
+    		$select_dates[] = $value["date"];
+			$select_dates_formatted[] = convert_date($value["date"], 1, $getmonth); 
+		}
 	
+
 		$tpl->assign('in_days', $in_days);	
 		$tpl->assign('latest_score', $latest_score);	
 		$tpl->assign('change', $change);		
 		$tpl->assign('select_dates', $select_dates);	
-			
+		$tpl->assign('select_dates_formatted', $select_dates_formatted);	
+		$tpl->assign('getmonth', serialize($getmonth));	
+						
 	}
 
-    //fill template variables	     
+    //fill template variables	 
+    
+    
+	$tpl->assign('head_title', $head_title['analyze']['bd_scale']['index']);	    
+	$tpl->assign('head_subtitle', $head_subtitle['analyze']['bd_scale']['index']);	
+		    
 	$tpl->assign('datay', $bd_scale_data); 
 	$tpl->assign('total_entries', $total_entries);
 	$tpl->assign('max_items_bd_scale', max_items_bd_scale);

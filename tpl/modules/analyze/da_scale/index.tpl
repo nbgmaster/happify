@@ -1,26 +1,4 @@
-	
-	<div style="float:left;width:70%">	
-			
-		  <span style="font-size:36px" class="coolvetica">Dysfunctional Attitude Scale</span>
-		  <p></p>
-		
-			<span style="font-size:18px;padding-top:8px" class="coolvetica">This tool helps you to identify the reasons for your mood swings.</span>
-			<p>&nbsp;</p>
-			<span style="font-size:12px;padding-top:8px" class="coolvetica"<i>developed by Dr. Arelende Weissmann</i></span>
-			
-	</div>
-			
-	<div style="float:left;width:29%;text-align:right;padding-right:8px">	
-					
-		{if $total_entries < $max_items_da_scale AND $time_ban == 0}
-				<img src="{$dir_img}add.png" onclick="location.href='new.html'" style="cursor:pointer;width:32px">
-		{/if}
-				
-	</div> 
-				
-	<div style="clear:both"></div>	
-					   
-<p>&nbsp;</p>
+{include file="fractions/headline.tpl"}
 
 {if $total_entries >= 1}
 
@@ -54,20 +32,22 @@
 {if $total_entries >= 1}
 
 <div style="float:left">
-	<select name="select_date" size="{*$ay_dates|@count*}" onChange="change_graph(this.selectedIndex)">
+	<select name="select_date" size="{*$ay_dates|@count*}" onChange="change_graph(this.selectedIndex)" style="height:30px">
 		<options>Select date</options>
-	   {html_options values=$ay_dates output=$ay_dates}
+	   {html_options values=$ay_dates output=$ay_dates_formatted}
 	</select>
 </div>
 
 {/if}
 
-<div style="float:left">
+<div style="float:left;padding-left:10px">
 	<div style="display:none;" id="delete_btn">
 		
 	    <form method="post" name="form_delete" onsubmit="return confirm('{$confirm_delete}')" style="display:inline">
-		 
-		    <input type="image" value="del" title="Delete" src="{$dir_img}delete.gif" name="submit_del" id="submit">
+
+	    	<input type="submit" class="btn" name="submit_del" id="submit" title="Delete" value="Delete">
+		 		 
+		    <!--input type="image" value="del" title="Delete" src="{$dir_img}delete.gif" name="submit_del" id="submit"-->
 		
 		    <input type="hidden" name="date_to_delete" value="" id="date_to_delete">
 		 
@@ -82,7 +62,7 @@
 
 
 <div style="float:left;width:640px;height:350px">
-	<img src="{$root_dir}modules/analyze/da_scale/result.php?{$datay}" id="graph" />
+	<img src='{$root_dir}modules/analyze/da_scale/result.php?{$datay}&getmonth={$getmonth}' id="graph" />
 </div>
 <div style="float:left;width:110px;">
 	<div style="height:146px;display:table-cell;vertical-align:middle;">
@@ -105,17 +85,18 @@
           
      <div class="pin" id="pin_add" style="overflow:auto;min-height:300px;">
      	
-     		<strong>Approval</strong>
+     		<div style="float:left"><img src="{$dir_img}status_{if $scores.$total_entries.0 > 4}2{else if $scores.$total_entries.0 > -5}1{else}0{/if}.png" width="16"></div>
+     		<div style="float:left;padding-left:4px;padding-top:1px"><span style="font-size:12px;font-weight:bold">Approval</span></div>
+     		<div style="clear:both"></div>
      		
      		<p>&nbsp;</p>
-     			    	
-			{$da_score_interpretation.approval.description}
-			
-			Latest score: {$scores.$total_entries.0}
-			
-			{if $total_entries > 1}{if $last_is_highest.approval == false}you had a better score in the past, why?{/if}{/if}
 
-			{if $total_entries > 1}You {if $change.approval < 0}worsened{else}improved{/if} in this category compared to the first test by {$change.approval}%{/if}
+			{$da_score_interpretation.approval.description}
+	
+			{if $total_entries > 1}{if $last_is_highest.approval == false}<hr>{$happier_in_past}{/if}{/if}
+			
+			{if $total_entries > 1}<hr>You {if $change.approval < 0}worsened{else}improved{/if} in this category compared to the first test by {$change.approval}%!{/if}
+			
 						
      		<p>&nbsp;</p>
      			  			 
@@ -123,17 +104,17 @@
          
      <div class="pin" id="pin_add" style="overflow:auto;min-height:300px;">
      	
-     		<strong>Love</strong>
+     		<div style="float:left"><img src="{$dir_img}status_{if $scores.$total_entries.1 > 4}2{else if $scores.$total_entries.1 > -5}1{else}0{/if}.png" width="16"></div>
+     		<div style="float:left;padding-left:4px;padding-top:1px"><span style="font-size:12px;font-weight:bold">Love</span></div>
+     		<div style="clear:both"></div>
      		
      		<p>&nbsp;</p>
      			    	
 			{$da_score_interpretation.love.description}
 
-			Latest score: {$scores.$total_entries.1}			
+			{if $total_entries > 1}{if $last_is_highest.love == false}<hr>{$happier_in_past}{/if}{/if}
 
-			{if $total_entries > 1}{if $last_is_highest.love == false}you had a better score in the past, why?{/if}{/if}
-
-			{if $total_entries > 1}You {if $change.love < 0}worsened{else}improved{/if} in this category compared to the first test by {$change.love}%{/if}
+			{if $total_entries > 1}<hr>You {if $change.love < 0}worsened{else}improved{/if} in this category compared to the first test by {$change.love}%!{/if}
 							
      		<p>&nbsp;</p>
      			  			 
@@ -142,16 +123,17 @@
          
      <div class="pin" id="pin_add" style="overflow:auto;min-height:300px;">
      	
-     		<strong>Achievement</strong>
+     		<div style="float:left"><img src="{$dir_img}status_{if $scores.$total_entries.2 > 4}2{else if $scores.$total_entries.2 > -5}1{else}0{/if}.png" width="16"></div>
+     		<div style="float:left;padding-left:4px;padding-top:1px"><span style="font-size:12px;font-weight:bold">Achievement</span></div>
+     		<div style="clear:both"></div>
      		
      		<p>&nbsp;</p>
      			    	
 			{$da_score_interpretation.achievement.description}
-			Latest score: {$scores.$total_entries.2}
 
-			{if $total_entries > 1}{if $last_is_highest.achievement == false}you had a better score in the past, why?{/if}{/if}
+			{if $total_entries > 1}{if $last_is_highest.achievement == false}<hr>{$happier_in_past}{/if}{/if}
 
-			{if $total_entries > 1}You {if $change.achievement < 0}worsened{else}improved{/if} in this category compared to the first test by {$change.achievement}%{/if}
+			{if $total_entries > 1}<hr>You {if $change.achievement < 0}worsened{else}improved{/if} in this category compared to the first test by {$change.achievement}%!{/if}
 													
      		<p>&nbsp;</p>
      			  			 
@@ -159,16 +141,17 @@
          
      <div class="pin" id="pin_add" style="overflow:auto;min-height:300px;">
      	
-     		<strong>Perfectionism</strong>
+     		<div style="float:left"><img src="{$dir_img}status_{if $scores.$total_entries.3 > 4}2{else if $scores.$total_entries.3 > -5}1{else}0{/if}.png" width="16"></div>
+     		<div style="float:left;padding-left:4px;padding-top:1px"><span style="font-size:12px;font-weight:bold">Perfectionism</span></div>
+     		<div style="clear:both"></div>
      		
      		<p>&nbsp;</p>
      			    	
-			{$da_score_interpretation.perfectionism.description}
-			Latest score: {$scores.$total_entries.3}			
+			{$da_score_interpretation.perfectionism.description}			
 
-			{if $total_entries > 1}{if $last_is_highest.perfectionism == false}you had a better score in the past, why?{/if}{/if}
+			{if $total_entries > 1}{if $last_is_highest.perfectionism == false}<hr>{$happier_in_past}{/if}{/if}
 
-			{if $total_entries > 1}You {if $change.approval < 0}worsened{else}improved{/if} in this category compared to the first test by {$change.approval}%{/if}
+			{if $total_entries > 1}<hr>You {if $change.approval < 0}worsened{else}improved{/if} in this category compared to the first test by {$change.approval}%!{/if}
 							
      		<p>&nbsp;</p>
      			  			 
@@ -176,16 +159,17 @@
          
      <div class="pin" id="pin_add" style="overflow:auto;min-height:300px;">
      	
-     		<strong>Entitlement</strong>
+     		<div style="float:left"><img src="{$dir_img}status_{if $scores.$total_entries.4 > 4}2{else if $scores.$total_entries.4 > -5}1{else}0{/if}.png" width="16"></div>
+     		<div style="float:left;padding-left:4px;padding-top:1px"><span style="font-size:12px;font-weight:bold">Entitlement</span></div>
+     		<div style="clear:both"></div>
      		
      		<p>&nbsp;</p>
      			    	
-			{$da_score_interpretation.entitlement.description}
-			Latest score: {$scores.$total_entries.4}			
+			{$da_score_interpretation.entitlement.description}			
 
-			{if $total_entries > 1}{if $last_is_highest.entitlement == false}you had a better score in the past, why?{/if}{/if}
+			{if $total_entries > 1}{if $last_is_highest.entitlement == false}<hr>{$happier_in_past}{/if}{/if}
 
-			{if $total_entries > 1}You {if $change.entitlement < 0}worsened{else}improved{/if} in this category compared to the first test by {$change.entitlement}%{/if}
+			{if $total_entries > 1}<hr>You {if $change.entitlement < 0}worsened{else}improved{/if} in this category compared to the first test by {$change.entitlement}%!{/if}
 						
      		<p>&nbsp;</p>
      			  			 
@@ -193,16 +177,17 @@
          
      <div class="pin" id="pin_add" style="overflow:auto;min-height:300px;">
      	
-     		<strong>Omnipotence</strong>
+     		<div style="float:left"><img src="{$dir_img}status_{if $scores.$total_entries.5 > 4}2{else if $scores.$total_entries.5 > -5}1{else}0{/if}.png" width="16"></div>
+     		<div style="float:left;padding-left:4px;padding-top:1px"><span style="font-size:12px;font-weight:bold">Omnipotence</span></div>
+     		<div style="clear:both"></div>
      		
      		<p>&nbsp;</p>
      			    	
-			{$da_score_interpretation.omnipotence.description}
-			Latest score: {$scores.$total_entries.5}			
+			{$da_score_interpretation.omnipotence.description}			
 
-			{if $total_entries > 1}{if $last_is_highest.omnipotence == false}you had a better score in the past, why?{/if}{/if}
+			{if $total_entries > 1}{if $last_is_highest.omnipotence == false}<hr>{$happier_in_past}{/if}{/if}
 
-			{if $total_entries > 1}You {if $change.omnipotence < 0}worsened{else}improved{/if} in this category compared to the first test by {$change.omnipotence}%{/if}
+			{if $total_entries > 1}<hr>You {if $change.omnipotence < 0}worsened{else}improved{/if} in this category compared to the first test by {$change.omnipotence}%!{/if}
 						
      		<p>&nbsp;</p>
      			  			 
@@ -210,17 +195,33 @@
          
      <div class="pin" id="pin_add" style="overflow:auto;min-height:300px;">
      	
-     		<strong>Autonomy</strong>
+     		<div style="float:left"><img src="{$dir_img}status_{if $scores.$total_entries.6 > 4}2{else if $scores.$total_entries.6 > -5}1{else}0{/if}.png" width="16"></div>
+     		<div style="float:left;padding-left:4px;padding-top:1px"><span style="font-size:12px;font-weight:bold">Autonomy</span></div>
+     		<div style="clear:both"></div>
      		
      		<p>&nbsp;</p>
      			    	
-			{$da_score_interpretation.autonomy.description}
-			Latest score: {$scores.$total_entries.6}			
+			{$da_score_interpretation.autonomy.description}			
 
-			{if $total_entries > 1}{if $last_is_highest.autonomy == false}you had a better score in the past, why?{/if}{/if}
+			{if $total_entries > 1}{if $last_is_highest.autonomy == false}<hr>{$happier_in_past}{/if}{/if}
 
-			{if $total_entries > 1}You {if $change.autonomy < 0}worsened{else}improved{/if} in this category compared to the first test by {$change.autonomy}%{/if}
+			{if $total_entries > 1}<hr>You {if $change.autonomy < 0}worsened{else}improved{/if} in this category compared to the first test by {$change.autonomy}%!{/if}
 						
+    		<p>&nbsp;</p>
+     			  			 
+     </div>
+
+     <div class="pin" id="pin_add" style="overflow:auto;min-height:300px;">
+     	
+     		<span style="font-size:12px;font-weight:bold">Next steps</span>
+     		
+     		<p>&nbsp;</p>
+     			    	
+			You have categories with a yellow or even red status icon? <hr>Then it is time to learn more about your flawed tendencies and what you can do about it.
+    		<p>&nbsp;</p>
+    		<p>&nbsp;</p>     					
+		    <a href="{$root_dir}improve/index.html" class="btn" style="display:inline-block;"><span>Learn and Improve Now</span></a>
+									
     		<p>&nbsp;</p>
      			  			 
      </div>

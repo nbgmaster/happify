@@ -4,7 +4,10 @@
 
 	require_once ('../../../lib/jpgraph/src/jpgraph.php');
 	require_once ('../../../lib/jpgraph/src/jpgraph_bar.php');
-
+	require_once ('../../../lib/functions/convert_date.php');
+	
+	//require_once('../../../settings/lang_'.$_GET['lang'].'.php');
+	
 	$total_items = count(unserialize($_GET["fscores"]));
 	if ($total_items == 1) $g_width = 300;
 	elseif ($total_items == 2) $g_width = 440;
@@ -25,7 +28,7 @@
 
     //TODO: format date
 	$short_date = unserialize($_GET["datay"]);
-	foreach($short_date as $key => $value) $select_dates[] = substr($value["date"],0,10); 
+	foreach($short_date as $key => $value) $select_dates[] = convert_date($value["date"], 0, unserialize($_GET['getmonth'])); 
 	 
 	$graph->xaxis->SetTickLabels($select_dates);
 	$graph->yaxis->HideLine(false);

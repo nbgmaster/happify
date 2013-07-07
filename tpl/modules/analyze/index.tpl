@@ -22,8 +22,8 @@
 		<a href="{$root_dir}analyze/da_scale/index.html" class="btn" style="display:inline-block;width:140px"><span>Learn more</span></a>
 		<p>&nbsp;</p>			<p>&nbsp;</p>
 		<a href="{$root_dir}analyze/bd_scale/new.html" class="btn" style="display:inline-block;width:140px"><span>Do Test</span></a>
-		<p>&nbsp;</p>			<p>&nbsp;</p>
-		<a href="{$root_dir}analyze/bd_scale/index.html" class="btn" style="display:inline-block;width:140px"><span>Show last results</span></a>
+		{if $user_data.bd_latest_score != 500}<p>&nbsp;</p>			<p>&nbsp;</p>
+		<a href="{$root_dir}analyze/bd_scale/index.html" class="btn" style="display:inline-block;width:140px"><span>Show last results</span></a>{/if}
 		<p>&nbsp;</p>		<p>&nbsp;</p>
 		</center>
 		
@@ -41,8 +41,8 @@
 		<a href="{$root_dir}analyze/da_scale/index.html" class="btn" style="display:inline-block;width:140px"><span>Learn more</span></a>
 		<p>&nbsp;</p>			<p>&nbsp;</p>
 		<a href="{$root_dir}analyze/da_scale/new.html" class="btn" style="display:inline-block;width:140px"><span>Do Test</span></a>
-		<p>&nbsp;</p>			<p>&nbsp;</p>
-		<a href="{$root_dir}analyze/da_scale/index.html" class="btn" style="display:inline-block;width:140px"><span>Show last results</span></a>
+		{if $user_data.bd_latest_score != ''}<p>&nbsp;</p>			<p>&nbsp;</p>
+		<a href="{$root_dir}analyze/da_scale/index.html" class="btn" style="display:inline-block;width:140px"><span>Show last results</span></a>{/if}
 		<p>&nbsp;</p>		<p>&nbsp;</p>
 		</center>
 	

@@ -6,8 +6,11 @@
 	require_once ('../../../lib/jpgraph/src/jpgraph.php');
 	require_once ('../../../lib/jpgraph/src/jpgraph_line.php');
 	require_once ('../../../lib/jpgraph/src/jpgraph_plotline.php');
-	
-	
+	require_once ('../../../lib/functions/convert_date.php');
+		
+	if (isset($_GET["getmonth"])) $getmonth = unserialize($_GET["getmonth"]);
+	else $getmonth = '';
+
 	// Setup the graph
 	$graph = new Graph(640,380);
 	$graph->SetScale("textlin",-10,10);
@@ -48,7 +51,7 @@
 		
 		$p1->SetWeight(3); 
 		$p1->SetColor("#c54242");
-		$p1->SetLegend(substr($_GET["date1"],0,10));
+		$p1->SetLegend(convert_date($_GET['date1'], 0, $getmonth));
 		$p1->SetStyle("solid");
 	
 	}
@@ -61,7 +64,7 @@
 	    $p2 = new LinePlot(unserialize($_GET["datay2"])); 
 	    $graph->Add($p2);
 		$p2->SetColor("#1e25af");
-	    $p2->SetLegend(substr($_GET["date2"],0,10));
+		$p2->SetLegend(convert_date($_GET['date2'], 0, $getmonth));
 	    $p2->SetStyle("solid");
 				
 	}
@@ -72,7 +75,7 @@
 	    $graph->Add($p3);
 		$p3->SetWeight(3); 	
 		$p3->SetColor("#ba42c5");
-	    $p3->SetLegend(substr($_GET["date3"],0,10));
+		$p3->SetLegend(convert_date($_GET['date3'], 0, $getmonth));
 	    $p3->SetStyle("solid");
 			
 	}
@@ -82,7 +85,7 @@
 	    $p4 = new LinePlot(unserialize($_GET["datay4"])); 
 	    $graph->Add($p4);
 		$p4->SetColor("#58af1e");
-	    $p4->SetLegend(substr($_GET["date4"],0,10));
+		$p4->SetLegend(convert_date($_GET['date4'], 0, $getmonth));
 	    $p4->SetStyle("solid");
 					
 	}
@@ -92,7 +95,7 @@
 	    $p5 = new LinePlot(unserialize($_GET["datay5"])); 
 	    $graph->Add($p5);
 		$p5->SetColor("#d4bb66");
-	    $p5->SetLegend(substr($_GET["date5"],0,10));
+		$p5->SetLegend(convert_date($_GET['date5'], 0, $getmonth));
 	    $p5->SetStyle("solid");
 					
 	}

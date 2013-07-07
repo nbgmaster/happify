@@ -10,6 +10,7 @@
 	 global $l;
 	 global $tpl;
 	 global $user_data;
+	 global $getmonth;
 		  
      $objResponse = new xajaxResponse();  
 
@@ -43,9 +44,21 @@
 			   //$diary->limit     = 10;
 	           $diary->multiSelect     = 1;
 	           $ay_diary = $diary->row();
-		   
+
+			   if (isset($ay_diary[0])) {
+				   	
+				   require_once('lib/functions/convert_date.php');
+				   
+				   $count = 0;
+				   foreach ($ay_diary as $date_format) {
+				   		$ay_diary[$count]["date"] = convert_date($date_format['date'], 0, $getmonth);
+				   		$count++;
+				   } 
+			   
+			   }
+		   			   
 		   }
-	 		 	 
+	 	 
 		   //refresh content		 
 	       //include("lib/functions/fetch_diary.php");
 	       $tpl->assign('ay_diary', $ay_diary);
@@ -60,10 +73,10 @@
            $html = $tpl->fetch("modules/home/diary_entries.tpl");   
            $objResponse->assign("diary_entries","innerHTML",$html); 
 		   
-		   if ($data == 'clear_filter') {
+		 //  if ($data == 'clear_filter') {
 		   	   $objResponse->includeScript("js/pinterest.js");
 		       $objResponse->call("m_reload");
-		   }
+		//   }
    	   
 	 }
 	 	       

@@ -97,7 +97,10 @@
 		//if ($ay_da_reasons[0])
             
         $tpl->assign('bd_score_severity', $bd_score_severity);
-    
+		
+		$tpl->assign('head_title', $head_title['home']['index']);	    
+		$tpl->assign('head_subtitle', $head_subtitle['home']['index']);	
+	   
 		$tpl->display("modules/home/main.tpl");
 	
 	}

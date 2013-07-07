@@ -40,15 +40,11 @@
 	});
 	</script>
 	
-	<p></p>
+{include file="fractions/headline.tpl"}
 	
 	<form method="get" id="insert">
 <fieldset>
-	
-	Indicate how much you have experienced each symptom <b>during the past week, including today</b>.
-	You need to answer all 25 items.
-	
-<p>&nbsp;</p>
+		
 <div id="container3" class="headline">
     <div id="container2" class="headline">
         <div id="container1" class="headline">

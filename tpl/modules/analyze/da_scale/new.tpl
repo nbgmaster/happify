@@ -39,6 +39,8 @@
 		$( "#radio_35" ).buttonset();
 	});
 	</script>
+
+{include file="fractions/headline.tpl"}
 	
 	<form method="get" id="insert">
 <fieldset>
