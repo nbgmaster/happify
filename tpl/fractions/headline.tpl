@@ -1,12 +1,26 @@
 
-	<div style="float:left;{if $module == 'analyze' AND $section == 'bd_scale' AND $subsection == 'index' || $module == 'improve' AND $section == 'diary' || $module == ''}width:70%{/if}">	
+	<div style="float:left;{if $module == 'analyze' AND $section == 'bd_scale' AND $subsection == 'index' || $module == 'improve' AND $section == 'diary'}width:70%{*elseif $module == ''}width:60%{*}{/if}">	
 			
 		  <span style="font-size:36px" class="coolvetica">{$head_title}</span>
 		  <p></p>
-		
-			<span style="font-size:18px;padding-top:8px" class="coolvetica">{$head_subtitle}</span>
+		  
+
+			<span style="font-size:18px;padding-top:8px;margin-top:16px;" class="coolvetica" valign="bottom">
+				{if $module == ''}
+					<ul id="ticker">
+								{foreach from=$ay_rules item=rules name=rules}  
+			
+								<li><a href="#"><span style="color:#565656">{$rules.rule}!&nbsp;</span></a></li>
+								
+								{/foreach}
+				</ul>
+				{else}
+				{$head_subtitle}
+				{/if}
+				</span>
 			
 	</div>
+	
 	
 	{if $module == 'analyze' AND $section == 'bd_scale' AND $subsection == 'index'}		
 	<div style="float:left;width:29%;text-align:right;padding-right:8px">	
@@ -87,25 +101,6 @@
 			
     {/if}
 
- 	{if $module == ''}	
- 	    
-    	<div style="float:left;width:29%;text-align:right;padding-right:8px">	
-
-   			<div style="margin-top:16px;" valign="bottom">
-				
-				<ul id="ticker">
-								{foreach from=$ay_rules item=rules name=rules}  
-			
-								<li><a href="#"><span style="color:#565656">{$rules.rule}!&nbsp;</span></a></li>
-								
-								{/foreach}
-				</ul>
-					
-			</div>
-	
-		</div> 
-	
-    {/if}
     	
 	<div style="clear:both"></div>	
 					   

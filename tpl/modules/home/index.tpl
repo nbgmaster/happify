@@ -30,6 +30,19 @@
 	</div>
 </div>
 
+
+   
+   <p style="text-align:center;font-size:16px;line-height:32px" class="coolvetica">
+   When I was 5 years old, my mom always told me that happiness was the key to life. </p>  
+   <p></p>
+    <p style="text-align:center;font-size:16px;line-height:32px" class="coolvetica">
+When I went to school, they asked me what I wanted to be when I grew up. I wrote down “Happy.”  </p>  
+  <p></p>
+    <p style="text-align:center;font-size:16px;line-height:32px" class="coolvetica">
+They told me I didn’t understand the assignment and I told them they didn’t understand life.
+</p>   
+
+
 <!--p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>

@@ -106,18 +106,7 @@ function edit_desc() {
 					<li class="bb-listitem">Track the progress you make</li>
 				</ul>
 	
-				{if !empty($ay_diary)}
-			<p>&nbsp;</p>					
-					<span style="font-size:14px;font-weight:bold">Random Happy Diary Entry</span>	
-					<hr>
-					<div style="font-size:14px">
-					{foreach from=$ay_diary item=diary name=diary}  
-					   {if $diary.picture != ''}       <img src="{$dir_img}uploads/{$user_data.ID}/{$diary.picture}" width="100%">{/if}
-					   {$diary.entry}
-				   {/foreach}
-				   </div>
-			<p>&nbsp;</p>
-			    {/if}
+
 				<ul class="bb-list-unordered" style="font-size:14px">			   
    			{if $entry_today == 0}<li class="bb-listitem">You have not written a diary entry today yet!</li>{/if}
    
@@ -206,16 +195,22 @@ function edit_desc() {
 	
 			
    <p>&nbsp;</p>
-   
-   <p style="text-align:center;font-size:16px;line-height:32px" class="coolvetica">
-   When I was 5 years old, my mom always told me that happiness was the key to life. </p>  
-   <p></p>
-    <p style="text-align:center;font-size:16px;line-height:32px" class="coolvetica">
-When I went to school, they asked me what I wanted to be when I grew up. I wrote down “Happy.”  </p>  
-  <p></p>
-    <p style="text-align:center;font-size:16px;line-height:32px" class="coolvetica">
-They told me I didn’t understand the assignment and I told them they didn’t understand life.
-</p>   
+   <center>
+
+	{if !empty($ay_diary)}
+	<p>&nbsp;</p>					
+			<span style="font-size:14px;font-weight:bold">Random Happy Diary Entry</span>	
+			<div style="font-size:14px;">
+			{foreach from=$ay_diary item=diary name=diary}  					
+			   {if $diary.picture != ''}<div style="float:left"><img src="{$dir_img}uploads/{$user_data.ID}/{$diary.picture}" style="width:80px;border:1px solid #000;margin:4px"></div>{/if}
+			   <div style="float:left">{$diary.entry}</div>
+			   <div style="clear:both"></div>
+		   {/foreach}
+		   </div>
+	<p>&nbsp;</p>
+	{/if}
+	
+	</center>
 
 {if $user_data.description == ''}
 

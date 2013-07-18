@@ -57,7 +57,10 @@
 	 
      if ($debug_mode == 'OFF') define("ROOT_DIR", "http://localhost/happify/");
 	 else define("ROOT_DIR", "http://localhost/happify/"); //TODO define production link
-     
+
+	 if ($debug_mode == 'OFF') define("SSL_DIR", "https://localhost/happify/");
+	 else define("SSL_DIR", "https://localhost/happify/"); //TODO define production link
+	      
 	 //Enable Memcache?
      define("mod_memcache", 0);
 	 define("memcache_duration", 500);   //needs to be changed in production
