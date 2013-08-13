@@ -14,8 +14,9 @@
 
         $tpl->assign('root_dir', ROOT_DIR);  
         $tpl->assign('ssl_dir', SSL_DIR);  
+        $tpl->assign('w_online', w_online);  
         $tpl->assign("logon", $logon_true);             
-        $tpl->assign("debug_mode", "debug_mode");
+        $tpl->assign("debug_mode", $debug_mode);
              
         if (isset($_GET["IE"])) $tpl->assign('IE', $_GET["IE"]);                                 
         $tpl->assign('browser', $browser);

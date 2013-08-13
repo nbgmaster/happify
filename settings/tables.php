@@ -18,4 +18,5 @@
      $tbl_users 				= "users";	 	 
      $tbl_settings 				= "config";
      $tbl_blog 			     	= "blog";
+     $tbl_notify                = "notify";
      

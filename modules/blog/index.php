@@ -3,7 +3,7 @@
    if ($_GET['section'] != 'index' AND $_GET['section'] != 'books') {
 
 	     $blog            = new SelectEntrys();
-	     $blog->cols      = "ID, permalink, title_EN, message_EN";
+	     $blog->cols      = "ID, permalink, title_EN, message_EN, visibility";
 	     $blog->table     = $tbl_blog;
 		 $blog->condition =  "permalink = '".$_GET['section']."' ";
 		 $blog->multiSelect     = 1;

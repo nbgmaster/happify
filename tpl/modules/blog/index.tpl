@@ -26,13 +26,13 @@
 				   	 <p class="b_text">{$blog.pinterest_text}</p>   
 				   	 {/if}
 				    
-					<p>&nbsp;</p>
+					<!--p>&nbsp;</p>
 
 				    <p class="b_small_text">
 				    	<span>{$blog.fb_likes} likes</span>
 				    	<span>{$blog.fb_comments} comments</span>
 
-				    </p>
+				    </p-->
 				    
 				    <hr>
 
@@ -66,13 +66,13 @@
 				   	 <p class="b_text">{$blog.pinterest_text}</p>   
 				   	 {/if}
 				    
-					<p>&nbsp;</p>
+					<!--p>&nbsp;</p>
 
 				    <p class="b_small_text">
 				    	<span>{$blog.fb_likes} likes</span>
 				    	<span>{$blog.fb_comments} comments</span>
 
-				    </p>
+				    </p-->
 				    
 				    <hr>
 
@@ -103,13 +103,13 @@
 				   	 <p class="b_text">{$blog.pinterest_text}</p>   
 				   	 {/if}
 				    
-					<p>&nbsp;</p>
+					<!--p>&nbsp;</p>
 
 				    <p class="b_small_text">
 				    	<span>{$blog.fb_likes} likes</span>
 				    	<span>{$blog.fb_comments} comments</span>
 
-				    </p>
+				    </p-->
 				    
 				    <hr>
 
@@ -138,13 +138,13 @@
 				   	 <p class="b_text">{$blog.pinterest_text}</p>   
 				   	 {/if}
 				    
-					<p>&nbsp;</p>
+					<!--p>&nbsp;</p>
 
 				    <p class="b_small_text">
 				    	<span>{$blog.fb_likes} likes</span>
 				    	<span>{$blog.fb_comments} comments</span>
 
-				    </p>
+				    </p-->
 
 				    <hr>
 

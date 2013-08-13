@@ -11,7 +11,7 @@
 
 <div class="main_container">	
 	
-   <div class="pin" style="width:271px; height:340px">
+   <div class="pin" style="width:270px; height:340px">
      	
 		<span style="font-size:18px;font-weight:bold">Burns Depression Scale</span>
 		<hr style="" size="1">
@@ -30,7 +30,7 @@
    </div>
      
  		
-   <div class="pin" style="width:271px; height:340px">
+   <div class="pin" style="width:270px; height:340px">
      	
 		<span style="font-size:18px;font-weight:bold">Dysfunctional Attitude Scale</span>
 		<hr style="" size="1">
@@ -50,7 +50,7 @@
          
 
  		
-   <div class="pin" style="width:271px; height:340px">
+   <div class="pin" style="width:270px; height:340px">
      	
 		<span style="font-size:18px;font-weight:bold">Average Variety Score</span>
 		<hr style="" size="1">

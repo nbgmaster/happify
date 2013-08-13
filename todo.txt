@@ -1,33 +1,14 @@
-goals
-you recently achieved the following goals:  .. congratulations! keep up the positive spirit and achieve new goals!
-you should work on the following goals: ...
-you havent achieved any of your goals in the last 4 weeks. read here why goals help u t o...
-you have not set up any goals yet. do it now...
-
-happifiers
-hey u like to ... and have done it last time ... days ago. time for another try?
-
-rules
-connected with cats
-if no profile available, show random cat
-
-distorted thoughts
-do not forget to fight ur thought ... with ...
-
-depression categories
-show 1 or 2 rules for those cat.
-2 or more analyzes: you improved by ... points, keep on going!
-last test X days ago : hey do a new test
-comparison got better etc.
+1) finish prototype (incl. optimize wording and USP stuff)
+2) open for beta customers
+3) retrieve feedback
+4) setting up Facebook page
+5) make design and optimize integration
 
 
-overall depression score
-2 or more analyzes: you improved by ... points, keep on going!
-last test X days ago : hey do a new test
-comparison got better etc
-concrete items --> concrete tipps
+contact ppl to share their content (healthy food, sport apps, books, seminars)
 
-first login: show empty pins with instructions. fill out analyze etc.
+quantifying self
 
+professors
 
-
+collect data for research etc.

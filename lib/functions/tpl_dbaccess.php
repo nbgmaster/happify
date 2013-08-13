@@ -18,21 +18,30 @@
 	  global $set;
 
       $source = new SelectEntrys();
+      
+     // if ($cms_data == "") {
 
-      $source->cols      = $_GET["section"];
-      $source->table     = 'cms';
-      $source->condition = " lang = '$lang_active' ";
-      $source->limit     = "1";
+          $source->cols      = $_GET["section"];
+          $source->table     = 'cms';
+          $source->condition = " lang = '$lang_active' ";
+          $source->limit     = "1";
+    
+          //if ($IE) $tpl_source = "<br>";
+          $tpl_source .= $source->row();
+    
+          unset($source);
+         // print_r($tpl_source);
+          //TODO cache: check if it is older than 3 days and then refresh it and update cache object. otherwise leave it
+    
+          require_once('replace.php');
+    
+          $tpl_source = replaceBBcode($tpl_source, $set[0]["width_images"], 0);
+          
+      //    if (mod_memcache == 1)  $memcache->set('cms_ '.$_GET["section"], $tpl_source, false, memcache_duration);       
+       //   else $_SESSION['cms_data'][$_GET["section"]]  = $tpl_source;   
 
-      //if ($IE) $tpl_source = "<br>";
-      $tpl_source .= $source->row();
-
-      unset($source);
-
-      require_once('replace.php');
-
-      $tpl_source = replaceBBcode($tpl_source, $set[0]["width_images"], 0);
-
+     // }
+                  
       return empty($tpl_source) ? false : true;
 
   }

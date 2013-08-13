@@ -38,13 +38,13 @@ function edit_desc() {
 			<span style="font-size:18px;font-weight:bold">1 Analyze and Understand</span>
 			<hr>
 	
-				<ul class="bb-list-unordered" style="font-size:14px">
+				<!--ul class="bb-list-unordered" style="font-size:14px">
 					<li class="bb-listitem">Identify your level of happiness and your mental areas for improvement</li>
 					<li class="bb-listitem">Learn what your mental weaknesses mean and how you can improve mentally</li>
 				</ul>
 <p>&nbsp;</p>	
 <span style="font-size:14px;font-weight:bold">Latest results</span>
-<p>&nbsp;</p>
+<p>&nbsp;</p-->
 	<ul class="bb-list-unordered" style="font-size:14px">
 						<!--img src="{$dir_img}analyze.jpg" width="180"-->
 
@@ -101,10 +101,10 @@ function edit_desc() {
 	     	
 			<span style="font-size:18px;font-weight:bold">2 Learn and Improve</span>
 			<hr>
-				<ul class="bb-list-unordered" style="font-size:14px">
+				<!--ul class="bb-list-unordered" style="font-size:14px">
 					<li class="bb-listitem">Use the tools Happify offers to assist you in becoming a happier person</li>
 					<li class="bb-listitem">Track the progress you make</li>
-				</ul>
+				</ul-->
 	
 
 				<ul class="bb-list-unordered" style="font-size:14px">			   
@@ -134,9 +134,9 @@ function edit_desc() {
 	     	
 			<span style="font-size:18px;font-weight:bold">3 Pursue Personal Fulfillment</span>
 			<hr>
-			Pursue constant personal growth, self-fullfillment and rich interpersonal relationships
+			<!--Pursue constant personal growth, self-fullfillment and rich interpersonal relationships
 
-			<p>&nbsp;</p>
+			<p>&nbsp;</p-->
 
 			<span style="font-size:14px;font-weight:bold">Your current Vision</span>
 			<p>&nbsp;</p>

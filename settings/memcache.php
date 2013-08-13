@@ -17,7 +17,9 @@
 	 //$da_scale_sep_strings = "";
 	 //$da_scale_sep_dates = ""; 
   	 $user_data = "";     
- 
+
+     $cms_data = "";  
+      
      //define keys
      $mem_key1  = "user_data_".$l["token"];
      $mem_key2  = "da_scale_data_".$l["token"];
@@ -44,7 +46,8 @@
 	    $da_scale_sep_strings  = $memcache->get($mem_key2a); 
 	    $da_scale_sep_dates    = $memcache->get($mem_key2b); 
 	    $bd_scale_data    = $memcache->get($mem_key3); 
-		
+    //    $cms_data    = $memcache->get('cms_data'); 
+        		
 	    //$size = strlen(serialize($user_data));
 	    //echo $size." bytes";
 	    
@@ -59,6 +62,7 @@
 		    $memcache->delete($mem_key2a);   
 		    $memcache->delete($mem_key2b);  
 		    $memcache->delete($mem_key3);
+  //          $memcache->delete('cms_data');
 
 			$memcache->flush();  
 	    	    
@@ -74,6 +78,7 @@
 	    if (isset($_SESSION['$mem_key2a'])) $da_scale_sep_strings  = $_SESSION['$mem_key2a']; 
 	    if (isset($_SESSION['$mem_key2b'])) $da_scale_sep_dates    = $_SESSION['$mem_key2b']; 
 	    if (isset($_SESSION['$mem_key3']))  $bd_scale_data    = $_SESSION['$mem_key3']; 
+ //       if (isset($_SESSION['cms_data']))  $cms_data    = $_SESSION['cms_data']; 
 
 	    /* will only take effect after two reloads. attention: this is only for dev environment to force the app to select the data from the database. in production this functionality would need to
 	    be done via sql, so that we can store for each user if cache object has been updated. Here could also happen a bug: as for asynchronous calls we do not initiate the get_userdata.php as we 

@@ -55,12 +55,15 @@
 	 
 	 //ATTENTION: Facebook API requires CURL with SSL activated on server
 	 
-     if ($debug_mode == 'OFF') define("ROOT_DIR", "http://localhost/happify/");
+     if ($debug_mode == 'OFF') define("ROOT_DIR", "http://myhappifier.com/");
 	 else define("ROOT_DIR", "http://localhost/happify/"); //TODO define production link
 
-	 if ($debug_mode == 'OFF') define("SSL_DIR", "https://localhost/happify/");
+	 if ($debug_mode == 'OFF') define("SSL_DIR", "https://myhappifier.com/");
 	 else define("SSL_DIR", "https://localhost/happify/"); //TODO define production link
-	      
+
+	 //live version or just show landing page?
+	 define("w_online", 1);
+          	      
 	 //Enable Memcache?
      define("mod_memcache", 0);
 	 define("memcache_duration", 500);   //needs to be changed in production
@@ -100,7 +103,7 @@
                           
   /******************************************/
       	 
-	
+
   /* Load :: Current time & date */
 
      $timestamp = time();
@@ -204,11 +207,15 @@
     
   /******************************************/
 
-    
+  
+     //load <head> area before xajax calls to have it on the very top of the browser source code page
+     //$tpl->display("fractions/html_head.tpl");
+      
+           
   /* Load :: XAJAX for asynchronous calls */
-         
-     require_once('./lib/functions/ajax_requests.php');
      
+     require_once('./lib/functions/ajax_requests.php');
+ 
   /******************************************/
   
 

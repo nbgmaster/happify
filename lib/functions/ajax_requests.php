@@ -10,7 +10,7 @@
 	   require('lib/xajax/xajax_core/xajax.inc.php');
 	
 	   $xajax = new xajax();
-	   //$xajax->configure('debug', true);
+	   if ($debug_mode != 'OFF') $xajax->configure('debug', true);
 	   //$xajax->configure('processData', false);
 	   $xajax->configure('javascript URI', ROOT_DIR.'lib/xajax/');
 	   $xajax->configure('defaultMode', "asynchronous");
